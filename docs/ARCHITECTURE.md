@@ -86,9 +86,24 @@ The debug signature verifies and its manifest declares min SDK 26, target SDK
 36, a launcher, and no internet permission. The exported Room v1 schema, XML,
 local documentation links, and Git whitespace checks are valid.
 
-**Device checks remain pending.** The API 35 emulator could not finish starting
-without hardware virtualization; a minimum-SDK emulator is being prepared.
-The four compiled instrumentation tests cover atomic/idempotent Room bootstrap
-and reopening, DataStore recreation, four-tab/settings/back navigation, and
-Activity recreation. Compilation is not counted as executing these tests.
-Do not call Phase 1 complete until those checks and app launch are verified.
+**PASS: device checks executed on Android 8.0 / API 26.** All four instrumentation
+tests passed with zero failures, errors, or skips: atomic/idempotent Room
+initialization and reopening, DataStore recreation, four-tab/settings/back
+navigation, and Activity recreation. `am start -W` returned `Status: ok`; the
+running Home screen was captured and inspected. The device tests used the same
+APK bytes as the published download (SHA-256 recorded in PHASE_1_STATUS.md).
+
+The API 35 software emulator did not finish starting in the available setup;
+API 26 succeeded using a foreground managed emulator session after stale locks
+from an exited task emulator were removed. Only task-owned locks were cleared;
+user data was not wiped. Hardware virtualization is unavailable in this cloud
+machine. API 35/36 device behavior, physical ARM devices, and IDE sync remain
+NOT VERIFIED; broader device coverage belongs to subsequent hardening gates.
+
+The reusable setup was rerun successfully using retained verified SDK packages,
+followed by the build/unit/lint/test-APK checks. Official archive fallback keeps
+TLS and published checksums enabled if SDK Manager extraction fails. Cloud
+scripts set the full JDK, SDK, writable preferences, and platform-CA truststore.
+Publication/restoration in a new cloud task remains separate and NOT VERIFIED.
+
+**Phase 1 gate: met. Stop here; Phase 2 requires a new instruction.**

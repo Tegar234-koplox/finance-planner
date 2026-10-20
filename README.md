@@ -24,8 +24,9 @@ It is a development build, not the final personal-finance product.
 
 The downloadable Phase 1 preview is a navigation/storage foundation, with no
 transaction entry, budgeting calculations, or market feeds yet. Its build,
-34 unit tests, lint, and debug signature have passed. Device/instrumentation
-verification is still pending; see ARCHITECTURE.md for the current gate status.
+34 unit tests, lint, and debug signature have passed. All four Android
+instrumentation tests and app launch passed on Android 8.0. See
+[Phase 1 status](docs/PHASE_1_STATUS.md) for exact results and remaining coverage.
 
 ## Design
 

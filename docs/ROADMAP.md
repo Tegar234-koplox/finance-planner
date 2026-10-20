@@ -1,7 +1,9 @@
 # Sequential roadmap
 
-Phase 0 design/build baseline was completed. Phase 1 is authorized and underway.
-Stop after Phase 1's report; later phases require another instruction.
+Phases 0 and 1 are complete. Phase 1 passed build, 34 unit tests, lint (0 errors,
+7 documented upgrade advisories), app launch, and all 4 Android instrumentation
+tests on API 26. Stop after Phase 1's report; later phases require another
+instruction. See PHASE_1_STATUS.md for verification and limitations.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review
