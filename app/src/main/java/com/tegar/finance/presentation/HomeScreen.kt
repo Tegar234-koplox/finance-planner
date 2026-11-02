@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import com.tegar.finance.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
@@ -14,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
-
 @Composable
 fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Unit, categories: () -> Unit,
     addTransaction: () -> Unit, budget: () -> Unit, reports: () -> Unit, goals: () -> Unit, wealth: () -> Unit = {}) {
@@ -52,18 +50,30 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                 item {
                     Card(Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text(stringResource(R.string.ui_recorded_cash_44197f), style = MaterialTheme.typography.titleLarge)
+                            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                                Text(stringResource(R.string.ui_recorded_cash_44197f), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                                ScreenHelp("home_help") {
+                                    Text(stringResource(R.string.ui_ledger_opening_cash_saved_income_consumption_investment_contributions_975c89, data.date))
+                                    Text(stringResource(R.string.ui_tracking_began_value_this_is_your_recorded_ledger_cash_not_a_bank_bala_d9625c, data.trackedFrom),
+                                style = MaterialTheme.typography.bodySmall)
+                                    Text(stringResource(R.string.ui_lower_of_cash_and_remaining_budget_each_clamped_at_zero_divided_by_val_998af5, data.budget.remainingDays))
+                                    Text(stringResource(R.string.ui_cash_cap_and_budget_cap_are_applied_together_this_limit_never_exceeds_e50119))
+                                    Text(stringResource(R.string.ui_goals_bill_reservations_and_unrecorded_obligations_are_not_included_th_b808ea),
+                                style = MaterialTheme.typography.bodySmall)
+                                    Text(stringResource(R.string.ui_contributions_reduce_cash_but_are_not_consumption_saving_excludes_cont_cd4988),
+                                style = MaterialTheme.typography.bodySmall)
+                                    Text(stringResource(R.string.ui_projection_follows_the_recorded_daily_pace_it_is_not_a_forecast_of_fut_29cedd),
+                                style = MaterialTheme.typography.bodySmall)
+                                }
+                            }
                             Text(amount(data.recordedCash), style = MaterialTheme.typography.headlineMedium,
                                 color = if ((data.recordedCash?.minorUnits ?: 0) < 0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.testTag("home_cash"))
-                            Text(stringResource(R.string.ui_ledger_opening_cash_saved_income_consumption_investment_contributions_975c89, data.date))
                             if (data.reservationOverflow) Text(stringResource(R.string.goals_reserve_overflow))
                             else HomeValue(stringResource(R.string.goals_cash_reserved), data.reservedForGoals, "home_goal_reserved")
                             HomeValue(stringResource(R.string.goals_cash_free), data.unreservedCash, "home_unreserved_cash")
                             TextButton(onClick = wealth, modifier = Modifier.testTag("home_wealth")) { Text(stringResource(R.string.wealth_open)) }
                             TextButton(onClick = goals, modifier = Modifier.testTag("home_goals")) { Text(stringResource(R.string.goals_manage)) }
-                            Text(stringResource(R.string.ui_tracking_began_value_this_is_your_recorded_ledger_cash_not_a_bank_bala_d9625c, data.trackedFrom),
-                                style = MaterialTheme.typography.bodySmall)
                             if (data.recordedCount == 0) Text(stringResource(R.string.ui_no_recorded_transactions_through_this_date_add_income_expenses_or_cont_f53ca9))
                             if (data.futureCount > 0) Text(stringResource(R.string.ui_value_future_dated_transaction_s_are_excluded_until_their_date_985afa, data.futureCount))
                             if ((data.recordedCash?.minorUnits ?: 0) < 0)
@@ -86,11 +96,7 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                                 DailyLimitReason.NO_COVERAGE -> stringResource(R.string.ui_the_reporting_date_is_before_tracking_began_recorded_cash_and_a_spendi_cca51a)
                             }, modifier = Modifier.testTag("home_limit_reason"))
                             if (data.dailyLimit != null) {
-                                Text(stringResource(R.string.ui_lower_of_cash_and_remaining_budget_each_clamped_at_zero_divided_by_val_998af5, data.budget.remainingDays))
-                                Text(stringResource(R.string.ui_cash_cap_and_budget_cap_are_applied_together_this_limit_never_exceeds_e50119))
                             }
-                            Text(stringResource(R.string.ui_goals_bill_reservations_and_unrecorded_obligations_are_not_included_th_b808ea),
-                                style = MaterialTheme.typography.bodySmall)
                             TextButton(onClick = budget) { Text(stringResource(R.string.ui_review_budget_8673c7)) }
                         }
                     }
@@ -105,8 +111,6 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                             HomeValue(stringResource(R.string.ui_income_minus_consumption_541067), data.monthSaving, "home_saving")
                             Text(stringResource(R.string.ui_saving_rate_9db534) + (data.savingRatePercent?.toPlainString()?.plus("%") ?: stringResource(R.string.ui_not_available_67a926)),
                                 modifier = Modifier.testTag("home_saving_rate"))
-                            Text(stringResource(R.string.ui_contributions_reduce_cash_but_are_not_consumption_saving_excludes_cont_cd4988),
-                                style = MaterialTheme.typography.bodySmall)
                             Text(when (data.budget.coverage) {
                                 BudgetCoverage.FULL -> stringResource(R.string.ui_tracking_covers_this_month_through_the_reporting_date_edf479)
                                 BudgetCoverage.PARTIAL -> stringResource(R.string.ui_partial_month_tracking_began_value_these_totals_may_omit_earlier_activ_be8187, data.trackedFrom)
@@ -133,8 +137,6 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                                 BudgetStatus.OVER_BUDGET -> stringResource(R.string.ui_over_budget_82d5e1)
                             }, modifier = Modifier.testTag("home_budget_status"))
                             Text(stringResource(R.string.ui_month_end_consumption_projection_5b1eea) + if (data.budget.projectionOverflow) stringResource(R.string.ui_outside_supported_range_5fe45d) else amount(data.budget.projection))
-                            Text(stringResource(R.string.ui_projection_follows_the_recorded_daily_pace_it_is_not_a_forecast_of_fut_29cedd),
-                                style = MaterialTheme.typography.bodySmall)
                             TextButton(onClick = budget) { Text(stringResource(R.string.ui_open_monthly_budgets_66d4b1)) }
                         }
                     }
@@ -181,7 +183,6 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
         }
     }
 }
-
 @Composable private fun amount(value: Money?) = value?.let { MoneyText.format(it) } ?: stringResource(R.string.ui_not_available_67a926)
 @Composable
 private fun HomeValue(label: String, value: Money?, tag: String) {

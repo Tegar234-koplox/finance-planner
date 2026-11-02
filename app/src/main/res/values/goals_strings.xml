@@ -7,7 +7,7 @@
     <string name="goals_save" formatted="false">"Save goal"</string>
     <string name="goals_delete" formatted="false">"Delete goal"</string>
     <string name="goals_refresh" formatted="false">"Refresh goals"</string>
-    <string name="goals_empty" formatted="false">"No goals yet. Add a saving goal or a purchase you want to plan."</string>
+    <string name="goals_empty" formatted="false">"Add your first saving or purchase goal."</string>
     <string name="goals_intro" formatted="false">"Earmarks reserve your existing recorded cash. They are not new income, spending or additional wealth. Saving a goal never transfers money."</string>
     <string name="goals_name" formatted="false">"Goal name"</string>
     <string name="goals_kind_saving" formatted="false">"Saving goal"</string>
@@ -24,8 +24,8 @@
     <string name="goals_earmarked" formatted="false">"Currently earmarked"</string>
     <string name="goals_asof" formatted="false">"Earmark as of (YYYY-MM-DD)"</string>
     <string name="goals_deadline" formatted="false">"Target date (YYYY-MM-DD)"</string>
-    <string name="goals_amount_hint" formatted="false">"Ledger currency; Indonesian amount notation, for example 25.000,50. Target must be positive; earmark may be zero or exceed the target."</string>
-    <string name="goals_asof_hint" formatted="false">"An earmark date must be within recorded coverage and no later than today. A target date may be in the past."</string>
+    <string name="goals_amount_hint" formatted="false">"Example: 25.000,50"</string>
+    <string name="goals_asof_hint" formatted="false">"Use the date of your latest earmark."</string>
     <string name="goals_error_input" formatted="false">"Check the name (1–80 characters), positive target, nonnegative earmark and valid dates. The earmark date cannot be in the future."</string>
     <string name="goals_error_coverage" formatted="false">"The earmark date cannot precede the ledger tracking start."</string>
     <string name="goals_error_currency" formatted="false">"Goal amounts must use the ledger currency."</string>
@@ -61,7 +61,7 @@
     <string name="goals_overdue" formatted="false">"Target date has passed; more money remains to be earmarked."</string>
     <string name="goals_due_today" formatted="false">"Target is due today and is not fully earmarked."</string>
     <string name="goals_needed_value">"Monthly amount for this goal alone: %1$s"</string>
-    <string name="goals_needed_hint">"Ceiling of remaining earmark ÷ %1$s future month-end contribution date(s) before/on the target. This amount does not reserve shared capacity."</string>
+    <string name="goals_needed_hint">"%1$s month-end contribution date(s)"</string>
     <string name="goals_no_dates" formatted="false">"No future month-end contribution date falls before/on this target date."</string>
     <string name="goals_cash_assigned">"Free cash assigned in this scenario: %1$s"</string>
     <string name="goals_scenario_date">"Scenario ready date: %1$s"</string>

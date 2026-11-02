@@ -12,8 +12,12 @@ implement the smallest coherent change, validate meaningful checks, review
 diff/status, document outcomes and report readiness YES/NO. Never count skipped,
 zero-test, or unrun targets as passed. Preserve user changes; use the existing
 isolated cloud checkout, no worktrees unless requested.
-When GitHub delivery is requested, use branch → commit → push → pull request →
-merge. Never push changes directly to main.
+For every subsequent coherent change, create a commit. When a feature is complete,
+push its branch, create a pull request and squash merge after checks pass.
+Never push changes directly to main. Keep the user’s identity for commits and
+GitHub publication; report any missing account/API access explicitly.
+Keep primary screens concise: metrics/actions first, short status captions,
+and detailed calculation explanations behind an information control.
 Use the user's verified Git account identity for author and committer. Do not
 attribute changes to bots, GPT or similar identities, and do not add co-author,
 co-contributor or generated-contributor trailers. Confirm the account identity

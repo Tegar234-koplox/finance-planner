@@ -24,8 +24,8 @@
     <string name="wealth_record_value" formatted="false">"Record dated value"</string>
     <string name="wealth_edit_value" formatted="false">"Edit dated value"</string>
     <string name="wealth_save_value" formatted="false">"Save value"</string>
-    <string name="wealth_archive" formatted="false">"Exclude from current total"</string>
-    <string name="wealth_restore" formatted="false">"Include in current total"</string>
+    <string name="wealth_archive" formatted="false">"Exclude"</string>
+    <string name="wealth_restore" formatted="false">"Include"</string>
     <string name="wealth_archived" formatted="false">"Excluded from current total"</string>
     <string name="wealth_delete_item" formatted="false">"Delete item"</string>
     <string name="wealth_delete_value" formatted="false">"Delete value"</string>
@@ -46,10 +46,10 @@
     <string name="wealth_capture" formatted="false">"Save today’s snapshot"</string>
     <string name="wealth_capture_confirm_title" formatted="false">"Save today’s tracked snapshot?"</string>
     <string name="wealth_capture_confirm_body" formatted="false">"This copies today’s recorded cash and the latest dated active asset/liability values. Their original value dates stay visible. Later edits will not update this snapshot. Only one snapshot per ledger date is stored."</string>
-    <string name="wealth_capture_saved" formatted="false">"Today’s snapshot was saved. Later source edits do not rewrite it."</string>
-    <string name="wealth_snapshot_exists" formatted="false">"A snapshot already exists for today. To replace it, explicitly delete that snapshot first, then capture again."</string>
+    <string name="wealth_capture_saved" formatted="false">"Snapshot saved"</string>
+    <string name="wealth_snapshot_exists" formatted="false">"Today’s snapshot saved"</string>
     <string name="wealth_history_title" formatted="false">"Saved dated snapshots"</string>
-    <string name="wealth_history_empty" formatted="false">"No saved snapshots. Older net worth is unavailable; today’s values are never backfilled into earlier dates."</string>
+    <string name="wealth_history_empty" formatted="false">"No saved snapshots yet."</string>
     <string name="wealth_history_hint" formatted="false">"These are saved observations, not a reconstructed daily history. Changes between captures can include cash edits, new items, exclusions and value corrections; they are not investment returns."</string>
     <string name="wealth_history_change">"Change between the latest two saved dates: %1$s"</string>
     <string name="wealth_history_components" formatted="false">"Show saved components"</string>
@@ -57,15 +57,15 @@
     <string name="wealth_snapshot_date">"Snapshot date: %1$s"</string>
     <string name="wealth_snapshot_time">"Captured at %1$s (UTC). Tracked assets/liabilities method v1; holdings excluded."</string>
     <string name="wealth_component">"%1$s · %2$s · %3$s · valued on %4$s"</string>
-    <string name="wealth_empty" formatted="false">"No asset or liability items. Cash is still counted once; unrecorded wealth and debts remain outside this tracked total."</string>
+    <string name="wealth_empty" formatted="false">"Add your first asset or liability."</string>
     <string name="wealth_current_items" formatted="false">"Current records and dated values"</string>
-    <string name="wealth_latest">"Latest recorded value: %1$s · %2$s"</string>
-    <string name="wealth_age">"Value age: %1$s day(s). This is the last observation, not a new valuation for today."</string>
-    <string name="wealth_unknown" formatted="false">"No recorded value on or before today. Acquisition cost is not used as a substitute."</string>
+    <string name="wealth_latest">"%1$s · %2$s"</string>
+    <string name="wealth_age">"Valued %1$s day(s) ago"</string>
+    <string name="wealth_unknown" formatted="false">"No dated value yet"</string>
     <string name="wealth_acquired_value">"Acquired / opened on: %1$s"</string>
     <string name="wealth_cost_value">"Acquisition cost (metadata only): %1$s"</string>
-    <string name="wealth_value_history" formatted="false">"Show dated values"</string>
-    <string name="wealth_hide_values" formatted="false">"Hide dated values"</string>
+    <string name="wealth_value_history" formatted="false">"Details and value history"</string>
+    <string name="wealth_hide_values" formatted="false">"Hide details"</string>
     <string name="wealth_value_row">"%1$s: %2$s"</string>
     <string name="wealth_no_values" formatted="false">"No dated observations."</string>
     <string name="wealth_form_hint" formatted="false">"Use the ledger currency and Indonesian notation, for example 25.000,50. Values and amounts owed may be zero but not negative. Future dates and dates before acquisition/opening are rejected."</string>

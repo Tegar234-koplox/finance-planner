@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import com.tegar.finance.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
@@ -14,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
-
 @Composable
 fun ForecastScreen(state: ForecastUiState, model: ForecastViewModel, openGoals: (() -> Unit)? = null) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
@@ -22,8 +20,17 @@ fun ForecastScreen(state: ForecastUiState, model: ForecastViewModel, openGoals: 
     LazyColumn(Modifier.fillMaxSize().testTag("forecast_list"), contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.ui_forecasts_075c74), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.ui_a_baseline_from_your_completed_months_for_the_next_1_and_3_calendar_mo_384001))
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text(stringResource(R.string.ui_forecasts_075c74), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+                ScreenHelp("forecast_help") {
+                    Text(stringResource(R.string.ui_a_baseline_from_your_completed_months_for_the_next_1_and_3_calendar_mo_384001))
+                    Text(stringResource(R.string.ui_0_samples_unavailable_1_low_2_5_medium_6_higher_these_describe_evidenc_89cd22))
+                    Text(stringResource(R.string.ui_each_horizon_repeats_that_monthly_baseline_income_consumption_and_cont_df1699))
+                    Text(stringResource(R.string.ui_only_fully_tracked_completed_calendar_months_count_covered_months_with_89bb3a))
+                    Text(stringResource(R.string.ui_these_are_recorded_history_scenarios_not_guarantees_statistical_confid_5ca0fb))
+                    Text(stringResource(R.string.ui_opening_cash_is_excluded_contributions_reduce_cash_not_consumption_or_2303d4))
+                }
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ForecastMethod.entries.forEach { method ->
                     FilterChip(selected = state.options.method == method, onClick = { model.selectMethod(method) },
@@ -66,14 +73,11 @@ fun ForecastScreen(state: ForecastUiState, model: ForecastViewModel, openGoals: 
                             ForecastEvidence.HIGHER -> R.string.evidence_higher
                         })), modifier = Modifier.testTag("forecast_evidence"),
                             style = MaterialTheme.typography.titleMedium)
-                        Text(stringResource(R.string.ui_0_samples_unavailable_1_low_2_5_medium_6_higher_these_describe_evidenc_89cd22))
                         Text(if (data.options.method == ForecastMethod.ROLLING) stringResource(R.string.ui_method_sum_of_completed_monthly_amounts_sample_count_every_month_has_e_32c824)
                             else if (data.samples.isEmpty()) stringResource(R.string.ui_method_weighted_mean_no_complete_months_are_available_to_assign_weight_9013b4)
                             else stringResource(R.string.ui_method_monthly_amounts_weights_1_through_value_oldest_to_newest_divide_ce8c7c, data.samples.size))
                         if (data.samples.size == 1) Text(stringResource(R.string.ui_one_observed_month_cannot_establish_variability_matching_range_endpoin_7fe259))
-                        Text(stringResource(R.string.ui_each_horizon_repeats_that_monthly_baseline_income_consumption_and_cont_df1699))
                         Text(stringResource(R.string.ui_current_month_excluded_value_recorded_transaction_s_future_dated_recor_43458b, data.currentMonthRecordsExcluded, data.futureRecordsExcluded))
-                        Text(stringResource(R.string.ui_only_fully_tracked_completed_calendar_months_count_covered_months_with_89bb3a))
                     }
                 }
             }
@@ -132,14 +136,12 @@ fun ForecastScreen(state: ForecastUiState, model: ForecastViewModel, openGoals: 
                 }
             }
             item {
-                Text(stringResource(R.string.ui_these_are_recorded_history_scenarios_not_guarantees_statistical_confid_5ca0fb))
                 Text(stringResource(R.string.ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a),
                     modifier = Modifier.testTag("forecast_future_scope"))
             }
         }
     }
 }
-
 @Composable private fun ForecastHorizonCard(horizon: ForecastHorizon) {
     OutlinedCard(Modifier.fillMaxWidth().testTag("forecast_horizon_${horizon.months}")) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -158,7 +160,6 @@ fun ForecastScreen(state: ForecastUiState, model: ForecastViewModel, openGoals: 
                 ForecastAmount(stringResource(R.string.ui_income_minus_consumption_541067), flows.saving, "forecast_${horizon.months}_saving")
                 Text(stringResource(R.string.ui_saving_rate_9db534) + (flows.savingRatePercent?.toPlainString()?.plus("%") ?: stringResource(R.string.ui_not_available_67a926)))
                 Text(stringResource(R.string.ui_net_cash_flow_87a3a9) + if (flows.netCashFlowOverflow) stringResource(R.string.ui_outside_supported_range_5fe45d) else MoneyText.format(flows.netCashFlow!!))
-                Text(stringResource(R.string.ui_opening_cash_is_excluded_contributions_reduce_cash_not_consumption_or_2303d4))
                 Text(stringResource(R.string.ui_historical_monthly_range_value_not_a_prediction_interval_3461ad, horizon.months), style = MaterialTheme.typography.titleMedium)
                 @Composable fun range(label: String, band: ForecastBand?) = "$label: " +
                     (band?.low?.let(MoneyText::format) ?: stringResource(R.string.ui_outside_supported_range_5fe45d)) + stringResource(R.string.ui_to_877216) +

@@ -24,8 +24,8 @@
     <string name="wealth_record_value" formatted="false">"Catat nilai bertanggal"</string>
     <string name="wealth_edit_value" formatted="false">"Ubah nilai bertanggal"</string>
     <string name="wealth_save_value" formatted="false">"Simpan nilai"</string>
-    <string name="wealth_archive" formatted="false">"Kecualikan dari total saat ini"</string>
-    <string name="wealth_restore" formatted="false">"Masukkan ke total saat ini"</string>
+    <string name="wealth_archive" formatted="false">"Kecualikan"</string>
+    <string name="wealth_restore" formatted="false">"Masukkan"</string>
     <string name="wealth_archived" formatted="false">"Dikecualikan dari total saat ini"</string>
     <string name="wealth_delete_item" formatted="false">"Hapus data"</string>
     <string name="wealth_delete_value" formatted="false">"Hapus nilai"</string>
@@ -46,10 +46,10 @@
     <string name="wealth_capture" formatted="false">"Simpan snapshot hari ini"</string>
     <string name="wealth_capture_confirm_title" formatted="false">"Simpan snapshot tercatat hari ini?"</string>
     <string name="wealth_capture_confirm_body" formatted="false">"Ini menyalin kas tercatat hari ini dan nilai aktif aset/utang bertanggal terbaru. Tanggal nilai aslinya tetap terlihat. Perubahan berikutnya tidak memperbarui snapshot ini. Hanya satu snapshot disimpan per tanggal pelaporan."</string>
-    <string name="wealth_capture_saved" formatted="false">"Snapshot hari ini tersimpan. Perubahan sumber berikutnya tidak menulis ulang isinya."</string>
-    <string name="wealth_snapshot_exists" formatted="false">"Snapshot untuk hari ini sudah ada. Untuk menggantinya, hapus snapshot tersebut secara eksplisit, lalu simpan kembali."</string>
+    <string name="wealth_capture_saved" formatted="false">"Snapshot tersimpan"</string>
+    <string name="wealth_snapshot_exists" formatted="false">"Snapshot hari ini tersimpan"</string>
     <string name="wealth_history_title" formatted="false">"Snapshot bertanggal tersimpan"</string>
-    <string name="wealth_history_empty" formatted="false">"Belum ada snapshot tersimpan. Kekayaan bersih sebelumnya tidak tersedia; nilai hari ini tidak pernah diisikan ke tanggal terdahulu."</string>
+    <string name="wealth_history_empty" formatted="false">"Belum ada snapshot tersimpan."</string>
     <string name="wealth_history_hint" formatted="false">"Ini adalah pengamatan tersimpan, bukan riwayat harian yang direkonstruksi. Perubahan antar-snapshot dapat mencakup perubahan kas, data baru, pengecualian, dan koreksi nilai; bukan imbal hasil investasi."</string>
     <string name="wealth_history_change">"Perubahan antara dua tanggal tersimpan terbaru: %1$s"</string>
     <string name="wealth_history_components" formatted="false">"Tampilkan komponen tersimpan"</string>
@@ -57,15 +57,15 @@
     <string name="wealth_snapshot_date">"Tanggal snapshot: %1$s"</string>
     <string name="wealth_snapshot_time">"Disimpan pada %1$s (UTC). Metode aset/utang tercatat v1; investasi dikecualikan."</string>
     <string name="wealth_component">"%1$s · %2$s · %3$s · dinilai pada %4$s"</string>
-    <string name="wealth_empty" formatted="false">"Belum ada data aset atau utang. Kas tetap dihitung satu kali; kekayaan dan utang yang belum dicatat tetap di luar total tercatat ini."</string>
+    <string name="wealth_empty" formatted="false">"Tambahkan aset atau utang pertamamu."</string>
     <string name="wealth_current_items" formatted="false">"Data saat ini dan nilai bertanggal"</string>
-    <string name="wealth_latest">"Nilai tercatat terbaru: %1$s · %2$s"</string>
-    <string name="wealth_age">"Usia nilai: %1$s hari. Ini adalah pengamatan terakhir, bukan penilaian baru untuk hari ini."</string>
-    <string name="wealth_unknown" formatted="false">"Belum ada nilai tercatat pada atau sebelum hari ini. Biaya perolehan tidak digunakan sebagai pengganti."</string>
+    <string name="wealth_latest">"%1$s · %2$s"</string>
+    <string name="wealth_age">"Dinilai %1$s hari lalu"</string>
+    <string name="wealth_unknown" formatted="false">"Belum ada nilai bertanggal"</string>
     <string name="wealth_acquired_value">"Tanggal perolehan / pembukaan: %1$s"</string>
     <string name="wealth_cost_value">"Biaya perolehan (hanya metadata): %1$s"</string>
-    <string name="wealth_value_history" formatted="false">"Tampilkan nilai bertanggal"</string>
-    <string name="wealth_hide_values" formatted="false">"Sembunyikan nilai bertanggal"</string>
+    <string name="wealth_value_history" formatted="false">"Detail dan riwayat nilai"</string>
+    <string name="wealth_hide_values" formatted="false">"Sembunyikan detail"</string>
     <string name="wealth_value_row">"%1$s: %2$s"</string>
     <string name="wealth_no_values" formatted="false">"Belum ada pengamatan bertanggal."</string>
     <string name="wealth_form_hint" formatted="false">"Gunakan mata uang buku dan format Indonesia, misalnya 25.000,50. Nilai dan jumlah utang boleh nol tetapi tidak negatif. Tanggal mendatang dan tanggal sebelum perolehan/pembukaan ditolak."</string>

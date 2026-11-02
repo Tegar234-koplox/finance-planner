@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import com.tegar.finance.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
-
 @Composable private fun budgetError(error: AppError) = when (error) {
     AppError.BUDGET_LIMIT_EXCEEDED -> stringResource(R.string.ui_category_allocations_cannot_exceed_the_overall_budget_increase_it_or_r_43ae34)
     AppError.CATEGORY_INACTIVE -> stringResource(R.string.ui_this_category_is_archived_restore_it_before_adding_a_new_allocation_d41812)
@@ -39,7 +37,6 @@ import com.tegar.finance.domain.model.*
     BudgetStatus.HIGH -> stringResource(R.string.ui_high_95_be0044)
     BudgetStatus.OVER_BUDGET -> stringResource(R.string.ui_over_budget_82d5e1)
 }
-
 @Composable
 fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
@@ -52,7 +49,15 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
     LazyColumn(Modifier.fillMaxSize().imePadding().testTag("budget_list"), contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.ui_monthly_budgets_c9c385), style = MaterialTheme.typography.headlineMedium)
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text(stringResource(R.string.ui_monthly_budgets_c9c385), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+                ScreenHelp("budget_help") {
+                    Text(stringResource(R.string.ui_income_and_investment_contributions_are_excluded_all_recorded_consumpt_7f969c))
+                    Text(stringResource(R.string.ui_a_budget_allowance_is_not_available_cash_cash_limits_and_reservations_758a54))
+                    Text(stringResource(R.string.ui_category_allocations_share_the_overall_cap_when_one_is_set_removing_th_d66d9e))
+                    Text(stringResource(R.string.ui_future_dated_transactions_are_excluded_until_their_date_projections_us_31e5f2))
+                }
+            }
             Text(stringResource(R.string.ui_as_of_value_ledger_reporting_date_2486ef, state.today))
             OutlinedTextField(monthText, { monthText = it }, label = { Text(stringResource(R.string.ui_month_yyyy_mm_70e660)) }, singleLine = true,
                 modifier = Modifier.fillMaxWidth().testTag("budget_month"))
@@ -62,7 +67,6 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
                 TextButton(onClick = { model.moveMonth(1) }, enabled = !state.busy) { Text(stringResource(R.string.ui_next_1ff57a)) }
             }
             TextButton(onClick = model::refresh) { Text(stringResource(R.string.ui_refresh_0e9161)) }
-            Text(stringResource(R.string.ui_income_and_investment_contributions_are_excluded_all_recorded_consumpt_7f969c))
         }
         if (state.loading) item { CircularProgressIndicator() }
         if (state.readError != null) item {
@@ -81,7 +85,6 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
                     state.categories.any { it.active && it.transactionType == TransactionType.EXPENSE }) { Text(stringResource(R.string.ui_add_category_budget_0b7f25)) }
                 if (state.snapshot.monthly.none { it.month == state.month } && state.snapshot.categories.none { it.month == state.month })
                     Text(stringResource(R.string.ui_no_budgets_yet_e76acb))
-                Text(stringResource(R.string.ui_a_budget_allowance_is_not_available_cash_cash_limits_and_reservations_758a54))
             }
             state.overall?.let { metrics -> item {
                 MetricsCard(stringResource(R.string.ui_overall_715b14), metrics, "overall",
@@ -91,7 +94,6 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
             } }
             item {
                 Text(stringResource(R.string.ui_categories_b8b1d8), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(R.string.ui_category_allocations_share_the_overall_cap_when_one_is_set_removing_th_d66d9e))
                 if (state.rows.isEmpty() && state.readError == null) Text(stringResource(R.string.ui_no_category_allocations_or_recorded_spending_9e212a))
             }
             items(state.rows, key = { it.category.id }) { row ->
@@ -100,7 +102,7 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
                     delete = if (row.metrics.allocation == null) null else { { deleting = row.category.id to row.category.name } },
                     enabled = !state.busy)
             }
-            item { Text(stringResource(R.string.ui_future_dated_transactions_are_excluded_until_their_date_projections_us_31e5f2)) }
+            item {  }
         }
     }
     state.editor?.let { editor ->
@@ -136,7 +138,6 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
             dismissButton = { TextButton(onClick = { deleting = null }) { Text(stringResource(R.string.ui_cancel_19766e)) } })
     }
 }
-
 @Composable
 private fun MetricsCard(title: String, metrics: BudgetMetrics, tag: String, edit: () -> Unit, delete: (() -> Unit)?, enabled: Boolean) {
     @Composable fun amount(value: Money?) = value?.let { MoneyText.format(it) } ?: stringResource(R.string.ui_not_available_67a926)

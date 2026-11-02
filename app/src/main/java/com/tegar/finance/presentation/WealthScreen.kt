@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,7 +20,6 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.tegar.finance.R
 import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
-
 @Composable private fun kindName(kind: WealthKind) = stringResource(if (kind == WealthKind.ASSET) R.string.wealth_asset else R.string.wealth_liability)
 @Composable private fun categoryName(category: WealthCategory) = stringResource(when (category) {
     WealthCategory.PROPERTY -> R.string.wealth_property; WealthCategory.VEHICLE -> R.string.wealth_vehicle
@@ -40,10 +38,14 @@ import com.tegar.finance.domain.model.*
 })
 @Composable private fun amount(money: Money?) = money?.let(MoneyText::format) ?: stringResource(R.string.ui_not_available_67a926)
 @Composable private fun Metric(label: Int, money: Money?, tag: String) {
-    Text(stringResource(label), style = MaterialTheme.typography.titleMedium)
-    Text(amount(money), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.testTag(tag))
+    if (tag == "wealth_total" || tag.startsWith("wealth_saved_total_")) {
+        Text(stringResource(label), style = MaterialTheme.typography.titleMedium)
+        Text(amount(money), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.testTag(tag))
+    } else Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Text(stringResource(label), modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+        Text(amount(money), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag(tag))
+    }
 }
-
 @Composable
 fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
@@ -54,8 +56,18 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
     fun delete(type: String, id: String, name: String = "") { deletion = type; deleteId = id; deleteName = name }
     LazyColumn(Modifier.fillMaxSize().testTag("wealth_list"), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.wealth_title), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.wealth_intro))
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text(stringResource(R.string.wealth_title), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+                ScreenHelp("wealth_help") {
+                    Text(stringResource(R.string.wealth_intro))
+                    Text(stringResource(R.string.wealth_scope))
+                    Text(stringResource(R.string.wealth_investment_scope))
+                    Text(stringResource(R.string.wealth_history_hint))
+                    Text(stringResource(R.string.wealth_archive_hint))
+                    Text(stringResource(R.string.wealth_form_hint))
+                    Text(stringResource(R.string.wealth_cost_hint))
+                }
+            }
             Button(onClick = { model.openItem() }, enabled = !state.busy && state.source != null,
                 modifier = Modifier.testTag("wealth_add")) { Text(stringResource(R.string.wealth_add)) }
             TextButton(onClick = model::refresh, enabled = !state.busy) { Text(stringResource(R.string.wealth_refresh)) }
@@ -79,8 +91,6 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
                         Metric(R.string.ui_recorded_cash_44197f, overview.cash, "wealth_cash")
                         Metric(R.string.wealth_asset_total, overview.assets, "wealth_assets")
                         Metric(R.string.wealth_debt_total, overview.liabilities, "wealth_liabilities")
-                        Text(stringResource(R.string.wealth_scope))
-                        Text(stringResource(R.string.wealth_investment_scope))
                         if (overview.cashOverflow || overview.assetsOverflow || overview.liabilitiesOverflow || overview.totalOverflow)
                             Text(stringResource(R.string.wealth_error_range), color = MaterialTheme.colorScheme.error)
                         if (overview.missingAssets + overview.missingLiabilities > 0) Text(stringResource(R.string.wealth_missing,
@@ -102,7 +112,6 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
             }
             item {
                 Text(stringResource(R.string.wealth_history_title), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(R.string.wealth_history_hint))
                 if (overview.history.isEmpty()) Text(stringResource(R.string.wealth_history_empty), modifier = Modifier.testTag("wealth_history_empty"))
                 if (overview.historyChange != null) Text(stringResource(R.string.wealth_history_change, amount(overview.historyChange)), modifier = Modifier.testTag("wealth_history_change"))
                 if (overview.historyChangeOverflow) Text(stringResource(R.string.wealth_error_range))
@@ -130,7 +139,6 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
             modifier = Modifier.testTag("wealth_confirm_capture")) { Text(stringResource(R.string.wealth_capture)) } },
         dismissButton = { TextButton(onClick = { captureConfirmation = false }, enabled = !state.busy) { Text(stringResource(R.string.ui_cancel_19766e)) } })
 }
-
 @Composable private fun WealthItemCard(status: WealthItemStatus, values: List<WealthValue>, busy: Boolean,
     model: WealthViewModel, deleteItem: () -> Unit, deleteValue: (String) -> Unit) {
     val item = status.item
@@ -139,24 +147,25 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(item.name, style = MaterialTheme.typography.titleLarge)
             Text(kindName(item.kind) + " · " + categoryName(item.category))
-            Text(stringResource(R.string.wealth_acquired_value, item.acquiredOn))
-            item.acquisitionCost?.let { Text(stringResource(R.string.wealth_cost_value, amount(it))) }
-            if (item.notes.isNotBlank()) Text(item.notes)
             if (!item.active) Text(stringResource(R.string.wealth_archived))
             if (status.latest == null) Text(stringResource(R.string.wealth_unknown)) else {
                 Text(stringResource(R.string.wealth_latest, amount(status.latest.amount), status.latest.date))
                 Text(stringResource(R.string.wealth_age, status.ageDays.toString()))
             }
             TextButton(onClick = { model.openValue(item) }, enabled = !busy, modifier = Modifier.testTag("wealth_add_value_${item.id}")) { Text(stringResource(R.string.wealth_record_value)) }
+            Row {
             TextButton(onClick = { model.openItem(item) }, enabled = !busy, modifier = Modifier.testTag("wealth_edit_${item.id}")) { Text(stringResource(R.string.wealth_edit)) }
             TextButton(onClick = { model.toggleActive(item) }, enabled = !busy, modifier = Modifier.testTag("wealth_active_${item.id}")) {
                 Text(stringResource(if (item.active) R.string.wealth_archive else R.string.wealth_restore))
             }
-            Text(stringResource(R.string.wealth_archive_hint), style = MaterialTheme.typography.bodySmall)
+            }
             TextButton(onClick = { expanded = !expanded }, modifier = Modifier.testTag("wealth_values_${item.id}")) {
                 Text(stringResource(if (expanded) R.string.wealth_hide_values else R.string.wealth_value_history))
             }
             if (expanded) {
+                Text(stringResource(R.string.wealth_acquired_value, item.acquiredOn))
+                item.acquisitionCost?.let { Text(stringResource(R.string.wealth_cost_value, amount(it))) }
+                if (item.notes.isNotBlank()) Text(item.notes)
                 if (values.isEmpty()) Text(stringResource(R.string.wealth_no_values))
                 values.sortedByDescending { it.date }.forEach { value ->
                     HorizontalDivider()
@@ -170,7 +179,6 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
         }
     }
 }
-
 @Composable private fun CaptureCard(capture: WealthCapture, busy: Boolean, delete: () -> Unit) {
     var expanded by rememberSaveable(capture.id) { mutableStateOf(false) }
     OutlinedCard(Modifier.fillMaxWidth().testTag("wealth_history_${capture.id}")) {
@@ -191,25 +199,22 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
         }
     }
 }
-
 @Composable private fun ItemDialog(editor: WealthItemEditor, busy: Boolean, error: AppError?, model: WealthViewModel) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = model::closeEditors, title = { Text(stringResource(if (editor.id == null) R.string.wealth_add else R.string.wealth_edit)) },
         text = { Column(Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()).testTag("wealth_item_form"), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Field(editor.name, R.string.wealth_name, "wealth_name", busy) { model.editItem(editor.copy(name = it)) }
-            Choice(kindName(editor.kind), WealthKind.entries.map { it to kindName(it) }, !busy && editor.id == null, "wealth_kind") {
+            Choice(stringResource(R.string.wealth_kind) + ": " + kindName(editor.kind), WealthKind.entries.map { it to kindName(it) }, !busy && editor.id == null, "wealth_kind") {
                 model.editItem(editor.copy(kind = it, category = if (it == WealthKind.ASSET) WealthCategory.PERSONAL else WealthCategory.LOAN, cost = ""))
             }
-            Choice(categoryName(editor.category), WealthCategory.entries.filter { WealthRules.categoryValid(editor.kind, it) }.map { it to categoryName(it) }, !busy, "wealth_category") { model.editItem(editor.copy(category = it)) }
+            Choice(stringResource(R.string.wealth_category) + ": " + categoryName(editor.category), WealthCategory.entries.filter { WealthRules.categoryValid(editor.kind, it) }.map { it to categoryName(it) }, !busy, "wealth_category") { model.editItem(editor.copy(category = it)) }
             Field(editor.acquired, R.string.wealth_acquired, "wealth_acquired", busy) { model.editItem(editor.copy(acquired = it)) }
             if (editor.kind == WealthKind.ASSET) Field(editor.cost, R.string.wealth_cost, "wealth_cost", busy, decimal = true) { model.editItem(editor.copy(cost = it)) }
-            Text(stringResource(R.string.wealth_cost_hint))
             if (editor.id == null) {
                 Field(editor.amount, R.string.wealth_value_amount, "wealth_amount", busy, decimal = true) { model.editItem(editor.copy(amount = it)) }
                 Field(editor.valueDate, R.string.wealth_value_date, "wealth_date", busy) { model.editItem(editor.copy(valueDate = it)) }
             }
             Field(editor.notes, R.string.wealth_notes, "wealth_notes", busy, done = true) { model.editItem(editor.copy(notes = it)) }
-            Text(stringResource(R.string.wealth_form_hint))
             if (error != null) Text(wealthError(error), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("wealth_editor_error"))
         } }, confirmButton = { TextButton(onClick = { keyboard?.hide(); model.saveItem() }, enabled = !busy,
             modifier = Modifier.testTag("wealth_save_item")) { Text(stringResource(R.string.wealth_save_item)) } },
@@ -222,7 +227,6 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
             Field(editor.amount, R.string.wealth_value_amount, "wealth_amount", busy, decimal = true) { model.editValue(editor.copy(amount = it)) }
             Field(editor.date, R.string.wealth_value_date, "wealth_date", busy) { model.editValue(editor.copy(date = it)) }
             Field(editor.notes, R.string.wealth_notes, "wealth_notes", busy, done = true) { model.editValue(editor.copy(notes = it)) }
-            Text(stringResource(R.string.wealth_form_hint))
             if (error != null) Text(wealthError(error), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("wealth_editor_error"))
         } }, confirmButton = { TextButton(onClick = { keyboard?.hide(); model.saveValue() }, enabled = !busy,
             modifier = Modifier.testTag("wealth_save_value")) { Text(stringResource(R.string.wealth_save_value)) } },

@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import com.tegar.finance.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
@@ -19,7 +18,6 @@ import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
 import java.math.BigDecimal
 import java.math.RoundingMode
-
 @Composable private fun ReportKind.label() = when (this) { ReportKind.WEEK -> stringResource(R.string.ui_week_e78041); ReportKind.MONTH -> stringResource(R.string.ui_month_310ca5); ReportKind.YEAR -> stringResource(R.string.ui_year_89f683) }
 @Composable private fun ReportCoverage.label() = when (this) {
     ReportCoverage.COMPLETE -> stringResource(R.string.ui_complete_period_d1eeff)
@@ -40,7 +38,16 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
     LazyColumn(Modifier.fillMaxSize().imePadding().testTag("reports_list"), contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.ui_reports_dacca3), style = MaterialTheme.typography.headlineMedium)
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text(stringResource(R.string.ui_reports_dacca3), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+                ScreenHelp("report_help") {
+                    Text(stringResource(R.string.ui_percentage_change_is_unavailable_when_the_previous_amount_is_zero_eba789))
+                    Text(stringResource(R.string.ui_opening_cash_is_excluded_contributions_are_not_consumption_bars_start_294d55))
+                    Text(stringResource(R.string.ui_bar_scale_zero_to_total_recorded_consumption_archived_and_unallocated_479ca9))
+                    Text(stringResource(R.string.ui_reports_use_saved_records_only_unknown_or_future_dates_are_not_zeros_h_44f5da))
+                    Text(stringResource(R.string.ui_net_cash_flow_income_consumption_contributions_this_is_not_a_cash_bala_88ffcf))
+                }
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ReportKind.entries.forEach { kind ->
                     FilterChip(selected = report?.selection?.kind == kind, enabled = report != null,
@@ -111,14 +118,12 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
                             ReportAmount(stringResource(R.string.ui_saving_change_f52d12), comparison.savingDelta, "report_saving_delta")
                             Text(stringResource(R.string.ui_income_change_bf7cdc) + percent(comparison.incomeChangePercent))
                             Text(stringResource(R.string.ui_consumption_change_5544f4) + percent(comparison.expenseChangePercent))
-                            Text(stringResource(R.string.ui_percentage_change_is_unavailable_when_the_previous_amount_is_zero_eba789))
                         }
                     }
                 }
             }
             item {
                 Text(stringResource(R.string.ui_income_consumption_and_contributions_over_time_546a7c), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(R.string.ui_opening_cash_is_excluded_contributions_are_not_consumption_bars_start_294d55))
                 OutlinedButton(onClick = { chart = !chart }, modifier = Modifier.testTag("report_chart_toggle")) {
                     Text(if (chart) stringResource(R.string.ui_hide_chart_6b614d) else stringResource(R.string.ui_show_chart_6d64a1))
                 }
@@ -155,7 +160,6 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
             }
             item {
                 Text(stringResource(R.string.ui_consumption_by_category_1edbbd), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(R.string.ui_bar_scale_zero_to_total_recorded_consumption_archived_and_unallocated_479ca9))
                 if (data.categories.isEmpty()) Text(if (data.current.totals == null) stringResource(R.string.ui_category_amounts_are_unavailable_3d5f4a)
                     else stringResource(R.string.ui_no_consumption_expenses_recorded_in_the_covered_range_c1bec0))
             }
@@ -170,7 +174,7 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
                     }
                 }
             }
-            item { Text(stringResource(R.string.ui_reports_use_saved_records_only_unknown_or_future_dates_are_not_zeros_h_44f5da)) }
+            item {  }
         }
     }
 }
@@ -186,8 +190,6 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
             Text(stringResource(R.string.ui_saving_rate_9db534) + percent(totals?.savingRatePercent), modifier = Modifier.testTag("report_saving_rate"))
             Text(stringResource(R.string.ui_net_cash_flow_87a3a9) + if (totals?.netCashFlowOverflow == true) stringResource(R.string.ui_outside_supported_range_5fe45d)
                 else totals?.netCashFlow?.let { MoneyText.format(it) } ?: stringResource(R.string.ui_not_available_67a926))
-            Text(stringResource(R.string.ui_net_cash_flow_income_consumption_contributions_this_is_not_a_cash_bala_88ffcf),
-                style = MaterialTheme.typography.bodySmall)
         }
     }
 }

@@ -7,7 +7,7 @@
     <string name="goals_save" formatted="false">"Simpan tujuan"</string>
     <string name="goals_delete" formatted="false">"Hapus tujuan"</string>
     <string name="goals_refresh" formatted="false">"Muat ulang tujuan"</string>
-    <string name="goals_empty" formatted="false">"Belum ada tujuan. Tambahkan tujuan tabungan atau pembelian yang ingin direncanakan."</string>
+    <string name="goals_empty" formatted="false">"Tambahkan tujuan tabungan atau pembelian pertamamu."</string>
     <string name="goals_intro" formatted="false">"Dana tujuan mencadangkan kas yang sudah tercatat. Dana ini bukan pendapatan, pengeluaran, atau kekayaan tambahan. Menyimpan tujuan tidak memindahkan uang."</string>
     <string name="goals_name" formatted="false">"Nama tujuan"</string>
     <string name="goals_kind_saving" formatted="false">"Tujuan tabungan"</string>
@@ -24,8 +24,8 @@
     <string name="goals_earmarked" formatted="false">"Dana yang sudah disisihkan"</string>
     <string name="goals_asof" formatted="false">"Tanggal dana disisihkan (YYYY-MM-DD)"</string>
     <string name="goals_deadline" formatted="false">"Tanggal target (YYYY-MM-DD)"</string>
-    <string name="goals_amount_hint" formatted="false">"Mata uang buku; format jumlah Indonesia, misalnya 25.000,50. Target harus positif; dana tujuan boleh nol atau melebihi target."</string>
-    <string name="goals_asof_hint" formatted="false">"Tanggal dana tujuan harus berada dalam cakupan pencatatan dan tidak melewati hari ini. Tanggal target boleh sudah lewat."</string>
+    <string name="goals_amount_hint" formatted="false">"Contoh: 25.000,50"</string>
+    <string name="goals_asof_hint" formatted="false">"Gunakan tanggal pencatatan dana terbaru."</string>
     <string name="goals_error_input" formatted="false">"Periksa nama (1–80 karakter), target positif, dana tujuan nonnegatif, dan tanggal valid. Tanggal dana tujuan tidak boleh mendatang."</string>
     <string name="goals_error_coverage" formatted="false">"Tanggal dana tujuan tidak boleh mendahului awal pencatatan buku."</string>
     <string name="goals_error_currency" formatted="false">"Jumlah tujuan harus menggunakan mata uang buku."</string>
@@ -61,7 +61,7 @@
     <string name="goals_overdue" formatted="false">"Tanggal target sudah lewat; masih ada dana yang perlu disisihkan."</string>
     <string name="goals_due_today" formatted="false">"Target jatuh tempo hari ini dan dananya belum penuh."</string>
     <string name="goals_needed_value">"Jumlah bulanan untuk tujuan ini saja: %1$s"</string>
-    <string name="goals_needed_hint">"Pembulatan ke atas dari sisa dana tujuan ÷ %1$s tanggal kontribusi akhir bulan mendatang sebelum/pada target. Jumlah ini tidak mencadangkan kapasitas bersama."</string>
+    <string name="goals_needed_hint">"%1$s tanggal kontribusi akhir bulan"</string>
     <string name="goals_no_dates" formatted="false">"Tidak ada tanggal kontribusi akhir bulan mendatang sebelum/pada tanggal target ini."</string>
     <string name="goals_cash_assigned">"Kas bebas yang dialokasikan dalam skenario ini: %1$s"</string>
     <string name="goals_scenario_date">"Tanggal siap dalam skenario: %1$s"</string>

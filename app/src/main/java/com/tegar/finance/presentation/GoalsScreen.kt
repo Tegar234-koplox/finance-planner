@@ -1,5 +1,4 @@
 package com.tegar.finance.presentation
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,7 +21,6 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.tegar.finance.R
 import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
-
 @Composable private fun goalKind(value: GoalKind) = stringResource(if (value == GoalKind.SAVING) R.string.goals_kind_saving else R.string.goals_kind_purchase)
 @Composable private fun goalPriority(value: GoalPriority) = stringResource(when (value) {
     GoalPriority.HIGH -> R.string.goals_priority_high; GoalPriority.NORMAL -> R.string.goals_priority_normal; GoalPriority.LOW -> R.string.goals_priority_low
@@ -37,7 +35,6 @@ import com.tegar.finance.domain.model.*
     AppError.NOT_FOUND -> R.string.goals_error_missing
     else -> R.string.goals_error_storage
 })
-
 @Composable
 fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
@@ -45,8 +42,17 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
     LazyColumn(Modifier.fillMaxSize().testTag("goals_list"), contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.goals_title), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.goals_intro))
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text(stringResource(R.string.goals_title), style = MaterialTheme.typography.headlineMedium, modifier = Modifier.weight(1f))
+                ScreenHelp("goals_help") {
+                    Text(stringResource(R.string.goals_intro))
+                    Text(stringResource(R.string.goals_queue))
+                    Text(stringResource(R.string.goals_schedule))
+                    Text(stringResource(R.string.goals_capacity_formula))
+                    Text(stringResource(R.string.goals_footer))
+                    Text(stringResource(R.string.goals_purchase_hint))
+                }
+            }
             Row {
                 Button(onClick = { model.openGoal() }, enabled = state.plan != null && !state.busy,
                     modifier = Modifier.testTag("goal_add")) { Text(stringResource(R.string.goals_add)) }
@@ -94,10 +100,6 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
                 GoalCard(row, enabled = !state.busy, edit = { model.openGoal(row.goal) }, delete = { deleting = row.goal.id })
             }
             item {
-                Text(stringResource(R.string.goals_queue))
-                Text(stringResource(R.string.goals_schedule))
-                Text(stringResource(R.string.goals_capacity_formula))
-                Text(stringResource(R.string.goals_footer))
             }
         }
     }
@@ -111,7 +113,6 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
             }, dismissButton = { TextButton(onClick = { deleting = null }, enabled = !state.busy) { Text(stringResource(R.string.ui_cancel_19766e)) } })
     }
 }
-
 @Composable private fun GoalCard(row: GoalProgress, enabled: Boolean, edit: () -> Unit, delete: () -> Unit) {
     val goal = row.goal
     OutlinedCard(Modifier.fillMaxWidth().testTag("goal_${goal.id}")) {
@@ -150,7 +151,6 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
                 GoalDateReason.FORECAST_OUT_OF_RANGE -> R.string.goals_capacity_range
             }))
             row.meetsDeadline?.let { meets -> Text(stringResource(if (meets) R.string.goals_meets_deadline else R.string.goals_misses_deadline)) }
-            if (goal.kind == GoalKind.PURCHASE) Text(stringResource(R.string.goals_purchase_hint))
             Row {
                 TextButton(onClick = edit, enabled = enabled, modifier = Modifier.testTag("goal_edit_${goal.id}")) { Text(stringResource(R.string.goals_edit)) }
                 TextButton(onClick = delete, enabled = enabled, modifier = Modifier.testTag("goal_delete_${goal.id}")) { Text(stringResource(R.string.goals_delete)) }
@@ -158,7 +158,6 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
         }
     }
 }
-
 @Composable private fun GoalForm(editor: GoalEditor, busy: Boolean, error: AppError?, model: GoalsViewModel) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = model::closeEditor, title = { Text(stringResource(if (editor.id == null) R.string.goals_add else R.string.goals_edit)) },
@@ -187,7 +186,6 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
             modifier = Modifier.testTag("goal_save")) { Text(stringResource(R.string.goals_save)) } },
         dismissButton = { TextButton(onClick = model::closeEditor, enabled = !busy) { Text(stringResource(R.string.ui_cancel_19766e)) } })
 }
-
 @Composable private fun <T> GoalChoice(selected: String, choices: List<Pair<T, String>>, enabled: Boolean, tag: String, choose: (T) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     Box {

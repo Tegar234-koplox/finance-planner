@@ -5,6 +5,9 @@ liabilities, dated valuations and immutable tracked-net-worth snapshots to goals
 forecasts, reports, Home, budgets and bookkeeping. Manual investment holdings
 and market APIs remain later phases. Phase 9 has not started.
 
+Numbers and actions appear first. Tap the information icon for calculation details.
+Angka dan aksi utama ditampilkan lebih dulu; ketuk ikon info untuk penjelasan.
+
 ## Assets and net worth / Aset dan kekayaan bersih
 
 Open **Home → Assets and net worth**. Add a non-cash, non-investment asset or a
