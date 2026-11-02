@@ -34,9 +34,9 @@
     <string name="wealth_delete_item_body">"Delete %1$s and its dated values? Cash, transactions, goals and saved net-worth snapshots stay unchanged."</string>
     <string name="wealth_delete_value_body" formatted="false">"Delete this dated value? An earlier recorded value may become the latest; saved snapshots stay unchanged. Without any value, an active item becomes unknown, not zero."</string>
     <string name="wealth_delete_capture_body" formatted="false">"Delete this saved snapshot and its copied components? Current items, values and cash stay unchanged. Historical dates without a saved snapshot remain unavailable."</string>
-    <string name="wealth_intro" formatted="false">"Track non-cash, non-investment assets and manual liabilities. Do not enter ledger cash or investment holdings again as assets. Adding or valuing an item never creates a purchase, expense, loan payment or cash transfer."</string>
-    <string name="wealth_scope" formatted="false">"Tracked net worth = recorded ledger cash + latest recorded active asset values − latest recorded active liabilities. Goal earmarks remain part of cash and are not added or subtracted again. Non-cash assets do not increase Home spending cash."</string>
-    <string name="wealth_investment_scope" formatted="false">"Investment holdings are excluded from this total. Contributions reduce recorded cash but do not prove a holding value. This tracked total excludes holdings and all unrecorded assets/debts; it is not a complete bank-verified wealth statement."</string>
+    <string name="wealth_intro" formatted="false">"Manage non-cash assets and liabilities here. Keep investment holdings in Investments and cash in the ledger."</string>
+    <string name="wealth_scope" formatted="false">"Tracked net worth = recorded cash + active asset values + active investment values − active liabilities. Goal earmarks stay inside cash; acquisition costs are not added again."</string>
+    <string name="wealth_investment_scope" formatted="false">"Investment values are manual, dated observations. Cash entries do not prove a market value. Unrecorded assets and debts remain outside this total."</string>
     <string name="wealth_total" formatted="false">"Tracked net worth"</string>
     <string name="wealth_asset_total" formatted="false">"Active asset values"</string>
     <string name="wealth_debt_total" formatted="false">"Active liabilities"</string>
@@ -45,7 +45,7 @@
     <string name="wealth_refresh" formatted="false">"Refresh values"</string>
     <string name="wealth_capture" formatted="false">"Save today’s snapshot"</string>
     <string name="wealth_capture_confirm_title" formatted="false">"Save today’s tracked snapshot?"</string>
-    <string name="wealth_capture_confirm_body" formatted="false">"This copies today’s recorded cash and the latest dated active asset/liability values. Their original value dates stay visible. Later edits will not update this snapshot. Only one snapshot per ledger date is stored."</string>
+    <string name="wealth_capture_confirm_body" formatted="false">"Save today’s cash and latest recorded asset, investment and debt values? Later edits will not change this snapshot."</string>
     <string name="wealth_capture_saved" formatted="false">"Snapshot saved"</string>
     <string name="wealth_snapshot_exists" formatted="false">"Today’s snapshot saved"</string>
     <string name="wealth_history_title" formatted="false">"Saved dated snapshots"</string>

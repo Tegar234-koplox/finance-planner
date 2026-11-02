@@ -19,18 +19,22 @@ data class WealthCaptureLine(val sourceItemId: String, val name: String, val kin
     val category: WealthCategory, val amount: Money, val valuedOn: LocalDate)
 data class WealthCapture(val id: String, val date: LocalDate, val cash: Money, val assets: Money,
     val liabilities: Money, val total: Money, val lines: List<WealthCaptureLine>, val capturedAt: Instant,
-    val method: String = WealthRules.METHOD)
+    val method: String = WealthRules.METHOD, val investments: Money = Money(0, cash.currency),
+    val investmentLines: List<InvestmentCaptureLine> = emptyList())
 data class WealthSource(val ledger: Ledger, val transactions: List<FinanceTransaction>, val items: List<WealthItem>,
-    val values: List<WealthValue>, val captures: List<WealthCapture>)
+    val values: List<WealthValue>, val captures: List<WealthCapture>,
+    val holdings: List<InvestmentHolding> = emptyList(), val holdingValues: List<HoldingValue> = emptyList())
 data class WealthItemStatus(val item: WealthItem, val latest: WealthValue?, val ageDays: Long?, val included: Boolean)
 data class WealthOverview(val today: LocalDate, val cash: Money?, val cashOverflow: Boolean,
     val assets: Money?, val liabilities: Money?, val total: Money?, val assetsOverflow: Boolean,
     val liabilitiesOverflow: Boolean, val totalOverflow: Boolean, val missingAssets: Int, val missingLiabilities: Int,
     val items: List<WealthItemStatus>, val futureValues: Int, val futureItems: Int,
-    val history: List<WealthCapture>, val historyChange: Money?, val historyChangeOverflow: Boolean)
+    val history: List<WealthCapture>, val historyChange: Money?, val historyChangeOverflow: Boolean, val investments: Money? = null,
+    val investmentsOverflow: Boolean = false, val missingInvestments: Int = 0, val historyScopeChanged: Boolean = false)
 
 object WealthRules {
     const val METHOD = "TRACKED_V1"
+    const val WITH_INVESTMENTS = "TRACKED_V2"
     fun categoryValid(kind: WealthKind, category: WealthCategory) = category == WealthCategory.OTHER || when (kind) {
         WealthKind.ASSET -> category in listOf(WealthCategory.PROPERTY, WealthCategory.VEHICLE, WealthCategory.PERSONAL)
         WealthKind.LIABILITY -> category in listOf(WealthCategory.LOAN, WealthCategory.CARD)
@@ -50,9 +54,11 @@ object WealthRules {
         else -> null
     }
     fun validCapture(row: WealthCapture, currency: CurrencyCode): Boolean {
-        if (row.method != METHOD || row.date.year !in 1..9999 ||
-            listOf(row.cash, row.assets, row.liabilities, row.total).any { it.currency != currency } ||
-            row.assets.minorUnits < 0 || row.liabilities.minorUnits < 0 ||
+        if (row.method !in listOf(METHOD, WITH_INVESTMENTS) || row.date.year !in 1..9999 ||
+            listOf(row.cash, row.assets, row.liabilities, row.total, row.investments).any { it.currency != currency } ||
+            row.assets.minorUnits < 0 || row.liabilities.minorUnits < 0 || row.investments.minorUnits < 0 ||
+            (row.method == METHOD && (row.investments.minorUnits != 0L || row.investmentLines.isNotEmpty())) ||
+            row.investmentLines.map { it.sourceHoldingId }.distinct().size != row.investmentLines.size ||
             row.lines.map { it.sourceItemId }.distinct().size != row.lines.size) return false
         var assets = BigInteger.ZERO; var liabilities = BigInteger.ZERO
         for (line in row.lines) {
@@ -61,8 +67,14 @@ object WealthRules {
             if (line.kind == WealthKind.ASSET) assets += BigInteger.valueOf(line.amount.minorUnits)
             else liabilities += BigInteger.valueOf(line.amount.minorUnits)
         }
-        return assets == BigInteger.valueOf(row.assets.minorUnits) && liabilities == BigInteger.valueOf(row.liabilities.minorUnits) &&
-            BigInteger.valueOf(row.cash.minorUnits) + assets - liabilities == BigInteger.valueOf(row.total.minorUnits)
+        var holdings = BigInteger.ZERO
+        for (line in row.investmentLines) {
+            if (!CategoryNames.valid(line.name) || line.bucket == AllocationBucket.CASH || line.amount.currency != currency ||
+                line.amount.minorUnits < 0 || line.valuedOn.year !in 1..9999 || line.valuedOn > row.date) return false
+            holdings += BigInteger.valueOf(line.amount.minorUnits)
+        }
+        return holdings == BigInteger.valueOf(row.investments.minorUnits) && assets == BigInteger.valueOf(row.assets.minorUnits) && liabilities == BigInteger.valueOf(row.liabilities.minorUnits) &&
+            BigInteger.valueOf(row.cash.minorUnits) + assets + holdings - liabilities == BigInteger.valueOf(row.total.minorUnits)
     }
 }
 
@@ -84,6 +96,9 @@ object WealthCalculator {
                 currency, LocalDate.of(9999, 12, 31))?.let { return AppResult.Failure(it) }
         }
         if (source.captures.any { !WealthRules.validCapture(it, currency) }) return AppResult.Failure(AppError.INVALID_INPUT)
+        val holdingResult = InvestmentValuations.calculate(source.ledger, source.holdings, source.holdingValues, today)
+        if (holdingResult is AppResult.Failure) return holdingResult
+        val holdings = (holdingResult as AppResult.Success).value
         val cashResult = RecordedCashCalculator.calculate(source.ledger, source.transactions, today)
         if (cashResult is AppResult.Failure && cashResult.error != AppError.OUT_OF_RANGE) return cashResult
         val cash = (cashResult as? AppResult.Success)?.value
@@ -103,14 +118,16 @@ object WealthCalculator {
         fun money(value: BigInteger) = try { value.toMoneyExact(currency) } catch (_: ArithmeticException) { null }
         val assetsKnown = money(assetSum); val liabilitiesKnown = money(liabilitySum)
         val assets = assetsKnown.takeIf { missingAssets == 0 }; val liabilities = liabilitiesKnown.takeIf { missingLiabilities == 0 }
-        val total = if (cash != null && assets != null && liabilities != null)
-            money(BigInteger.valueOf(cash.minorUnits) + assetSum - liabilitySum) else null
+        val total = if (cash != null && assets != null && liabilities != null && holdings.total != null)
+            money(BigInteger.valueOf(cash.minorUnits) + assetSum + BigInteger.valueOf(holdings.total!!.minorUnits) - liabilitySum) else null
         val history = source.captures.sortedWith(compareByDescending<WealthCapture> { it.date }.thenBy { it.id })
-        val change = if (history.size >= 2) money(BigInteger.valueOf(history[0].total.minorUnits) - BigInteger.valueOf(history[1].total.minorUnits)) else null
+        val sameScope = history.size < 2 || history[0].method == history[1].method
+        val change = if (history.size >= 2 && sameScope) money(BigInteger.valueOf(history[0].total.minorUnits) - BigInteger.valueOf(history[1].total.minorUnits)) else null
         return AppResult.Success(WealthOverview(today, cash, cashResult is AppResult.Failure, assets, liabilities, total,
-            assetsKnown == null, liabilitiesKnown == null, cash != null && assets != null && liabilities != null && total == null,
-            missingAssets, missingLiabilities, rows, source.values.count { it.date > today }, source.items.count { it.active && it.acquiredOn > today },
-            history, change, history.size >= 2 && change == null))
+            assetsKnown == null, liabilitiesKnown == null, cash != null && assets != null && liabilities != null && holdings.total != null && total == null,
+            missingAssets, missingLiabilities, rows, source.values.count { it.date > today } + source.holdingValues.count { it.date > today },
+            source.items.count { it.active && it.acquiredOn > today } + source.holdings.count { it.active && it.acquiredOn > today },
+            history, change, history.size >= 2 && sameScope && change == null, holdings.total, holdings.overflow, holdings.missing, !sameScope))
     }
     fun capture(source: WealthSource, today: LocalDate, id: String, at: Instant): AppResult<WealthCapture> {
         if (source.captures.any { it.date == today }) return AppResult.Failure(AppError.SNAPSHOT_EXISTS)
@@ -118,9 +135,12 @@ object WealthCalculator {
         if (result is AppResult.Failure) return result
         val current = (result as AppResult.Success).value
         if (current.total == null) return AppResult.Failure(if (current.cashOverflow || current.assetsOverflow ||
-            current.liabilitiesOverflow || current.totalOverflow) AppError.OUT_OF_RANGE else AppError.WEALTH_INCOMPLETE)
+            current.liabilitiesOverflow || current.investmentsOverflow || current.totalOverflow) AppError.OUT_OF_RANGE else AppError.WEALTH_INCOMPLETE)
+        val holdings = (InvestmentValuations.calculate(source.ledger, source.holdings, source.holdingValues, today) as AppResult.Success).value
         return AppResult.Success(WealthCapture(id, today, current.cash!!, current.assets!!, current.liabilities!!, current.total,
             current.items.filter { it.included }.map { row -> WealthCaptureLine(row.item.id, row.item.name, row.item.kind,
-                row.item.category, row.latest!!.amount, row.latest.date) }, at))
+                row.item.category, row.latest!!.amount, row.latest.date) }, at, WealthRules.WITH_INVESTMENTS, current.investments!!,
+            holdings.statuses.filter { it.included }.map { row -> InvestmentCaptureLine(row.holding.id, row.holding.name, row.holding.bucket,
+                row.latest!!.amount, row.latest.date) }))
     }
 }

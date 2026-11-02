@@ -26,7 +26,10 @@ import com.tegar.finance.domain.model.*
     TransactionType.EXPENSE -> stringResource(R.string.ui_expense_a0417b)
     TransactionType.INVESTMENT -> stringResource(R.string.ui_investment_contribution_14704e)
 }
+@Composable internal fun FinanceTransaction.label() = if (type == TransactionType.INVESTMENT) (investmentAction ?: InvestmentAction.CONTRIBUTION).label() else type.label()
 @Composable private fun AppError.message() = when (this) {
+    AppError.ALLOCATION_TOTAL -> stringResource(R.string.portfolio_error_targets)
+    AppError.INVESTMENT_IN_USE -> stringResource(R.string.portfolio_error_in_use)
     AppError.INVALID_INPUT -> stringResource(R.string.ui_check_the_amount_date_yyyy_mm_dd_date_range_name_1_80_characters_and_n_031125)
     AppError.OUT_OF_RANGE -> stringResource(R.string.ui_this_amount_is_too_large_890084)
     AppError.CURRENCY_MISMATCH -> stringResource(R.string.ui_the_amount_must_use_the_ledger_currency_c869fa)
@@ -95,7 +98,7 @@ fun BookkeepingScreen(state: BookkeepingState, model: BookkeepingViewModel, cate
                     OutlinedCard(Modifier.fillMaxWidth().testTag("transaction_${transaction.id}")) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(MoneyText.format(transaction.amount), style = MaterialTheme.typography.titleLarge)
-                            Text("${transaction.type.label()} · ${transaction.date}")
+                            Text("${transaction.label()} · ${transaction.date}")
                             val category = state.categories.firstOrNull { it.id == transaction.categoryId }
                             Text((category?.name ?: stringResource(R.string.ui_category_unavailable_da9371)) + if (category?.active == false) stringResource(R.string.ui_archived_c089d2) else "")
                             if (transaction.note.isNotEmpty()) Text(transaction.note)
@@ -126,7 +129,7 @@ fun BookkeepingScreen(state: BookkeepingState, model: BookkeepingViewModel, cate
             dismissButton = { TextButton(onClick = model::closeEditors, enabled = !state.busy) { Text(stringResource(R.string.ui_cancel_19766e)) } })
     }
     deletingTransaction?.let { row ->
-        ConfirmDelete(stringResource(R.string.ui_delete_transaction_a61cf3), stringResource(R.string.ui_this_permanently_removes_this_transaction_ce239b), {
+        ConfirmDelete(stringResource(R.string.ui_delete_transaction_a61cf3), stringResource(if (row.type == TransactionType.INVESTMENT) R.string.portfolio_movement_delete_body else R.string.ui_this_permanently_removes_this_transaction_ce239b), {
             model.deleteTransaction(row.id); deletingTransaction = null
         }, { deletingTransaction = null })
     }
@@ -180,6 +183,9 @@ private fun TransactionForm(editor: TransactionEditor, state: BookkeepingState, 
                 val type = TransactionType.valueOf(it)
                 model.editTransaction(editor.copy(type = type,
                     categoryId = state.categories.firstOrNull { cat -> cat.active && cat.transactionType == type }?.id.orEmpty()))
+            }
+            if (editor.type == TransactionType.INVESTMENT) Choice(stringResource(R.string.portfolio_activity), editor.investmentAction.label(), InvestmentAction.entries.map { it.name to it.label() }) {
+                model.editTransaction(editor.copy(investmentAction = InvestmentAction.valueOf(it)))
             }
             OutlinedTextField(editor.amount, { model.editTransaction(editor.copy(amount = it)) }, enabled = !state.busy,
                 label = { Text(stringResource(R.string.ui_amount_idr_28ca9d)) }, supportingText = { Text(stringResource(R.string.ui_example_25_000_50_must_be_positive_c11fff)) },

@@ -52,12 +52,12 @@ class WealthMigrationTest {
             }).build())
         val old = helper.writableDatabase
         val tables = listOf("ledger", "category", "finance_transaction", "monthly_budget", "category_budget", "finance_goal")
-        fun rows(db: SupportSQLiteDatabase, table: String): List<List<String?>> = db.query("SELECT * FROM $table ORDER BY id").use { cursor ->
+        fun rows(db: SupportSQLiteDatabase, table: String): List<List<String?>> = db.query("SELECT " + (if (table == "finance_transaction") "id,ledgerId,transactionType,amountMinor,categoryId,date,note,createdAt,updatedAt" else "*") + " FROM $table ORDER BY id").use { cursor ->
             buildList { while (cursor.moveToNext()) add((0 until cursor.columnCount).map { cursor.getString(it) }) }
         }
         val before = tables.associateWith { rows(old, it) }; helper.close()
         fun open() = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5)
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6)
             .addCallback(FinanceMigrations.CALLBACK).build()
         var db = open()
         val clock = Clock.fixed(Instant.parse("2028-03-10T05:00:00Z"), ZoneOffset.UTC)
@@ -65,7 +65,7 @@ class WealthMigrationTest {
             var repository = LocalWealthRepository(db, clock)
             fun <T> AppResult<T>.ok(): T { assertTrue(toString(), this is AppResult.Success); return (this as AppResult.Success).value }
             assertTrue(repository.observeWealth().first().ok()!!.items.isEmpty())
-            assertEquals(5, db.openHelper.readableDatabase.version)
+            assertEquals(6, db.openHelper.readableDatabase.version)
             for (table in tables) { assertFalse(before[table]!!.isEmpty()); assertEquals(table, before[table], rows(db.openHelper.readableDatabase, table)) }
             val today = LocalDate.of(2028, 3, 10)
             val item = repository.saveItem(null, WealthItemDraft("Vehicle / Kendaraan", WealthKind.ASSET,

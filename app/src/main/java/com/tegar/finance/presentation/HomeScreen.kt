@@ -15,7 +15,7 @@ import com.tegar.finance.core.currency.MoneyText
 import com.tegar.finance.domain.model.*
 @Composable
 fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Unit, categories: () -> Unit,
-    addTransaction: () -> Unit, budget: () -> Unit, reports: () -> Unit, goals: () -> Unit, wealth: () -> Unit = {}) {
+    addTransaction: () -> Unit, budget: () -> Unit, reports: () -> Unit, goals: () -> Unit, wealth: () -> Unit = {}, investments: () -> Unit = {}) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
     LazyColumn(Modifier.fillMaxSize().testTag("home_list"), contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -72,6 +72,7 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                             if (data.reservationOverflow) Text(stringResource(R.string.goals_reserve_overflow))
                             else HomeValue(stringResource(R.string.goals_cash_reserved), data.reservedForGoals, "home_goal_reserved")
                             HomeValue(stringResource(R.string.goals_cash_free), data.unreservedCash, "home_unreserved_cash")
+                            TextButton(onClick = investments, modifier = Modifier.testTag("home_investments")) { Text(stringResource(R.string.portfolio_open)) }
                             TextButton(onClick = wealth, modifier = Modifier.testTag("home_wealth")) { Text(stringResource(R.string.wealth_open)) }
                             TextButton(onClick = goals, modifier = Modifier.testTag("home_goals")) { Text(stringResource(R.string.goals_manage)) }
                             if (data.recordedCount == 0) Text(stringResource(R.string.ui_no_recorded_transactions_through_this_date_add_income_expenses_or_cont_f53ca9))
@@ -161,7 +162,7 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                             if (data.recent.isEmpty()) Text(stringResource(R.string.ui_no_recorded_transactions_through_this_date_b5c2d8))
                             data.recent.forEach { row ->
                                 val category = state.categories[row.categoryId]
-                                Text("${row.date} · ${row.type.label()} · ${MoneyText.format(row.amount)}")
+                                Text("${row.date} · ${row.label()} · ${MoneyText.format(row.amount)}")
                                 Text((category?.name ?: stringResource(R.string.ui_category_unavailable_da9371)) + if (category?.active == false) stringResource(R.string.ui_archived_c089d2) else "")
                                 if (row.note.isNotEmpty()) Text(row.note)
                                 HorizontalDivider()
@@ -170,15 +171,7 @@ fun HomeScreen(state: HomeUiState, model: HomeViewModel, transactions: () -> Uni
                         }
                     }
                 }
-                item {
-                    OutlinedCard(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text(stringResource(R.string.ui_not_available_yet_787406), style = MaterialTheme.typography.titleLarge)
-                            Text(stringResource(R.string.ui_forecasts_are_available_in_plan_goals_progress_net_worth_and_market_va_c83038),
-                                modifier = Modifier.testTag("home_future_metrics"))
-                        }
-                    }
-                }
+
             }
         }
     }

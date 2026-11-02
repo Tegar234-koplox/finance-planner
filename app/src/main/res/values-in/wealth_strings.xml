@@ -34,9 +34,9 @@
     <string name="wealth_delete_item_body">"Hapus %1$s beserta nilai bertanggalnya? Kas, transaksi, tujuan, dan snapshot kekayaan bersih tersimpan tetap dipertahankan."</string>
     <string name="wealth_delete_value_body" formatted="false">"Hapus nilai bertanggal ini? Nilai tercatat sebelumnya dapat menjadi nilai terbaru; snapshot tersimpan tetap dipertahankan. Tanpa nilai apa pun, data aktif menjadi tidak diketahui, bukan nol."</string>
     <string name="wealth_delete_capture_body" formatted="false">"Hapus snapshot tersimpan ini beserta salinan komponennya? Data saat ini, nilai, dan kas tetap dipertahankan. Tanggal historis tanpa snapshot tersimpan tetap tidak tersedia."</string>
-    <string name="wealth_intro" formatted="false">"Catat aset selain kas dan investasi serta utang manual. Jangan masukkan kembali kas buku atau kepemilikan investasi sebagai aset. Menambah atau menilai data tidak membuat pembelian, pengeluaran, pembayaran utang, atau transfer kas."</string>
-    <string name="wealth_scope" formatted="false">"Kekayaan bersih tercatat = kas buku tercatat + nilai aset aktif terbaru yang dicatat − utang aktif terbaru yang dicatat. Dana tujuan tetap bagian dari kas dan tidak ditambah atau dikurangi lagi. Aset nonkas tidak menambah kas belanja di Beranda."</string>
-    <string name="wealth_investment_scope" formatted="false">"Kepemilikan investasi belum termasuk dalam total ini. Kontribusi mengurangi kas tercatat tetapi tidak membuktikan nilai kepemilikan. Total tercatat ini mengecualikan investasi serta semua aset/utang yang belum dicatat; ini bukan laporan kekayaan lengkap yang diverifikasi bank."</string>
+    <string name="wealth_intro" formatted="false">"Kelola aset nonkas dan utang di sini. Catat kepemilikan investasi di Investasi, dan kas di buku transaksi."</string>
+    <string name="wealth_scope" formatted="false">"Kekayaan bersih tercatat = kas tercatat + nilai aset aktif + nilai investasi aktif − utang aktif. Dana tujuan tetap bagian kas; biaya perolehan tidak ditambahkan lagi."</string>
+    <string name="wealth_investment_scope" formatted="false">"Nilai investasi adalah pengamatan manual bertanggal. Arus kas tidak membuktikan nilai pasar. Aset dan utang yang belum dicatat tetap di luar total ini."</string>
     <string name="wealth_total" formatted="false">"Kekayaan bersih tercatat"</string>
     <string name="wealth_asset_total" formatted="false">"Nilai aset aktif"</string>
     <string name="wealth_debt_total" formatted="false">"Utang aktif"</string>
@@ -45,7 +45,7 @@
     <string name="wealth_refresh" formatted="false">"Muat ulang nilai"</string>
     <string name="wealth_capture" formatted="false">"Simpan snapshot hari ini"</string>
     <string name="wealth_capture_confirm_title" formatted="false">"Simpan snapshot tercatat hari ini?"</string>
-    <string name="wealth_capture_confirm_body" formatted="false">"Ini menyalin kas tercatat hari ini dan nilai aktif aset/utang bertanggal terbaru. Tanggal nilai aslinya tetap terlihat. Perubahan berikutnya tidak memperbarui snapshot ini. Hanya satu snapshot disimpan per tanggal pelaporan."</string>
+    <string name="wealth_capture_confirm_body" formatted="false">"Simpan kas hari ini beserta nilai aset, investasi, dan utang terbaru? Perubahan berikutnya tidak mengubah snapshot ini."</string>
     <string name="wealth_capture_saved" formatted="false">"Snapshot tersimpan"</string>
     <string name="wealth_snapshot_exists" formatted="false">"Snapshot hari ini tersimpan"</string>
     <string name="wealth_history_title" formatted="false">"Snapshot bertanggal tersimpan"</string>

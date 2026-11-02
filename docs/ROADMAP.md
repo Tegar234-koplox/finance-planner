@@ -5,7 +5,9 @@ all 38 Android tests on API 26, and actual APK 0.7→0.8 migration 4→5 preserv
 all six nonempty original financial tables. Lint has 0 errors, 7 existing upgrade
 advisories and 2 unused label resources. See PHASE_8_STATUS.md for evidence and
 limits; Phase 1–7 status reports retain their historical results.
-Stop after Phase 8. Phase 9 has not started and requires another instruction.
+Phase 9 is in progress: manual holdings, exact allocation targets, contribution
+plans, cash redemptions and investment-inclusive frozen snapshots. The user also
+authorized compact financial screens. Stop after Phase 9; do not start Phase 10.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review

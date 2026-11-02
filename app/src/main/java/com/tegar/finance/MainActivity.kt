@@ -17,6 +17,7 @@ import com.tegar.finance.presentation.BudgetViewModel
 import com.tegar.finance.presentation.HomeViewModel
 import com.tegar.finance.presentation.ReportsViewModel
 import com.tegar.finance.presentation.ForecastViewModel
+import com.tegar.finance.presentation.PortfolioViewModel
 import com.tegar.finance.presentation.WealthViewModel
 import com.tegar.finance.presentation.GoalsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,7 @@ class MainActivity : ComponentActivity() {
     private val home: HomeViewModel by viewModels()
     private val reports: ReportsViewModel by viewModels()
     private val forecast: ForecastViewModel by viewModels()
+    private val portfolio: PortfolioViewModel by viewModels()
     private val wealth: WealthViewModel by viewModels()
     private val goals: GoalsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ class MainActivity : ComponentActivity() {
             val homeState by home.state.collectAsStateWithLifecycle()
             val reportsState by reports.state.collectAsStateWithLifecycle()
             val forecastState by forecast.state.collectAsStateWithLifecycle()
+            val portfolioState by portfolio.state.collectAsStateWithLifecycle()
             val wealthState by wealth.state.collectAsStateWithLifecycle()
             val goalsState by goals.state.collectAsStateWithLifecycle()
             AppLocalization(state.language) { FinanceTheme(state.theme, onDarkTheme = { dark ->
@@ -48,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     isAppearanceLightStatusBars = !dark
                     isAppearanceLightNavigationBars = !dark
                 }
-            }) { FinanceApp(state, viewModel::retry, viewModel::setTheme, records, bookkeeping, budgetState, budgets, homeState, home, reportsState, reports, forecastState, forecast, viewModel::setLanguage, goalsState, goals, wealthState, wealth) } }
+            }) { FinanceApp(state, viewModel::retry, viewModel::setTheme, records, bookkeeping, budgetState, budgets, homeState, home, reportsState, reports, forecastState, forecast, viewModel::setLanguage, goalsState, goals, wealthState, wealth, portfolioState, portfolio) } }
         }
     }
 }

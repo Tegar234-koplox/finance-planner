@@ -18,7 +18,7 @@ class ForecastStorageTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val name = "forecast-${UUID.randomUUID()}.db"
         fun open() = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5).addCallback(FinanceMigrations.CALLBACK).build()
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6).addCallback(FinanceMigrations.CALLBACK).build()
         var db = open()
         fun <T> AppResult<T>.ok(): T { assertTrue(toString(), this is AppResult.Success); return (this as AppResult.Success).value }
         val clock = Clock.fixed(Instant.parse("2028-01-01T05:00:00Z"), ZoneOffset.UTC)
@@ -50,7 +50,7 @@ class ForecastStorageTest {
             assertEquals(3000L, forecast().horizons.first().totals!!.consumption.minorUnits)
             assertEquals(9000L, forecast().horizons.last().totals!!.consumption.minorUnits)
             assertEquals(2, forecast().samples.size)
-            assertEquals(5, db.openHelper.readableDatabase.version)
+            assertEquals(6, db.openHelper.readableDatabase.version)
             book.deleteTransaction(id).ok()
             assertEquals(500L, forecast().horizons.first().totals!!.consumption.minorUnits)
             assertEquals(0L, forecast().samples.last().flows.consumption.minorUnits)

@@ -25,6 +25,7 @@ object FinanceMigrations {
             BudgetMigrations.installGuards(db)
             GoalMigrations.installGuards(db)
             WealthMigrations.installGuards(db)
+            InvestmentMigrations.installGuards(db)
         }
     }
     /** Also protect invariants for writes outside the repository, on both fresh and migrated databases. */

@@ -47,7 +47,7 @@ import com.tegar.finance.domain.model.*
     }
 }
 @Composable
-fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
+fun WealthScreen(state: WealthUiState, model: WealthViewModel, openInvestments: (() -> Unit)? = null) {
     LifecycleResumeEffect(Unit) { model.refresh(); onPauseOrDispose { } }
     var deletion by rememberSaveable { mutableStateOf<String?>(null) }
     var deleteId by rememberSaveable { mutableStateOf("") }
@@ -90,9 +90,12 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
                         Metric(R.string.wealth_total, overview.total, "wealth_total")
                         Metric(R.string.ui_recorded_cash_44197f, overview.cash, "wealth_cash")
                         Metric(R.string.wealth_asset_total, overview.assets, "wealth_assets")
+                        Metric(R.string.portfolio_invested, overview.investments, "wealth_investments")
+                        if (openInvestments != null) TextButton(onClick = openInvestments, modifier = Modifier.testTag("wealth_investments_open")) { Text(stringResource(R.string.portfolio_open)) }
                         Metric(R.string.wealth_debt_total, overview.liabilities, "wealth_liabilities")
-                        if (overview.cashOverflow || overview.assetsOverflow || overview.liabilitiesOverflow || overview.totalOverflow)
+                        if (overview.cashOverflow || overview.assetsOverflow || overview.liabilitiesOverflow || overview.investmentsOverflow || overview.totalOverflow)
                             Text(stringResource(R.string.wealth_error_range), color = MaterialTheme.colorScheme.error)
+                        if (overview.missingInvestments > 0) Text(stringResource(R.string.portfolio_unknown_holdings))
                         if (overview.missingAssets + overview.missingLiabilities > 0) Text(stringResource(R.string.wealth_missing,
                             overview.missingAssets.toString(), overview.missingLiabilities.toString()), modifier = Modifier.testTag("wealth_missing"))
                         if (overview.futureValues + overview.futureItems > 0) Text(stringResource(R.string.wealth_future,
@@ -114,6 +117,7 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
                 Text(stringResource(R.string.wealth_history_title), style = MaterialTheme.typography.titleLarge)
                 if (overview.history.isEmpty()) Text(stringResource(R.string.wealth_history_empty), modifier = Modifier.testTag("wealth_history_empty"))
                 if (overview.historyChange != null) Text(stringResource(R.string.wealth_history_change, amount(overview.historyChange)), modifier = Modifier.testTag("wealth_history_change"))
+                if (overview.historyScopeChanged) Text(stringResource(R.string.portfolio_wealth_scope_changed), modifier = Modifier.testTag("wealth_scope_changed"))
                 if (overview.historyChangeOverflow) Text(stringResource(R.string.wealth_error_range))
             }
             items(overview.history, key = { "capture_${it.id}" }) { capture ->
@@ -188,12 +192,18 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel) {
             Metric(R.string.ui_recorded_cash_44197f, capture.cash, "wealth_saved_cash_${capture.id}")
             Metric(R.string.wealth_asset_total, capture.assets, "wealth_saved_assets_${capture.id}")
             Metric(R.string.wealth_debt_total, capture.liabilities, "wealth_saved_liabilities_${capture.id}")
-            Text(stringResource(R.string.wealth_snapshot_time, capture.capturedAt))
+            if (capture.method == WealthRules.WITH_INVESTMENTS) {
+                Metric(R.string.portfolio_invested, capture.investments, "wealth_saved_investments_${capture.id}")
+                Text(stringResource(R.string.portfolio_snapshot_time, capture.capturedAt))
+            } else Text(stringResource(R.string.wealth_snapshot_time, capture.capturedAt))
             TextButton(onClick = { expanded = !expanded }, modifier = Modifier.testTag("wealth_components_${capture.id}")) {
                 Text(stringResource(if (expanded) R.string.wealth_hide_components else R.string.wealth_history_components))
             }
             if (expanded) capture.lines.sortedBy { it.name }.forEach { line ->
                 Text(stringResource(R.string.wealth_component, line.name, kindName(line.kind), amount(line.amount), line.valuedOn))
+            }
+            if (expanded) capture.investmentLines.sortedBy { it.name }.forEach { line ->
+                Text(stringResource(R.string.portfolio_snapshot_line, line.name, line.bucket.label(), amount(line.amount), line.valuedOn))
             }
             TextButton(onClick = delete, enabled = !busy, modifier = Modifier.testTag("wealth_delete_capture_${capture.id}")) { Text(stringResource(R.string.wealth_delete_capture)) }
         }

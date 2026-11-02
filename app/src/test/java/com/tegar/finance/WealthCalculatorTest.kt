@@ -103,7 +103,7 @@ class WealthCalculatorTest {
         val result = total(changed); assertEquals(Money(500), result.total)
         assertEquals(Money(300), result.history.single().total); assertEquals("Item asset", saved.lines.single().name)
         assertEquals(today.minusDays(10), saved.lines.single().valuedOn); assertEquals(Money(100), saved.cash)
-        assertEquals(saved, result.history.single()); assertEquals(WealthRules.METHOD, saved.method)
+        assertEquals(saved, result.history.single()); assertEquals(WealthRules.WITH_INVESTMENTS, saved.method)
     }
     @Test fun historicalSnapshotsAreSortedAndChangeUsesOnlyTheLatestTwoDates() {
         val first = capture(source(10), today.minusDays(5), "a"); val second = capture(source(70), today.minusDays(2), "b")

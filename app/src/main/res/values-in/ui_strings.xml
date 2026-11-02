@@ -2,7 +2,7 @@
 <resources>
     <string name="ui_income_51595d" formatted="false">"Pendapatan"</string>
     <string name="ui_expense_a0417b" formatted="false">"Pengeluaran"</string>
-    <string name="ui_investment_contribution_14704e" formatted="false">"Kontribusi investasi"</string>
+    <string name="ui_investment_contribution_14704e" formatted="false">"Investasi"</string>
     <string name="ui_check_the_amount_date_yyyy_mm_dd_date_range_name_1_80_characters_and_n_031125" formatted="false">"Periksa jumlah, tanggal (YYYY-MM-DD), rentang tanggal, nama (1–80 karakter), dan catatan (maksimal 500 karakter). Jumlah harus positif."</string>
     <string name="ui_this_amount_is_too_large_890084" formatted="false">"Jumlah ini terlalu besar."</string>
     <string name="ui_the_amount_must_use_the_ledger_currency_c869fa" formatted="false">"Jumlah harus menggunakan mata uang buku keuangan."</string>
@@ -221,8 +221,6 @@
     <string name="ui_recent_recorded_transactions_669a18" formatted="false">"Transaksi tercatat terbaru"</string>
     <string name="ui_no_recorded_transactions_through_this_date_b5c2d8" formatted="false">"Belum ada transaksi tercatat hingga tanggal ini."</string>
     <string name="ui_view_transaction_history_700d6a" formatted="false">"Lihat riwayat transaksi"</string>
-    <string name="ui_not_available_yet_787406" formatted="false">"Belum tersedia"</string>
-    <string name="ui_forecasts_are_available_in_plan_goals_progress_net_worth_and_market_va_c83038" formatted="false">"Prakiraan, tujuan, dan kekayaan bersih tercatat tersedia. Kepemilikan investasi dan nilai pasar belum diterapkan."</string>
     <string name="ui_week_e78041" formatted="false">"Minggu"</string>
     <string name="ui_month_310ca5" formatted="false">"Bulan"</string>
     <string name="ui_year_89f683" formatted="false">"Tahun"</string>

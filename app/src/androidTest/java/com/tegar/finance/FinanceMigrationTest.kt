@@ -42,7 +42,7 @@ class FinanceMigrationTest {
             old.version = 1
         }
         fun open() = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5).addCallback(FinanceMigrations.CALLBACK).build()
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6).addCallback(FinanceMigrations.CALLBACK).build()
         var db = open()
         try {
             val ledger = db.foundationDao().ledger()!!
@@ -51,7 +51,7 @@ class FinanceMigrationTest {
             val category = db.transactionDao().category("kept")!!
             assertEquals("Renamed food", category.name); assertFalse(category.active)
             assertEquals("food", category.seedKey); assertEquals(7, category.sortOrder)
-            assertEquals(5, db.openHelper.readableDatabase.version)
+            assertEquals(6, db.openHelper.readableDatabase.version)
             val row = TransactionEntity("migrated-write", transactionType = "EXPENSE", amountMinor = 100,
                 categoryId = "kept", date = 20000, note = "After migration", createdAt = 300, updatedAt = null)
             try { db.transactionDao().insert(row); fail("Archived category accepted") } catch (_: SQLiteException) { }

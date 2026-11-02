@@ -66,7 +66,7 @@ class ReportsUiTest {
         ready()
         val suffix=System.nanoTime()
         val income="Report income $suffix"; val expense="Report expense $suffix"; val contribution="Report contribution $suffix"
-        add("Income","40.000",income); add("Expense","10.000",expense); add("Investment contribution","5.000",contribution)
+        add("Income","40.000",income); add("Expense","10.000",expense); add("Investment","5.000",contribution)
         compose.onNodeWithTag("home_list").performScrollToIndex(0)
         compose.onNodeWithTag("home_reports").performClick()
         value("report_income","Income: "+MoneyText.format(Money(4000000)))

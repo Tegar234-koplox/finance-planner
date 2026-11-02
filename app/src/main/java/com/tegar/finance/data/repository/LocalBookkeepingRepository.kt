@@ -36,10 +36,16 @@ class LocalBookkeepingRepository @Inject constructor(
             Money(ledger.openingCashMinor, currency), Instant.ofEpochMilli(ledger.createdAt))
         val error = TransactionRules.validate(draft, account, dao.category(draft.categoryId)?.domain(), previous?.domain(currency))
         if (error != null) return@atomic AppResult.Failure(error)
+        draft.holdingId?.let { key ->
+            val holding = database.investmentDao().holding(key) ?: return@atomic AppResult.Failure(AppError.NOT_FOUND)
+            if (draft.date.toEpochDay() < holding.acquiredOn || (!holding.active && previous?.holdingId != key))
+                return@atomic AppResult.Failure(AppError.INVALID_INPUT)
+        }
         val now = clock.instant().toEpochMilli()
         val row = TransactionEntity(id ?: UUID.randomUUID().toString(), transactionType = draft.type.name,
             amountMinor = draft.amount.minorUnits, categoryId = draft.categoryId, date = draft.date.toEpochDay(),
-            note = draft.note.trim(), createdAt = previous?.createdAt ?: now, updatedAt = if (previous == null) null else now)
+            note = draft.note.trim(), createdAt = previous?.createdAt ?: now, updatedAt = if (previous == null) null else now,
+            investmentAction = draft.investmentAction?.name, holdingId = draft.holdingId)
         if (previous == null) dao.insert(row) else dao.update(row)
         AppResult.Success(row.id)
     }
@@ -77,6 +83,6 @@ class LocalBookkeepingRepository @Inject constructor(
         }
 }
 private fun CategoryEntity.domain() = Category(id, name, TransactionType.valueOf(transactionType), active)
-private fun TransactionEntity.domain(currency: CurrencyCode) = FinanceTransaction(id,
+internal fun TransactionEntity.domain(currency: CurrencyCode) = FinanceTransaction(id,
     TransactionType.valueOf(transactionType), Money(amountMinor, currency), categoryId, LocalDate.ofEpochDay(date),
-    note, Instant.ofEpochMilli(createdAt), updatedAt?.let(Instant::ofEpochMilli))
+    note, Instant.ofEpochMilli(createdAt), updatedAt?.let(Instant::ofEpochMilli), investmentAction?.let(InvestmentAction::valueOf), holdingId)

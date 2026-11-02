@@ -11,6 +11,7 @@ import com.tegar.finance.core.database.FinanceMigrations
 import com.tegar.finance.core.database.BudgetMigrations
 import com.tegar.finance.core.database.GoalMigrations
 import com.tegar.finance.core.database.WealthMigrations
+import com.tegar.finance.core.database.InvestmentMigrations
 import com.tegar.finance.data.repository.*
 import com.tegar.finance.domain.repository.*
 import dagger.*
@@ -27,7 +28,7 @@ object StorageModule {
     @Provides @Singleton fun clock(): Clock = Clock.systemUTC()
     @Provides @Singleton fun database(@ApplicationContext context: Context): FinanceDatabase =
         Room.databaseBuilder(context, FinanceDatabase::class.java, "finance.db")
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5).addCallback(FinanceMigrations.CALLBACK).build()
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6).addCallback(FinanceMigrations.CALLBACK).build()
     @Provides @Singleton fun preferences(@ApplicationContext context: Context): DataStore<Preferences> =
         PreferenceDataStoreFactory.create(scope = CoroutineScope(SupervisorJob() + Dispatchers.IO),
             produceFile = { context.preferencesDataStoreFile("settings") })
@@ -42,5 +43,6 @@ abstract class RepositoryModule {
     @Binds abstract fun editableCategories(implementation: LocalBookkeepingRepository): EditableCategoryRepository
     @Binds abstract fun budgets(implementation: LocalBudgetRepository): BudgetRepository
     @Binds abstract fun goals(implementation: LocalGoalRepository): GoalRepository
+    @Binds abstract fun investments(implementation: LocalInvestmentRepository): InvestmentRepository
     @Binds abstract fun wealth(implementation: LocalWealthRepository): WealthRepository
 }

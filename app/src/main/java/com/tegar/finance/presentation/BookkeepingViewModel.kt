@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 data class TransactionEditor(
     val id: String? = null, val type: TransactionType = TransactionType.EXPENSE,
     val amount: String = "", val categoryId: String = "", val date: String = "", val note: String = "",
+    val investmentAction: InvestmentAction = InvestmentAction.CONTRIBUTION, val holdingId: String? = null,
 )
 data class CategoryEditor(val id: String? = null, val name: String = "", val type: TransactionType = TransactionType.EXPENSE)
 data class BookkeepingState(
@@ -67,7 +68,7 @@ class BookkeepingViewModel @Inject constructor(
             row?.id, type, row?.amount?.decimalAmount()?.toPlainString()?.replace('.', ',') ?: "",
             row?.categoryId ?: current.categories.firstOrNull { cat -> cat.active && cat.transactionType == type }?.id.orEmpty(),
             (row?.date ?: LocalDate.now(clock.withZone(current.ledger?.reportingZone ?: ZoneId.of("Asia/Jakarta")))).toString(),
-            row?.note.orEmpty())) }
+            row?.note.orEmpty(), row?.investmentAction ?: InvestmentAction.CONTRIBUTION, row?.holdingId)) }
     }
     fun editTransaction(value: TransactionEditor) { if (!state.value.busy) mutable.update { it.copy(transactionEditor = value, error = null) } }
     fun openCategory(row: Category? = null) { mutable.update { it.copy(error = null,
@@ -83,7 +84,9 @@ class BookkeepingViewModel @Inject constructor(
         val date = try { LocalDate.parse(editor.date) }
         catch (_: DateTimeException) { mutable.update { it.copy(error = AppError.INVALID_INPUT) }; return }
         mutate({ transactions.saveTransaction(editor.id, TransactionDraft(editor.type,
-            (amount as AppResult.Success).value, editor.categoryId, date, editor.note)) }) {
+            (amount as AppResult.Success).value, editor.categoryId, date, editor.note,
+            editor.investmentAction.takeIf { editor.type == TransactionType.INVESTMENT && it == InvestmentAction.REDEMPTION },
+            editor.holdingId.takeIf { editor.type == TransactionType.INVESTMENT })) }) {
             mutable.update { it.copy(transactionEditor = null) }
         }
     }

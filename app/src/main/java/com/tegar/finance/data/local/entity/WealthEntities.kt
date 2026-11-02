@@ -18,7 +18,8 @@ data class WealthValueEntity(@PrimaryKey val id: String, val itemId: String, val
     parentColumns = ["id"], childColumns = ["ledgerId"], onDelete = ForeignKey.RESTRICT, onUpdate = ForeignKey.RESTRICT)],
     indices = [Index(value = ["ledgerId", "date"], unique = true)])
 data class WealthCaptureEntity(@PrimaryKey val id: String, val ledgerId: Int = 1, val date: Long, val currencyCode: String,
-    val cashMinor: Long, val assetsMinor: Long, val liabilitiesMinor: Long, val totalMinor: Long, val method: String, val capturedAt: Long)
+    val cashMinor: Long, val assetsMinor: Long, val liabilitiesMinor: Long, val totalMinor: Long, val method: String, val capturedAt: Long,
+    @ColumnInfo(defaultValue = "0") val investmentsMinor: Long = 0)
 
 // sourceItemId intentionally has no FK: deleting a current item must not erase captured evidence.
 @Entity(tableName = "wealth_capture_line", foreignKeys = [ForeignKey(entity = WealthCaptureEntity::class,
@@ -30,8 +31,10 @@ data class WealthCaptureLineEntity(@PrimaryKey val id: String, val captureId: St
 data class WealthItemWithValues(@Embedded val item: WealthItemEntity,
     @Relation(parentColumn = "id", entityColumn = "itemId") val values: List<WealthValueEntity>)
 data class WealthCaptureWithLines(@Embedded val capture: WealthCaptureEntity,
-    @Relation(parentColumn = "id", entityColumn = "captureId") val lines: List<WealthCaptureLineEntity>)
+    @Relation(parentColumn = "id", entityColumn = "captureId") val lines: List<WealthCaptureLineEntity>,
+    @Relation(parentColumn = "id", entityColumn = "captureId") val investments: List<InvestmentCaptureEntity>)
 data class WealthSourceEntity(@Embedded val ledger: LedgerEntity,
     @Relation(parentColumn = "id", entityColumn = "ledgerId") val transactions: List<TransactionEntity>,
     @Relation(parentColumn = "id", entityColumn = "ledgerId", entity = WealthItemEntity::class) val items: List<WealthItemWithValues>,
-    @Relation(parentColumn = "id", entityColumn = "ledgerId", entity = WealthCaptureEntity::class) val captures: List<WealthCaptureWithLines>)
+    @Relation(parentColumn = "id", entityColumn = "ledgerId", entity = WealthCaptureEntity::class) val captures: List<WealthCaptureWithLines>,
+    @Relation(parentColumn = "id", entityColumn = "ledgerId", entity = InvestmentHoldingEntity::class) val holdings: List<HoldingWithValues>)

@@ -186,6 +186,7 @@ fun ReportsScreen(state: ReportsUiState, model: ReportsViewModel) {
             ReportAmount(stringResource(R.string.ui_income_51595d), totals?.income, "report_income")
             ReportAmount(stringResource(R.string.ui_consumption_36fad7), totals?.consumption, "report_expenses")
             ReportAmount(stringResource(R.string.ui_contributions_7219a0), totals?.contributions, "report_contributions")
+            ReportAmount(stringResource(R.string.portfolio_redeemed), totals?.redemptions, "report_redemptions")
             ReportAmount(stringResource(R.string.ui_income_minus_consumption_541067), totals?.saving, "report_saving")
             Text(stringResource(R.string.ui_saving_rate_9db534) + percent(totals?.savingRatePercent), modifier = Modifier.testTag("report_saving_rate"))
             Text(stringResource(R.string.ui_net_cash_flow_87a3a9) + if (totals?.netCashFlowOverflow == true) stringResource(R.string.ui_outside_supported_range_5fe45d)

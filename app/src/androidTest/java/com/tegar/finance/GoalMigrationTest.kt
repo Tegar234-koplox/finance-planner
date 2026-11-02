@@ -50,19 +50,19 @@ class GoalMigrationTest {
             }).build())
         val old = helper.writableDatabase
         val tables = listOf("ledger", "category", "finance_transaction", "monthly_budget", "category_budget")
-        fun rows(db: SupportSQLiteDatabase, table: String): List<List<String?>> = db.query("SELECT * FROM $table ORDER BY id").use { cursor ->
+        fun rows(db: SupportSQLiteDatabase, table: String): List<List<String?>> = db.query("SELECT " + (if (table == "finance_transaction") "id,ledgerId,transactionType,amountMinor,categoryId,date,note,createdAt,updatedAt" else "*") + " FROM $table ORDER BY id").use { cursor ->
             buildList { while (cursor.moveToNext()) add((0 until cursor.columnCount).map { cursor.getString(it) }) }
         }
         val before = tables.associateWith { rows(old, it) }; helper.close()
         fun open() = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5)
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6)
             .addCallback(FinanceMigrations.CALLBACK).build()
         var db = open()
         val clock = Clock.fixed(Instant.parse("2028-03-10T05:00:00Z"), ZoneOffset.UTC)
         try {
             var source = LocalBudgetRepository(db, clock)
             val snapshot = (source.observeBudgets().first() as AppResult.Success).value!!
-            assertEquals(5, db.openHelper.readableDatabase.version); assertTrue(snapshot.goals.isEmpty())
+            assertEquals(6, db.openHelper.readableDatabase.version); assertTrue(snapshot.goals.isEmpty())
             for (table in tables) assertEquals(table, before[table], rows(db.openHelper.readableDatabase, table))
             var goals = LocalGoalRepository(db, source, clock)
             val id = (goals.saveGoal(null, GoalDraft("Phone / Ponsel", GoalKind.PURCHASE, Money(100000), Money(50000),

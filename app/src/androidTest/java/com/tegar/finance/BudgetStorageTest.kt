@@ -20,7 +20,7 @@ class BudgetStorageTest {
     private val clock = Clock.fixed(Instant.parse("2028-02-01T05:00:00Z"), ZoneOffset.UTC)
     private val month = YearMonth.of(2028, 2)
     private fun open(name: String) = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-        .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5).addCallback(FinanceMigrations.CALLBACK).build()
+        .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6).addCallback(FinanceMigrations.CALLBACK).build()
     private fun <T> AppResult<T>.ok(): T { assertTrue(toString(), this is AppResult.Success); return (this as AppResult.Success).value }
     private suspend fun reject(block: suspend () -> Unit) {
         try { block(); fail("Expected database constraint rejection") } catch (_: SQLiteException) { }

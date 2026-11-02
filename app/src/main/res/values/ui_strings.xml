@@ -2,7 +2,7 @@
 <resources>
     <string name="ui_income_51595d" formatted="false">"Income"</string>
     <string name="ui_expense_a0417b" formatted="false">"Expense"</string>
-    <string name="ui_investment_contribution_14704e" formatted="false">"Investment contribution"</string>
+    <string name="ui_investment_contribution_14704e" formatted="false">"Investment"</string>
     <string name="ui_check_the_amount_date_yyyy_mm_dd_date_range_name_1_80_characters_and_n_031125" formatted="false">"Check the amount, date (YYYY-MM-DD), date range, name (1–80 characters), and note (up to 500 characters). Amount must be positive."</string>
     <string name="ui_this_amount_is_too_large_890084" formatted="false">"This amount is too large."</string>
     <string name="ui_the_amount_must_use_the_ledger_currency_c869fa" formatted="false">"The amount must use the ledger currency."</string>
@@ -221,8 +221,6 @@
     <string name="ui_recent_recorded_transactions_669a18" formatted="false">"Recent recorded transactions"</string>
     <string name="ui_no_recorded_transactions_through_this_date_b5c2d8" formatted="false">"No recorded transactions through this date."</string>
     <string name="ui_view_transaction_history_700d6a" formatted="false">"View transaction history"</string>
-    <string name="ui_not_available_yet_787406" formatted="false">"Not available yet"</string>
-    <string name="ui_forecasts_are_available_in_plan_goals_progress_net_worth_and_market_va_c83038" formatted="false">"Forecasts, goals and tracked net worth are available. Investment holdings and market values are not implemented yet."</string>
     <string name="ui_week_e78041" formatted="false">"Week"</string>
     <string name="ui_month_310ca5" formatted="false">"Month"</string>
     <string name="ui_year_89f683" formatted="false">"Year"</string>

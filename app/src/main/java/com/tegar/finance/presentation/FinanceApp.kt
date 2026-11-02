@@ -34,12 +34,12 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
     home: HomeUiState, homeModel: HomeViewModel, reports: ReportsUiState, reportsModel: ReportsViewModel,
     forecast: ForecastUiState, forecastModel: ForecastViewModel,
     onLanguage: (com.tegar.finance.domain.model.AppLanguage) -> Unit,
-    goals: GoalsUiState, goalsModel: GoalsViewModel, wealth: WealthUiState, wealthModel: WealthViewModel) {
+    goals: GoalsUiState, goalsModel: GoalsViewModel, wealth: WealthUiState, wealthModel: WealthViewModel, portfolio: PortfolioUiState, portfolioModel: PortfolioViewModel) {
     LaunchedEffect(forecast.options) { goalsModel.useForecastOptions(forecast.options) }
     val controller = rememberNavController()
     val entry by controller.currentBackStackEntryAsState()
     val inSettings = entry?.destination?.route == "settings"
-    val inDetail = entry?.destination?.route in listOf("settings", "transactions", "categories", "reports", "goals", "wealth")
+    val inDetail = entry?.destination?.route in listOf("settings", "transactions", "categories", "reports", "goals", "wealth", "investments")
     val ready = state.status is FoundationStatus.Ready
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(if (inSettings) R.string.settings else R.string.app_name)) },
@@ -84,6 +84,7 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                             categories = { controller.navigate("categories") },
                             reports = { controller.navigate("reports") { launchSingleTop = true } },
                             goals = { controller.navigate("goals") { launchSingleTop = true } },
+                            investments = { controller.navigate("investments") { launchSingleTop = true } },
                             wealth = { controller.navigate("wealth") { launchSingleTop = true } },
                             addTransaction = { bookkeeping.openTransaction(); controller.navigate("transactions") },
                             budget = {
@@ -112,7 +113,8 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                 composable("transactions") { BookkeepingScreen(records, bookkeeping, categoryMode = false) }
                 composable("categories") { BookkeepingScreen(records, bookkeeping, categoryMode = true) }
                 composable("reports") { ReportsScreen(reports, reportsModel) }
-                composable("wealth") { WealthScreen(wealth, wealthModel) }
+                composable("wealth") { WealthScreen(wealth, wealthModel, openInvestments = { controller.navigate("investments") { launchSingleTop = true } }) }
+                composable("investments") { PortfolioScreen(portfolio, portfolioModel) }
                 composable("goals") { GoalsScreen(goals, goalsModel) }
             }
         }

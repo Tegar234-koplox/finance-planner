@@ -47,13 +47,13 @@ class BudgetMigrationTest {
             }).build())
         helper.writableDatabase; helper.close()
         fun open() = Room.databaseBuilder(context, FinanceDatabase::class.java, name)
-            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5)
+            .addMigrations(FinanceMigrations.FROM_1_TO_2, BudgetMigrations.FROM_2_TO_3, GoalMigrations.FROM_3_TO_4, WealthMigrations.FROM_4_TO_5, InvestmentMigrations.FROM_5_TO_6)
             .addCallback(FinanceMigrations.CALLBACK).build()
         var db = open()
         try {
             val clock = Clock.systemUTC(); var repo = LocalBudgetRepository(db, clock)
             val before = (repo.observeBudgets().first() as AppResult.Success).value!!
-            assertEquals(5, db.openHelper.readableDatabase.version)
+            assertEquals(6, db.openHelper.readableDatabase.version)
             assertEquals(-123L, before.ledger.openingCash.minorUnits)
             assertEquals("retained", before.transactions.single().id)
             assertEquals("Keep my note", before.transactions.single().note)

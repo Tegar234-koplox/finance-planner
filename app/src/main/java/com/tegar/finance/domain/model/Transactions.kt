@@ -4,13 +4,17 @@ import java.time.Instant
 import java.time.LocalDate
 import java.util.Locale
 
+enum class InvestmentAction { CONTRIBUTION, REDEMPTION }
+
 data class FinanceTransaction(
     val id: String, val type: TransactionType, val amount: Money, val categoryId: String,
     val date: LocalDate, val note: String, val createdAt: Instant, val updatedAt: Instant?,
+    val investmentAction: InvestmentAction? = null, val holdingId: String? = null,
 )
 data class TransactionDraft(
     val type: TransactionType, val amount: Money, val categoryId: String,
     val date: LocalDate, val note: String = "",
+    val investmentAction: InvestmentAction? = null, val holdingId: String? = null,
 )
 /** Inclusive calendar dates in the ledger's reporting zone. Null means unrestricted. */
 data class TransactionFilter(
@@ -22,6 +26,8 @@ data class TransactionFilter(
 object TransactionRules {
     fun validate(draft: TransactionDraft, ledger: Ledger, category: Category?, previous: FinanceTransaction? = null): AppError? = when {
         draft.amount.currency != ledger.currency -> AppError.CURRENCY_MISMATCH
+        draft.type != TransactionType.INVESTMENT && (draft.investmentAction != null || draft.holdingId != null) -> AppError.INVALID_INPUT
+        draft.date.year !in 1..9999 -> AppError.INVALID_INPUT
         draft.amount.minorUnits <= 0 || draft.note.length > 500 -> AppError.INVALID_INPUT
         draft.date < ledger.trackedFromDate -> AppError.DATE_BEFORE_COVERAGE
         category == null || category.id != draft.categoryId || category.transactionType != draft.type -> AppError.CATEGORY_MISMATCH
@@ -34,3 +40,5 @@ object CategoryNames {
     fun normalized(name: String): String = clean(name).lowercase(Locale.ROOT)
     fun valid(name: String): Boolean = clean(name).let { it.isNotEmpty() && it.length <= 80 && it.none(Char::isISOControl) }
 }
+
+val FinanceTransaction.isRedemption: Boolean get() = type == TransactionType.INVESTMENT && investmentAction == InvestmentAction.REDEMPTION

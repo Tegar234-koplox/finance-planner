@@ -71,9 +71,13 @@ class LocalWealthRepository @Inject constructor(private val database: FinanceDat
                 val capture = result.value
                 dao.insertCapture(WealthCaptureEntity(capture.id, date = capture.date.toEpochDay(), currencyCode = capture.cash.currency.value,
                     cashMinor = capture.cash.minorUnits, assetsMinor = capture.assets.minorUnits, liabilitiesMinor = capture.liabilities.minorUnits,
-                    totalMinor = capture.total.minorUnits, method = capture.method, capturedAt = capture.capturedAt.toEpochMilli()))
+                    totalMinor = capture.total.minorUnits, method = capture.method, capturedAt = capture.capturedAt.toEpochMilli(), investmentsMinor = capture.investments.minorUnits))
                 dao.insertLines(capture.lines.map { line -> WealthCaptureLineEntity(UUID.randomUUID().toString(), capture.id,
                     line.sourceItemId, line.name, line.kind.name, line.category.name, line.amount.minorUnits, line.valuedOn.toEpochDay()) })
+                database.investmentDao().insertCaptureInvestments(capture.investmentLines.map { line ->
+                    InvestmentCaptureEntity(UUID.randomUUID().toString(), capture.id, line.sourceHoldingId, line.name,
+                        line.bucket.name, line.amount.minorUnits, line.valuedOn.toEpochDay())
+                })
                 AppResult.Success(id)
             }
         }
@@ -94,8 +98,7 @@ internal fun WealthSourceEntity.domain(): WealthSource {
     val currency = CurrencyCode(ledger.currencyCode)
     return WealthSource(Ledger(currency, ZoneId.of(ledger.reportingZoneId), LocalDate.ofEpochDay(ledger.trackedFromDate),
         Money(ledger.openingCashMinor, currency), Instant.ofEpochMilli(ledger.createdAt)),
-        transactions.map { row -> FinanceTransaction(row.id, TransactionType.valueOf(row.transactionType), Money(row.amountMinor, currency),
-            row.categoryId, LocalDate.ofEpochDay(row.date), row.note, Instant.ofEpochMilli(row.createdAt), row.updatedAt?.let(Instant::ofEpochMilli)) },
+        transactions.map { row -> row.domain(currency) },
         items.map { it.item.domain(currency) }, items.flatMap { it.values }.map { row -> WealthValue(row.id, row.itemId,
             LocalDate.ofEpochDay(row.date), Money(row.valueMinor, currency), row.notes, Instant.ofEpochMilli(row.createdAt), row.updatedAt?.let(Instant::ofEpochMilli)) },
         captures.map { source ->
@@ -104,6 +107,8 @@ internal fun WealthSourceEntity.domain(): WealthSource {
                 Money(row.liabilitiesMinor, recordedCurrency), Money(row.totalMinor, recordedCurrency), source.lines.map { line ->
                     WealthCaptureLine(line.sourceItemId, line.name, WealthKind.valueOf(line.kind), WealthCategory.valueOf(line.category),
                         Money(line.valueMinor, recordedCurrency), LocalDate.ofEpochDay(line.valuedOn))
-                }, Instant.ofEpochMilli(row.capturedAt), row.method)
-        })
+                }, Instant.ofEpochMilli(row.capturedAt), row.method, Money(row.investmentsMinor, recordedCurrency),
+                source.investments.map { line -> InvestmentCaptureLine(line.sourceHoldingId, line.name, AllocationBucket.valueOf(line.bucket),
+                    Money(line.valueMinor, recordedCurrency), LocalDate.ofEpochDay(line.valuedOn)) })
+        }, holdings.map { it.holding.domain(currency) }, holdings.flatMap { it.values }.map { it.domain(currency) })
 }
