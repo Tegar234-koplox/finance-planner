@@ -11,4 +11,5 @@ interface CategoryRepository { fun observeCategories(): Flow<AppResult<List<Cate
 interface SettingsRepository {
     fun observeSettings(): Flow<AppResult<AppSettings>>
     suspend fun setTheme(mode: ThemeMode): AppResult<Unit>
+    suspend fun setLanguage(language: AppLanguage): AppResult<Unit>
 }

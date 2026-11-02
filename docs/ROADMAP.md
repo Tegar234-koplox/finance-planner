@@ -1,15 +1,23 @@
 # Sequential roadmap
 
-Phases 0 and 1 are complete. Phase 1 passed build, 34 unit tests, lint (0 errors,
-7 documented upgrade advisories), app launch, and all 4 Android instrumentation
-tests on API 26. Stop after Phase 1's report; later phases require another
-instruction. See PHASE_1_STATUS.md for verification and limitations.
+Phases 0–8 are complete. Phase 8 passed debug/test-APK builds, 251 JVM tests,
+all 38 Android tests on API 26, and actual APK 0.7→0.8 migration 4→5 preserving
+all six nonempty original financial tables. Lint has 0 errors, 7 existing upgrade
+advisories and 2 unused label resources. See PHASE_8_STATUS.md for evidence and
+limits; Phase 1–7 status reports retain their historical results.
+Stop after Phase 8. Phase 9 has not started and requires another instruction.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review
 diff/status, document outcomes and report readiness YES/NO. Never count skipped,
 zero-test, or unrun targets as passed. Preserve user changes; use the existing
 isolated cloud checkout, no worktrees unless requested.
+When GitHub delivery is requested, use branch → commit → push → pull request →
+merge. Never push changes directly to main.
+Use the user's verified Git account identity for author and committer. Do not
+attribute changes to bots, GPT or similar identities, and do not add co-author,
+co-contributor or generated-contributor trailers. Confirm the account identity
+from configured/connected account evidence before committing; never invent it.
 
 | Phase | Scope | Required gate |
 | --- | --- | --- |
@@ -37,5 +45,13 @@ isolated cloud checkout, no worktrees unless requested.
 | 21 | Release/signing/shrinker/docs/user guide | Actual release build, migrations/backup/security/edge-case/device tests |
 
 Tests are added throughout, not postponed to 19. Phase 1 appearance preference
-is the small settings foundation; full settings remain Phase 15. Market APIs,
-transaction entry, budgets, analytics, forecasts, and goals have not started.
+is the small settings foundation; Phase 6 adds the user-requested English/
+Indonesian language preference. Other full settings remain Phase 15. Transaction
+entry/history/filter, category management, monthly budgets and the source-backed
+Home decision dashboard, weekly/monthly/yearly reports and labeled charts are
+implemented, together with rolling/weighted 1/3-month forecasts and explainable
+rules using complete historical months. The interface is bilingual; a health
+indicator is deferred. Goals/purchases, earmark progress, cash reservations and
+shared capacity/date scenarios are implemented. Non-cash assets, manual liabilities,
+dated valuations and frozen tracked-net-worth snapshots are implemented. Holdings/investment-inclusive valuation and market
+APIs have not started.

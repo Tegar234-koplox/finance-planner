@@ -16,7 +16,8 @@ sealed interface FoundationStatus {
     data object StorageError : FoundationStatus
 }
 data class AppUiState(val status: FoundationStatus = FoundationStatus.Loading,
-    val theme: ThemeMode = ThemeMode.SYSTEM, val themeSaveFailed: Boolean = false)
+    val theme: ThemeMode = ThemeMode.SYSTEM, val themeSaveFailed: Boolean = false,
+    val language: AppLanguage = AppLanguage.ENGLISH, val languageSaveFailed: Boolean = false)
 
 @HiltViewModel
 class FoundationViewModel @Inject constructor(
@@ -41,15 +42,22 @@ class FoundationViewModel @Inject constructor(
                 if (current == null || seeds is AppResult.Failure || prefs is AppResult.Failure) {
                     AppUiState(status = FoundationStatus.StorageError)
                 } else {
-                    AppUiState(FoundationStatus.Ready(current), (prefs as AppResult.Success).value.theme)
+                    val preferences = (prefs as AppResult.Success).value
+                    AppUiState(FoundationStatus.Ready(current), preferences.theme, language = preferences.language)
                 }
-            }.collect { next -> mutableState.update { next.copy(themeSaveFailed = it.themeSaveFailed) } }
+            }.collect { next -> mutableState.update { next.copy(themeSaveFailed = it.themeSaveFailed, languageSaveFailed = it.languageSaveFailed) } }
         }
     }
     fun setTheme(mode: ThemeMode) {
         viewModelScope.launch {
             val result = settings.setTheme(mode)
             mutableState.update { it.copy(themeSaveFailed = result is AppResult.Failure) }
+        }
+    }
+    fun setLanguage(language: AppLanguage) {
+        viewModelScope.launch {
+            val result = settings.setLanguage(language)
+            mutableState.update { it.copy(languageSaveFailed = result is AppResult.Failure) }
         }
     }
 }

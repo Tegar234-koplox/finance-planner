@@ -1,8 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
+    <string name="language">Language</string>
+    <string name="language_description">Choose English or Bahasa Indonesia. Your saved amounts, category names and notes stay unchanged.</string>
+    <string name="language_error">Your language choice could not be saved. Try again.</string>
     <string name="app_name">Finance Planner</string>
-    <string name="home">Home</string><string name="budget">Budget</string>
-    <string name="plan">Plan</string><string name="market">Market</string>
-    <string name="settings">Settings</string><string name="back">Navigate back</string>
+    <string name="home">Home</string>
+    <string name="budget">Budget</string>
+    <string name="plan">Plan</string>
+    <string name="market">Market</string>
+    <string name="settings">Settings</string>
+    <string name="back">Navigate back</string>
     <string name="home_title">Your finances, in one place</string>
     <string name="home_empty">No activity yet</string>
     <string name="home_body">An overview of your income, expenses, and recent activity will appear here.</string>
@@ -18,7 +25,8 @@
     <string name="offline_note">Your records stay on this device.</string>
     <string name="appearance">Appearance</string>
     <string name="appearance_description">Choose the look you prefer.</string>
-    <string name="theme_system">Follow system</string><string name="theme_light">Light</string>
+    <string name="theme_system">Follow system</string>
+    <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="privacy_title">Private by default</string>
     <string name="privacy_body">No cloud sync, advertising, or activity tracking.</string>
@@ -26,4 +34,8 @@
     <string name="preference_error">Your appearance choice could not be saved. Try selecting it again.</string>
     <string name="storage_error">Local storage could not be opened.</string>
     <string name="retry">Try again</string>
+    <string name="evidence_unavailable">UNAVAILABLE</string>
+    <string name="evidence_low">LOW</string>
+    <string name="evidence_medium">MEDIUM</string>
+    <string name="evidence_higher">HIGHER</string>
 </resources>

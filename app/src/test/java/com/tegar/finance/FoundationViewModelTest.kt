@@ -26,9 +26,10 @@ class FoundationViewModelTest {
         val vm = viewModel(source)
         advanceUntilIdle()
         assertTrue(vm.state.value.status is FoundationStatus.Ready)
-        source.preferences.value = AppResult.Success(AppSettings(ThemeMode.DARK))
+        source.preferences.value = AppResult.Success(AppSettings(ThemeMode.DARK, AppLanguage.INDONESIAN))
         advanceUntilIdle()
         assertEquals(ThemeMode.DARK, vm.state.value.theme)
+        assertEquals(AppLanguage.INDONESIAN, vm.state.value.language)
     }
     @Test fun initializationFailureIsVisibleAndRetryRecovers() = runTest {
         val source = FakeSource().apply { initializationFails = true }
@@ -57,6 +58,17 @@ class FoundationViewModelTest {
         advanceUntilIdle()
         assertEquals(FoundationStatus.StorageError, vm.state.value.status)
     }
+    @Test fun languageChangesOnlyAfterSuccessfulPreferenceWriteAndKeepsTheme() = runTest {
+        val source = FakeSource(); val vm = viewModel(source); advanceUntilIdle()
+        vm.setTheme(ThemeMode.DARK); advanceUntilIdle()
+        source.preferenceWriteFails = true
+        vm.setLanguage(AppLanguage.INDONESIAN); advanceUntilIdle()
+        assertTrue(vm.state.value.languageSaveFailed); assertEquals(AppLanguage.ENGLISH, vm.state.value.language)
+        source.preferenceWriteFails = false
+        vm.setLanguage(AppLanguage.INDONESIAN); advanceUntilIdle()
+        assertFalse(vm.state.value.languageSaveFailed); assertEquals(AppLanguage.INDONESIAN, vm.state.value.language)
+        assertEquals(ThemeMode.DARK, vm.state.value.theme)
+    }
 
     private class FakeSource : LedgerRepository, CategoryRepository, SettingsRepository {
         var initializationFails = false
@@ -72,7 +84,12 @@ class FoundationViewModelTest {
         override fun observeSettings() = preferences
         override suspend fun setTheme(mode: ThemeMode): AppResult<Unit> {
             if (preferenceWriteFails) return AppResult.Failure(AppError.STORAGE)
-            preferences.value = AppResult.Success(AppSettings(mode))
+            preferences.value = AppResult.Success((preferences.value as AppResult.Success).value.copy(theme = mode))
+            return AppResult.Success(Unit)
+        }
+        override suspend fun setLanguage(language: AppLanguage): AppResult<Unit> {
+            if (preferenceWriteFails) return AppResult.Failure(AppError.STORAGE)
+            preferences.value = AppResult.Success((preferences.value as AppResult.Success).value.copy(language = language))
             return AppResult.Success(Unit)
         }
     }

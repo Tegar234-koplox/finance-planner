@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="goals_title" formatted="false">"Goals and purchases"</string>
+    <string name="goals_manage" formatted="false">"Manage goals"</string>
+    <string name="goals_add" formatted="false">"Add goal"</string>
+    <string name="goals_edit" formatted="false">"Edit goal"</string>
+    <string name="goals_save" formatted="false">"Save goal"</string>
+    <string name="goals_delete" formatted="false">"Delete goal"</string>
+    <string name="goals_refresh" formatted="false">"Refresh goals"</string>
+    <string name="goals_empty" formatted="false">"No goals yet. Add a saving goal or a purchase you want to plan."</string>
+    <string name="goals_intro" formatted="false">"Earmarks reserve your existing recorded cash. They are not new income, spending or additional wealth. Saving a goal never transfers money."</string>
+    <string name="goals_name" formatted="false">"Goal name"</string>
+    <string name="goals_kind_saving" formatted="false">"Saving goal"</string>
+    <string name="goals_kind_purchase" formatted="false">"Purchase"</string>
+    <string name="goals_priority" formatted="false">"Priority"</string>
+    <string name="goals_priority_high" formatted="false">"High"</string>
+    <string name="goals_priority_normal" formatted="false">"Normal"</string>
+    <string name="goals_priority_low" formatted="false">"Low"</string>
+    <string name="goals_state" formatted="false">"State"</string>
+    <string name="goals_active" formatted="false">"Active"</string>
+    <string name="goals_paused" formatted="false">"Paused"</string>
+    <string name="goals_pause_hint" formatted="false">"Pausing stops new scenario allocations. Existing earmarks stay reserved until edited or the goal is removed."</string>
+    <string name="goals_target" formatted="false">"Target amount"</string>
+    <string name="goals_earmarked" formatted="false">"Currently earmarked"</string>
+    <string name="goals_asof" formatted="false">"Earmark as of (YYYY-MM-DD)"</string>
+    <string name="goals_deadline" formatted="false">"Target date (YYYY-MM-DD)"</string>
+    <string name="goals_amount_hint" formatted="false">"Ledger currency; Indonesian amount notation, for example 25.000,50. Target must be positive; earmark may be zero or exceed the target."</string>
+    <string name="goals_asof_hint" formatted="false">"An earmark date must be within recorded coverage and no later than today. A target date may be in the past."</string>
+    <string name="goals_error_input" formatted="false">"Check the name (1–80 characters), positive target, nonnegative earmark and valid dates. The earmark date cannot be in the future."</string>
+    <string name="goals_error_coverage" formatted="false">"The earmark date cannot precede the ledger tracking start."</string>
+    <string name="goals_error_currency" formatted="false">"Goal amounts must use the ledger currency."</string>
+    <string name="goals_error_range" formatted="false">"This amount exceeds the supported range."</string>
+    <string name="goals_error_missing" formatted="false">"This goal no longer exists. Refresh the list."</string>
+    <string name="goals_error_storage" formatted="false">"Goals could not be read or saved. Try again."</string>
+    <string name="goals_read_error" formatted="false">"Plans are unavailable. No previous dates or totals are shown."</string>
+    <string name="goals_delete_title" formatted="false">"Remove this goal?"</string>
+    <string name="goals_delete_body">"Remove %1$s? Its earmark is released in the plan. Recorded cash and transactions stay unchanged; no purchase is made."</string>
+    <string name="goals_cash_reserved" formatted="false">"Reserved for goals"</string>
+    <string name="goals_cash_free" formatted="false">"Cash after goal reserves"</string>
+    <string name="goals_reserve_overflow" formatted="false">"Total goal reserves exceed the supported amount range. Unreserved cash is zero."</string>
+    <string name="goals_limit_reason" formatted="false">"Goal reserves make recorded cash the lower spending limit."</string>
+    <string name="goals_cash_shortfall" formatted="false">"Recorded cash does not cover all earmarks, or cash is negative. Reconcile records or adjust earmarks; scenario dates are unavailable."</string>
+    <string name="goals_cash_unavailable" formatted="false">"Recorded cash is unavailable. Dates that depend on cash are withheld."</string>
+    <string name="goals_capacity" formatted="false">"Shared monthly planning capacity"</string>
+    <string name="goals_baseline">"Planning uses your Forecasts selection: %1$s, %2$s-month window, %3$s complete sample(s)."</string>
+    <string name="goals_capacity_formula" formatted="false">"Capacity = max(1-month forecast income − consumption − contributions, 0), using the displayed rounded forecast amounts. At least 2 complete months are required. This is a scenario, not guaranteed future income."</string>
+    <string name="goals_need_history" formatted="false">"Not available: record at least 2 fully tracked, completed months."</string>
+    <string name="goals_no_capacity" formatted="false">"No positive monthly net flow in the selected historical baseline."</string>
+    <string name="goals_capacity_range" formatted="false">"The historical baseline or forecast exceeds the supported range."</string>
+    <string name="goals_queue" formatted="false">"One shared queue: higher priority first, then earlier target date and older creation. Free recorded cash is assigned once; the same monthly capacity is then shared across active goals. Paused earmarks remain reserved."</string>
+    <string name="goals_schedule" formatted="false">"Future contributions are assumed at the end of each next full calendar month. No current-month income, returns, inflation or unrecorded bills are assumed. Change Forecasts to compare methods/windows."</string>
+    <string name="goals_target_value">"Target: %1$s"</string>
+    <string name="goals_earmark_value">"Earmarked: %1$s · as of %2$s"</string>
+    <string name="goals_remaining_value">"Remaining to earmark: %1$s"</string>
+    <string name="goals_progress">"Earmark progress: %1$s%%"</string>
+    <string name="goals_funding_empty" formatted="false">"Nothing earmarked"</string>
+    <string name="goals_funding_partial" formatted="false">"Partly earmarked"</string>
+    <string name="goals_funding_full" formatted="false">"Earmark meets target"</string>
+    <string name="goals_funding_over" formatted="false">"Earmark exceeds target"</string>
+    <string name="goals_date_value">"Target date: %1$s"</string>
+    <string name="goals_overdue" formatted="false">"Target date has passed; more money remains to be earmarked."</string>
+    <string name="goals_due_today" formatted="false">"Target is due today and is not fully earmarked."</string>
+    <string name="goals_needed_value">"Monthly amount for this goal alone: %1$s"</string>
+    <string name="goals_needed_hint">"Ceiling of remaining earmark ÷ %1$s future month-end contribution date(s) before/on the target. This amount does not reserve shared capacity."</string>
+    <string name="goals_no_dates" formatted="false">"No future month-end contribution date falls before/on this target date."</string>
+    <string name="goals_cash_assigned">"Free cash assigned in this scenario: %1$s"</string>
+    <string name="goals_scenario_date">"Scenario ready date: %1$s"</string>
+    <string name="goals_reason_earmarked" formatted="false">"Target is already earmarked and all goal reserves are covered by recorded cash today. This is not a historical achievement date."</string>
+    <string name="goals_reason_cash" formatted="false">"This priority scenario can cover the remaining target from unreserved recorded cash now. Save an updated earmark to record your allocation; no amount is auto-saved."</string>
+    <string name="goals_reason_projected" formatted="false">"Estimated from the shared capacity after higher-priority goals and cash assignments. The recorded earmark does not grow automatically."</string>
+    <string name="goals_reason_paused" formatted="false">"Paused: no new free cash or future capacity is assigned."</string>
+    <string name="goals_reason_date_range" formatted="false">"The scenario completion date is outside supported years."</string>
+    <string name="goals_meets_deadline" formatted="false">"This scenario is ready by the target date; it is not a guarantee of affordability."</string>
+    <string name="goals_misses_deadline" formatted="false">"This scenario is later than the target date. Review priority, target amount, deadline or recorded cash flow."</string>
+    <string name="goals_purchase_hint" formatted="false">"This is purchase planning only. Buying is not executed and does not create an asset, expense or transfer. Record an actual purchase separately when it happens."</string>
+    <string name="goals_footer" formatted="false">"Earmarks are declarations of existing cash, not extra wealth. Review stale as-of dates and missing obligations. Scenario allocations and dates change with records, priorities and the forecast selection."</string>
+</resources>

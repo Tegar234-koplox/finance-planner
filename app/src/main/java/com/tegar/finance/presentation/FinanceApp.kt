@@ -29,15 +29,22 @@ private enum class Destination(val route: String, val label: Int, val title: Int
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance.domain.model.ThemeMode) -> Unit) {
+fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance.domain.model.ThemeMode) -> Unit,
+    records: BookkeepingState, bookkeeping: BookkeepingViewModel, budgets: BudgetUiState, budgetModel: BudgetViewModel,
+    home: HomeUiState, homeModel: HomeViewModel, reports: ReportsUiState, reportsModel: ReportsViewModel,
+    forecast: ForecastUiState, forecastModel: ForecastViewModel,
+    onLanguage: (com.tegar.finance.domain.model.AppLanguage) -> Unit,
+    goals: GoalsUiState, goalsModel: GoalsViewModel, wealth: WealthUiState, wealthModel: WealthViewModel) {
+    LaunchedEffect(forecast.options) { goalsModel.useForecastOptions(forecast.options) }
     val controller = rememberNavController()
     val entry by controller.currentBackStackEntryAsState()
     val inSettings = entry?.destination?.route == "settings"
+    val inDetail = entry?.destination?.route in listOf("settings", "transactions", "categories", "reports", "goals", "wealth")
     val ready = state.status is FoundationStatus.Ready
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(if (inSettings) R.string.settings else R.string.app_name)) },
             navigationIcon = {
-                if (inSettings) IconButton(onClick = { controller.popBackStack() }) {
+                if (inDetail) IconButton(onClick = { controller.popBackStack() }) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
                 }
             }, actions = {
@@ -46,7 +53,7 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                 }
             })
     }, bottomBar = {
-        if (!inSettings) NavigationBar {
+        if (!inDetail) NavigationBar {
             Destination.entries.forEach { target ->
                 NavigationBarItem(selected = entry?.destination?.route == target.route, enabled = ready,
                     onClick = { controller.navigate(target.route) {
@@ -72,6 +79,24 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
             is FoundationStatus.Ready -> NavHost(controller, startDestination = "home", modifier = content.testTag("app_ready")) {
                 Destination.entries.forEach { target ->
                     composable(target.route) {
+                        if (target == Destination.HOME) HomeScreen(home, homeModel,
+                            transactions = { controller.navigate("transactions") },
+                            categories = { controller.navigate("categories") },
+                            reports = { controller.navigate("reports") { launchSingleTop = true } },
+                            goals = { controller.navigate("goals") { launchSingleTop = true } },
+                            wealth = { controller.navigate("wealth") { launchSingleTop = true } },
+                            addTransaction = { bookkeeping.openTransaction(); controller.navigate("transactions") },
+                            budget = {
+                                home.dashboard?.month?.toString()?.let(budgetModel::selectMonth)
+                                controller.navigate("budget") {
+                                    popUpTo(controller.graph.findStartDestination().id) { saveState = true }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            })
+                        else if (target == Destination.BUDGET) BudgetScreen(budgets, budgetModel)
+                        else if (target == Destination.PLAN) ForecastScreen(forecast, forecastModel,
+                            openGoals = { controller.navigate("goals") { launchSingleTop = true } }) else
                         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
                             verticalArrangement = Arrangement.spacedBy(24.dp)) {
                             Text(stringResource(target.title), style = MaterialTheme.typography.headlineMedium)
@@ -83,7 +108,12 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                         }
                     }
                 }
-                composable("settings") { SettingsScreen(state, onTheme) }
+                composable("settings") { SettingsScreen(state, onTheme, onLanguage) }
+                composable("transactions") { BookkeepingScreen(records, bookkeeping, categoryMode = false) }
+                composable("categories") { BookkeepingScreen(records, bookkeeping, categoryMode = true) }
+                composable("reports") { ReportsScreen(reports, reportsModel) }
+                composable("wealth") { WealthScreen(wealth, wealthModel) }
+                composable("goals") { GoalsScreen(goals, goalsModel) }
             }
         }
     }

@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ui_income_51595d" formatted="false">"Income"</string>
+    <string name="ui_expense_a0417b" formatted="false">"Expense"</string>
+    <string name="ui_investment_contribution_14704e" formatted="false">"Investment contribution"</string>
+    <string name="ui_check_the_amount_date_yyyy_mm_dd_date_range_name_1_80_characters_and_n_031125" formatted="false">"Check the amount, date (YYYY-MM-DD), date range, name (1–80 characters), and note (up to 500 characters). Amount must be positive."</string>
+    <string name="ui_this_amount_is_too_large_890084" formatted="false">"This amount is too large."</string>
+    <string name="ui_the_amount_must_use_the_ledger_currency_c869fa" formatted="false">"The amount must use the ledger currency."</string>
+    <string name="ui_the_transaction_date_must_be_on_or_after_the_ledger_s_tracked_from_dat_f16e84" formatted="false">"The transaction date must be on or after the ledger's tracked-from date."</string>
+    <string name="ui_choose_a_category_matching_the_transaction_type_existing_category_type_c5caea" formatted="false">"Choose a category matching the transaction type. Existing category types cannot be changed."</string>
+    <string name="ui_this_category_is_archived_restore_it_or_choose_an_active_category_acbb4b" formatted="false">"This category is archived. Restore it or choose an active category."</string>
+    <string name="ui_this_category_has_transactions_or_budgets_archive_it_to_preserve_histo_7f0961" formatted="false">"This category has transactions or budgets. Archive it to preserve history."</string>
+    <string name="ui_category_allocations_cannot_exceed_the_overall_budget_5ed1a5" formatted="false">"Category allocations cannot exceed the overall budget."</string>
+    <string name="ui_a_category_with_this_name_and_type_already_exists_including_archived_c_3b240b" formatted="false">"A category with this name and type already exists, including archived categories."</string>
+    <string name="ui_this_record_no_longer_exists_reload_the_list_f9cdbf" formatted="false">"This record no longer exists. Reload the list."</string>
+    <string name="ui_the_change_could_not_be_saved_on_this_device_try_again_524950" formatted="false">"The change could not be saved on this device. Try again."</string>
+    <string name="ui_records_could_not_be_loaded_f028b7" formatted="false">"Records could not be loaded."</string>
+    <string name="ui_try_again_d8b839" formatted="false">"Try again"</string>
+    <string name="ui_categories_b8b1d8" formatted="false">"Categories"</string>
+    <string name="ui_transactions_3e5136" formatted="false">"Transactions"</string>
+    <string name="ui_stored_only_on_this_device_44053f" formatted="false">"Stored only on this device."</string>
+    <string name="ui_add_category_aafdf4" formatted="false">"Add category"</string>
+    <string name="ui_add_transaction_6502c0" formatted="false">"Add transaction"</string>
+    <string name="ui_dismiss_48845b" formatted="false">"Dismiss"</string>
+    <string name="ui_rename_archive_or_restore_categories_type_is_fixed_after_creation_only_8ea1ac" formatted="false">"Rename, archive, or restore categories. Type is fixed after creation. Only unused categories can be deleted."</string>
+    <string name="ui_archived_c089d2" formatted="false">" · Archived"</string>
+    <string name="ui_rename_3064d7" formatted="false">"Rename"</string>
+    <string name="ui_archive_66f480" formatted="false">"Archive"</string>
+    <string name="ui_restore_a76e13" formatted="false">"Restore"</string>
+    <string name="ui_delete_e2d0a5" formatted="false">"Delete"</string>
+    <string name="ui_no_transactions_match_these_filters_c5f787" formatted="false">"No transactions match these filters."</string>
+    <string name="ui_value_transaction_s_0120d6">"%1$s transaction(s)"</string>
+    <string name="ui_category_unavailable_da9371" formatted="false">"Category unavailable"</string>
+    <string name="ui_edit_464c4f" formatted="false">"Edit"</string>
+    <string name="ui_rename_category_897993" formatted="false">"Rename category"</string>
+    <string name="ui_category_name_73ddd9" formatted="false">"Category name"</string>
+    <string name="ui_type_baaddf" formatted="false">"Type"</string>
+    <string name="ui_save_category_5f2622" formatted="false">"Save category"</string>
+    <string name="ui_cancel_19766e" formatted="false">"Cancel"</string>
+    <string name="ui_delete_transaction_a61cf3" formatted="false">"Delete transaction?"</string>
+    <string name="ui_this_permanently_removes_this_transaction_ce239b" formatted="false">"This permanently removes this transaction."</string>
+    <string name="ui_delete_category_2b9e08" formatted="false">"Delete category?"</string>
+    <string name="ui_delete_value_categories_used_by_transactions_must_be_archived_instead_653c9d">"Delete %1$s? Categories used by transactions must be archived instead."</string>
+    <string name="ui_hide_filters_9e6ea4" formatted="false">"Hide filters"</string>
+    <string name="ui_show_filters_4594a3" formatted="false">"Show filters"</string>
+    <string name="ui_applied_value_to_value_ac520d">"Applied: %1$s to %2$s · "</string>
+    <string name="ui_any_date_a4717b" formatted="false">"Any date"</string>
+    <string name="ui_all_types_f10988" formatted="false">"All types"</string>
+    <string name="ui_all_categories_9d5097" formatted="false">"All categories"</string>
+    <string name="ui_deleted_category_clear_filters_098da3" formatted="false">"Deleted category (clear filters)"</string>
+    <string name="ui_from_yyyy_mm_dd_optional_3db29d" formatted="false">"From (YYYY-MM-DD, optional)"</string>
+    <string name="ui_through_yyyy_mm_dd_optional_f69da7" formatted="false">"Through (YYYY-MM-DD, optional)"</string>
+    <string name="ui_category_292c06" formatted="false">"Category"</string>
+    <string name="ui_deleted_category_151951" formatted="false">"Deleted category"</string>
+    <string name="ui_apply_filters_d80ab1" formatted="false">"Apply filters"</string>
+    <string name="ui_clear_filters_7179ea" formatted="false">"Clear filters"</string>
+    <string name="ui_edit_transaction_c71e88" formatted="false">"Edit transaction"</string>
+    <string name="ui_amount_idr_28ca9d" formatted="false">"Amount (IDR)"</string>
+    <string name="ui_example_25_000_50_must_be_positive_c11fff" formatted="false">"Example: 25.000,50. Must be positive."</string>
+    <string name="ui_choose_a_category_42d2f2" formatted="false">"Choose a category"</string>
+    <string name="ui_create_or_restore_a_category_for_this_type_in_categories_5d96e7" formatted="false">"Create or restore a category for this type in Categories."</string>
+    <string name="ui_date_yyyy_mm_dd_4a4059" formatted="false">"Date (YYYY-MM-DD)"</string>
+    <string name="ui_tracked_from_value_a8ca54">"Tracked from %1$s."</string>
+    <string name="ui_note_optional_f9b73e" formatted="false">"Note (optional)"</string>
+    <string name="ui_save_transaction_a08199" formatted="false">"Save transaction"</string>
+    <string name="ui_delete_permanently_280b10" formatted="false">"Delete permanently"</string>
+    <string name="ui_category_allocations_cannot_exceed_the_overall_budget_increase_it_or_r_43ae34" formatted="false">"Category allocations cannot exceed the overall budget. Increase it or reduce category allocations first."</string>
+    <string name="ui_this_category_is_archived_restore_it_before_adding_a_new_allocation_d41812" formatted="false">"This category is archived. Restore it before adding a new allocation."</string>
+    <string name="ui_choose_an_expense_category_88cfec" formatted="false">"Choose an expense category."</string>
+    <string name="ui_use_the_ledger_currency_4edc7f" formatted="false">"Use the ledger currency."</string>
+    <string name="ui_this_amount_or_calculated_total_exceeds_the_supported_range_no_estimat_ff1301" formatted="false">"This amount or calculated total exceeds the supported range. No estimate is shown."</string>
+    <string name="ui_enter_a_valid_month_yyyy_mm_and_a_nonnegative_idr_amount_such_as_500_0_d7ddb1" formatted="false">"Enter a valid month (YYYY-MM) and a nonnegative IDR amount, such as 500.000,50."</string>
+    <string name="ui_this_allocation_no_longer_exists_refresh_the_month_13536d" formatted="false">"This allocation no longer exists. Refresh the month."</string>
+    <string name="ui_budgets_could_not_be_read_or_saved_try_again_38a2f8" formatted="false">"Budgets could not be read or saved. Try again."</string>
+    <string name="ui_no_allocation_d12537" formatted="false">"No allocation"</string>
+    <string name="ui_not_available_67a926" formatted="false">"Not available"</string>
+    <string name="ui_neutral_1c6ac6" formatted="false">"Neutral"</string>
+    <string name="ui_safe_4f9f0d" formatted="false">"Safe"</string>
+    <string name="ui_watch_80_7722db" formatted="false">"Watch (80%+)"</string>
+    <string name="ui_high_95_be0044" formatted="false">"High (95%+)"</string>
+    <string name="ui_over_budget_82d5e1" formatted="false">"Over budget"</string>
+    <string name="ui_monthly_budgets_c9c385" formatted="false">"Monthly budgets"</string>
+    <string name="ui_as_of_value_ledger_reporting_date_2486ef">"As of %1$s · ledger reporting date"</string>
+    <string name="ui_month_yyyy_mm_70e660" formatted="false">"Month (YYYY-MM)"</string>
+    <string name="ui_previous_a57b08" formatted="false">"Previous"</string>
+    <string name="ui_open_month_2b285f" formatted="false">"Open month"</string>
+    <string name="ui_next_1ff57a" formatted="false">"Next"</string>
+    <string name="ui_refresh_0e9161" formatted="false">"Refresh"</string>
+    <string name="ui_income_and_investment_contributions_are_excluded_all_recorded_consumpt_7f969c" formatted="false">"Income and investment contributions are excluded. All recorded consumption expenses count, including categories without an allocation."</string>
+    <string name="ui_set_overall_budget_f19f0e" formatted="false">"Set overall budget"</string>
+    <string name="ui_add_category_budget_0b7f25" formatted="false">"Add category budget"</string>
+    <string name="ui_no_budgets_yet_e76acb" formatted="false">"No budgets yet"</string>
+    <string name="ui_a_budget_allowance_is_not_available_cash_cash_limits_and_reservations_758a54" formatted="false">"A budget allowance is not available cash. Cash limits and reservations are not included here."</string>
+    <string name="ui_overall_715b14" formatted="false">"Overall"</string>
+    <string name="ui_overall_budget_ece81d" formatted="false">"overall budget"</string>
+    <string name="ui_category_allocations_share_the_overall_cap_when_one_is_set_removing_th_d66d9e" formatted="false">"Category allocations share the overall cap when one is set. Removing the overall cap keeps the category allocations."</string>
+    <string name="ui_no_category_allocations_or_recorded_spending_9e212a" formatted="false">"No category allocations or recorded spending."</string>
+    <string name="ui_future_dated_transactions_are_excluded_until_their_date_projections_us_31e5f2" formatted="false">"Future-dated transactions are excluded until their date. Projections use the recorded pace, not a promise of future spending."</string>
+    <string name="ui_overall_budget_value_8b3547">"Overall budget · %1$s"</string>
+    <string name="ui_category_budget_value_bd5e9a">"Category budget · %1$s"</string>
+    <string name="ui_choose_an_expense_category_f0939e" formatted="false">"Choose an expense category"</string>
+    <string name="ui_allocation_idr_78861e" formatted="false">"Allocation (IDR)"</string>
+    <string name="ui_zero_is_allowed_example_500_000_50_9ea590" formatted="false">"Zero is allowed. Example: 500.000,50"</string>
+    <string name="ui_save_budget_6520b6" formatted="false">"Save budget"</string>
+    <string name="ui_remove_allocation_aa4181" formatted="false">"Remove allocation?"</string>
+    <string name="ui_remove_value_for_value_transactions_and_other_allocations_stay_unchang_61bf39">"Remove %1$s for %2$s? Transactions and other allocations stay unchanged."</string>
+    <string name="ui_remove_allocation_13e66b" formatted="false">"Remove allocation"</string>
+    <string name="ui_recorded_status_7c5bbd" formatted="false">"Recorded status: "</string>
+    <string name="ui_allocation_5a6531" formatted="false">"Allocation: "</string>
+    <string name="ui_not_set_4895f7" formatted="false">"Not set"</string>
+    <string name="ui_recorded_expenses_e7ccac" formatted="false">"Recorded expenses: "</string>
+    <string name="ui_remaining_after_recorded_expenses_585ccd" formatted="false">"Remaining after recorded expenses: "</string>
+    <string name="ui_utilization_7f21c8" formatted="false">"Utilization: "</string>
+    <string name="ui_daily_average_b220f1" formatted="false">"Daily average: "</string>
+    <string name="ui_month_end_projection_2325fb" formatted="false">"Month-end projection: "</string>
+    <string name="ui_outside_supported_range_5fe45d" formatted="false">"Outside supported range"</string>
+    <string name="ui_budget_per_day_01e5ef" formatted="false">"Budget per day: "</string>
+    <string name="ui_value_recorded_day_s_value_calendar_day_s_left_2c50dc">"%1$s recorded day(s) · %2$s calendar day(s) left"</string>
+    <string name="ui_tracking_covers_this_month_through_the_reporting_date_edf479" formatted="false">"Tracking covers this month through the reporting date."</string>
+    <string name="ui_tracking_began_after_this_month_started_totals_may_omit_earlier_spendi_f24344" formatted="false">"Tracking began after this month started. Totals may omit earlier spending; projection and daily allowance are unavailable."</string>
+    <string name="ui_this_month_is_before_the_ledger_s_tracked_from_date_spending_is_unknow_a2ee65" formatted="false">"This month is before the ledger's tracked-from date. Spending is unknown."</string>
+    <string name="ui_this_month_has_not_started_spending_is_not_yet_available_db4e0d" formatted="false">"This month has not started. Spending is not yet available."</string>
+    <string name="ui_edit_allocation_a92fcc" formatted="false">"Edit allocation"</string>
+    <string name="ui_remove_c3812f" formatted="false">"Remove"</string>
+    <string name="ui_forecasts_075c74" formatted="false">"Forecasts"</string>
+    <string name="ui_a_baseline_from_your_completed_months_for_the_next_1_and_3_calendar_mo_384001" formatted="false">"A baseline from your completed months for the next 1 and 3 calendar months. The remainder of this month is excluded."</string>
+    <string name="ui_rolling_mean_ec9573" formatted="false">"Rolling mean"</string>
+    <string name="ui_weighted_mean_6abad8" formatted="false">"Weighted mean"</string>
+    <string name="ui_history_window_97f1e4" formatted="false">"History window"</string>
+    <string name="ui_value_months_5fdb33">"%1$s months"</string>
+    <string name="ui_refresh_forecasts_e69b5d" formatted="false">"Refresh forecasts"</string>
+    <string name="ui_a_historical_monthly_total_exceeds_the_supported_amount_range_forecast_c60154" formatted="false">"A historical monthly total exceeds the supported amount range. Forecasts and rules are unavailable."</string>
+    <string name="ui_forecasts_could_not_be_loaded_no_previous_estimates_or_rules_are_shown_fda780" formatted="false">"Forecasts could not be loaded. No previous estimates or rules are shown."</string>
+    <string name="ui_no_earlier_supported_calendar_months_f22b4c" formatted="false">"No earlier supported calendar months."</string>
+    <string name="ui_lookback_value_through_value_4518ae">"Lookback: %1$s through %2$s."</string>
+    <string name="ui_value_complete_month_s_used_value_month_s_lack_complete_tracking_3c4e76">"%1$s complete month(s) used; %2$s month(s) lack complete tracking."</string>
+    <string name="ui_evidence_value_a6f3ef">"Evidence: %1$s"</string>
+    <string name="ui_0_samples_unavailable_1_low_2_5_medium_6_higher_these_describe_evidenc_89cd22" formatted="false">"0 samples: unavailable; 1: LOW; 2–5: MEDIUM; 6+: HIGHER. These describe evidence strength, not the probability a forecast will be right."</string>
+    <string name="ui_method_sum_of_completed_monthly_amounts_sample_count_every_month_has_e_32c824" formatted="false">"Method: sum of completed monthly amounts ÷ sample count. Every month has equal weight."</string>
+    <string name="ui_method_weighted_mean_no_complete_months_are_available_to_assign_weight_9013b4" formatted="false">"Method: weighted mean. No complete months are available to assign weights."</string>
+    <string name="ui_method_monthly_amounts_weights_1_through_value_oldest_to_newest_divide_ce8c7c">"Method: monthly amounts × weights 1 through %1$s, oldest to newest, divided by the sum of weights. Recent months count more."</string>
+    <string name="ui_one_observed_month_cannot_establish_variability_matching_range_endpoin_7fe259" formatted="false">"One observed month cannot establish variability. Matching range endpoints are not evidence of certainty."</string>
+    <string name="ui_each_horizon_repeats_that_monthly_baseline_income_consumption_and_cont_df1699" formatted="false">"Each horizon repeats that monthly baseline. Income, consumption and contributions round once per horizon to the nearest minor unit (half-even); saving and net flow derive from those rounded amounts."</string>
+    <string name="ui_current_month_excluded_value_recorded_transaction_s_future_dated_recor_43458b">"Current month excluded: %1$s recorded transaction(s). Future-dated records excluded: %2$s."</string>
+    <string name="ui_only_fully_tracked_completed_calendar_months_count_covered_months_with_89bb3a" formatted="false">"Only fully tracked, completed calendar months count. Covered months without transactions count as zero; missing/partial months do not. Review missing records before using a forecast."</string>
+    <string name="ui_rules_and_next_steps_a108bd" formatted="false">"Rules and next steps"</string>
+    <string name="ui_rule_version_value_forecast_rules_use_the_selected_method_window_and_r_da9e14">"Rule version %1$s. Forecast rules use the selected method/window and rounded 1-month estimate. They do not authorize spending or predict affordability."</string>
+    <string name="ui_no_rule_triggered_this_does_not_establish_that_your_finances_are_healt_0f50d6" formatted="false">"No rule triggered. This does not establish that your finances are healthy or your records complete."</string>
+    <string name="ui_build_more_completed_history_65d3c2" formatted="false">"Build more completed history"</string>
+    <string name="ui_value_complete_month_s_2_record_at_least_two_complete_months_before_re_53d8bf">"%1$s complete month(s) &lt; 2. Record at least two complete months before relying on comparisons. A one-month baseline cannot describe variation; no samples means no estimate."</string>
+    <string name="ui_review_the_income_consumption_gap_70f1a3" formatted="false">"Review the income–consumption gap"</string>
+    <string name="ui_estimated_consumption_value_income_value_for_next_month_review_recurri_674d30">"Estimated consumption %1$s &gt; income %2$s for next month. Review recurring spending and missing income records."</string>
+    <string name="ui_review_contribution_pressure_on_cash_0c0ed7" formatted="false">"Review contribution pressure on cash"</string>
+    <string name="ui_income_value_consumption_value_contributions_value_0_this_baseline_red_b8aabb">"Income %1$s − consumption %2$s − contributions %3$s &lt; 0. This baseline reduces recorded cash before unrecorded obligations. Contributions remain separate from consumption."</string>
+    <string name="ui_set_next_month_s_overall_budget_724990" formatted="false">"Set next month's overall budget"</string>
+    <string name="ui_no_overall_allocation_exists_for_value_category_allocations_alone_cann_e8de4a">"No overall allocation exists for %1$s. Category allocations alone cannot define the comparison cap."</string>
+    <string name="ui_review_next_month_s_budget_gap_f2e1db" formatted="false">"Review next month's budget gap"</string>
+    <string name="ui_estimated_consumption_value_next_month_s_overall_allocation_value_revi_72bf08">"Estimated consumption %1$s &gt; next month's overall allocation %2$s. Review the allocation and recorded spending pattern."</string>
+    <string name="ui_review_a_rise_in_recorded_consumption_5f68ef" formatted="false">"Review a rise in recorded consumption"</string>
+    <string name="ui_value_value_versus_value_value_rise_value_20_both_are_complete_months_9a0471">"%1$s: %2$s versus %3$s: %4$s; rise %5$s%% ≥ 20%%. Both are complete months; the earlier amount is positive. Check one-off purchases and record completeness before changing a plan."</string>
+    <string name="ui_hide_source_months_455a04" formatted="false">"Hide source months"</string>
+    <string name="ui_show_source_months_8d1f45" formatted="false">"Show source months"</string>
+    <string name="ui_value_complete_weight_value_95617c">"%1$s · complete · weight %2$s"</string>
+    <string name="ui_income_value_bd0cd1">"Income: %1$s"</string>
+    <string name="ui_consumption_value_91a5ee">"Consumption: %1$s"</string>
+    <string name="ui_contributions_value_5279a1">"Contributions: %1$s"</string>
+    <string name="ui_these_are_recorded_history_scenarios_not_guarantees_statistical_confid_5ca0fb" formatted="false">"These are recorded-history scenarios, not guarantees, statistical confidence intervals or a bank balance. They do not model seasonality, pay dates, inflation, market returns or new obligations. The historical ranges are not bounds on future outcomes. More months can still be incomplete or unrepresentative."</string>
+    <string name="ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a" formatted="false">"Goals and purchases are available from Plan. Their shared capacity and dates are scenarios, not guarantees. No financial health score is calculated."</string>
+    <string name="ui_value_month_forecast_total_85a2c5">"%1$s-month forecast · total"</string>
+    <string name="ui_value_through_value_2b3dc7">"%1$s through %2$s"</string>
+    <string name="ui_not_available_no_complete_covered_months_e3d9d2" formatted="false">"Not available: no complete covered months."</string>
+    <string name="ui_not_available_horizon_exceeds_supported_years_381c92" formatted="false">"Not available: horizon exceeds supported years."</string>
+    <string name="ui_not_available_this_horizon_exceeds_the_supported_amount_range_c58281" formatted="false">"Not available: this horizon exceeds the supported amount range."</string>
+    <string name="ui_consumption_36fad7" formatted="false">"Consumption"</string>
+    <string name="ui_contributions_7219a0" formatted="false">"Contributions"</string>
+    <string name="ui_income_minus_consumption_541067" formatted="false">"Income minus consumption"</string>
+    <string name="ui_saving_rate_9db534" formatted="false">"Saving rate: "</string>
+    <string name="ui_net_cash_flow_87a3a9" formatted="false">"Net cash flow: "</string>
+    <string name="ui_opening_cash_is_excluded_contributions_reduce_cash_not_consumption_or_2303d4" formatted="false">"Opening cash is excluded. Contributions reduce cash, not consumption or saving. Zero income has no saving rate."</string>
+    <string name="ui_historical_monthly_range_value_not_a_prediction_interval_3461ad">"Historical monthly range × %1$s (not a prediction interval):"</string>
+    <string name="ui_to_877216" formatted="false">" to "</string>
+    <string name="ui_your_finances_428334" formatted="false">"Your finances"</string>
+    <string name="ui_reports_dacca3" formatted="false">"Reports"</string>
+    <string name="ui_refresh_dashboard_d61273" formatted="false">"Refresh dashboard"</string>
+    <string name="ui_dashboard_unavailable_9e3edb" formatted="false">"Dashboard unavailable"</string>
+    <string name="ui_a_calculated_total_exceeds_the_supported_amount_range_no_totals_or_spe_46e84b" formatted="false">"A calculated total exceeds the supported amount range. No totals or spending limit are shown."</string>
+    <string name="ui_the_dashboard_could_not_be_read_no_previous_totals_are_shown_32ca8f" formatted="false">"The dashboard could not be read. No previous totals are shown."</string>
+    <string name="ui_recorded_cash_44197f" formatted="false">"Recorded cash"</string>
+    <string name="ui_ledger_opening_cash_saved_income_consumption_investment_contributions_975c89">"Ledger opening cash + saved income − consumption − investment contributions, through %1$s."</string>
+    <string name="ui_tracking_began_value_this_is_your_recorded_ledger_cash_not_a_bank_bala_d9625c">"Tracking began %1$s. This is your recorded ledger cash, not a bank balance."</string>
+    <string name="ui_no_recorded_transactions_through_this_date_add_income_expenses_or_cont_f53ca9" formatted="false">"No recorded transactions through this date. Add income, expenses, or contributions to build your overview."</string>
+    <string name="ui_value_future_dated_transaction_s_are_excluded_until_their_date_985afa">"%1$s future-dated transaction(s) are excluded until their date."</string>
+    <string name="ui_recorded_cash_is_negative_review_missing_or_incorrect_transactions_bef_b8ca8e" formatted="false">"Recorded cash is negative. Review missing or incorrect transactions before relying on a spending limit."</string>
+    <string name="ui_daily_spending_limit_e3d71e" formatted="false">"Daily spending limit"</string>
+    <string name="ui_the_monthly_budget_is_the_lower_or_equal_limit_9ebc66" formatted="false">"The monthly budget is the lower or equal limit."</string>
+    <string name="ui_recorded_cash_is_the_lower_limit_e8de6f" formatted="false">"Recorded cash is the lower limit."</string>
+    <string name="ui_set_an_overall_monthly_budget_to_calculate_a_limit_category_allocation_6d4cb2" formatted="false">"Set an overall monthly budget to calculate a limit. Category allocations alone do not define an overall cap."</string>
+    <string name="ui_this_month_s_tracking_is_incomplete_a_daily_spending_limit_is_unavaila_d6aa93" formatted="false">"This month's tracking is incomplete. A daily spending limit is unavailable."</string>
+    <string name="ui_the_reporting_date_is_before_tracking_began_recorded_cash_and_a_spendi_cca51a" formatted="false">"The reporting date is before tracking began. Recorded cash and a spending limit are unavailable."</string>
+    <string name="ui_lower_of_cash_and_remaining_budget_each_clamped_at_zero_divided_by_val_998af5">"Lower of cash after goal reserves and remaining budget, each clamped at zero, divided by %1$s day(s) including today; rounded down."</string>
+    <string name="ui_cash_cap_and_budget_cap_are_applied_together_this_limit_never_exceeds_e50119" formatted="false">"Cash cap and budget cap are applied together. This limit never exceeds either one."</string>
+    <string name="ui_goals_bill_reservations_and_unrecorded_obligations_are_not_included_th_b808ea" formatted="false">"Goal earmarks reduce available recorded cash. Bill reservations and unrecorded obligations are not included. This limit is not a guarantee of affordability."</string>
+    <string name="ui_review_budget_8673c7" formatted="false">"Review budget"</string>
+    <string name="ui_value_recorded_activity_157b11">"%1$s · recorded activity"</string>
+    <string name="ui_consumption_expenses_81a198" formatted="false">"Consumption expenses"</string>
+    <string name="ui_investment_contributions_9acd9c" formatted="false">"Investment contributions"</string>
+    <string name="ui_contributions_reduce_cash_but_are_not_consumption_saving_excludes_cont_cd4988" formatted="false">"Contributions reduce cash but are not consumption. Saving excludes contributions. The saving rate is unavailable when recorded income is zero."</string>
+    <string name="ui_partial_month_tracking_began_value_these_totals_may_omit_earlier_activ_be8187">"Partial month: tracking began %1$s. These totals may omit earlier activity."</string>
+    <string name="ui_this_month_s_activity_is_not_yet_covered_by_the_ledger_9f19dd" formatted="false">"This month's activity is not yet covered by the ledger."</string>
+    <string name="ui_monthly_budget_c24759" formatted="false">"Monthly budget"</string>
+    <string name="ui_overall_allocation_70c43d" formatted="false">"Overall allocation: "</string>
+    <string name="ui_remaining_after_recorded_expenses_9b3407" formatted="false">"Remaining after recorded expenses"</string>
+    <string name="ui_no_overall_allocation_e6d29a" formatted="false">"No overall allocation"</string>
+    <string name="ui_below_80_ca9e35" formatted="false">"Below 80%"</string>
+    <string name="ui_month_end_consumption_projection_5b1eea" formatted="false">"Month-end consumption projection: "</string>
+    <string name="ui_projection_follows_the_recorded_daily_pace_it_is_not_a_forecast_of_fut_29cedd" formatted="false">"Projection follows the recorded daily pace; it is not a forecast of future behavior. Partial-month tracking has no full-month projection."</string>
+    <string name="ui_open_monthly_budgets_66d4b1" formatted="false">"Open monthly budgets"</string>
+    <string name="ui_top_recorded_spending_categories_65e274" formatted="false">"Top recorded spending categories"</string>
+    <string name="ui_spending_is_not_yet_available_22b156" formatted="false">"Spending is not yet available."</string>
+    <string name="ui_no_consumption_expenses_recorded_this_month_881a77" formatted="false">"No consumption expenses recorded this month."</string>
+    <string name="ui_recent_recorded_transactions_669a18" formatted="false">"Recent recorded transactions"</string>
+    <string name="ui_no_recorded_transactions_through_this_date_b5c2d8" formatted="false">"No recorded transactions through this date."</string>
+    <string name="ui_view_transaction_history_700d6a" formatted="false">"View transaction history"</string>
+    <string name="ui_not_available_yet_787406" formatted="false">"Not available yet"</string>
+    <string name="ui_forecasts_are_available_in_plan_goals_progress_net_worth_and_market_va_c83038" formatted="false">"Forecasts, goals and tracked net worth are available. Investment holdings and market values are not implemented yet."</string>
+    <string name="ui_week_e78041" formatted="false">"Week"</string>
+    <string name="ui_month_310ca5" formatted="false">"Month"</string>
+    <string name="ui_year_89f683" formatted="false">"Year"</string>
+    <string name="ui_complete_period_d1eeff" formatted="false">"Complete period"</string>
+    <string name="ui_period_in_progress_037137" formatted="false">"Period in progress"</string>
+    <string name="ui_partial_tracking_history_08d6c3" formatted="false">"Partial tracking history"</string>
+    <string name="ui_history_unavailable_cf319f" formatted="false">"History unavailable"</string>
+    <string name="ui_future_period_947bb7" formatted="false">"Future period"</string>
+    <string name="ui_today_2b065c" formatted="false">"Today"</string>
+    <string name="ui_hide_date_input_7e4417" formatted="false">"Hide date input"</string>
+    <string name="ui_choose_date_343b5a" formatted="false">"Choose date"</string>
+    <string name="ui_refresh_report_e8d598" formatted="false">"Refresh report"</string>
+    <string name="ui_date_in_period_yyyy_mm_dd_0ed53d" formatted="false">"Date in period (YYYY-MM-DD)"</string>
+    <string name="ui_open_period_1cc585" formatted="false">"Open period"</string>
+    <string name="ui_enter_a_valid_date_from_year_0001_to_9999_969636" formatted="false">"Enter a valid date from year 0001 to 9999."</string>
+    <string name="ui_a_report_total_exceeds_the_supported_amount_range_no_stale_totals_or_c_578d27" formatted="false">"A report total exceeds the supported amount range. No stale totals or charts are shown."</string>
+    <string name="ui_reports_could_not_be_loaded_no_stale_totals_or_charts_are_shown_0f15fc" formatted="false">"Reports could not be loaded. No stale totals or charts are shown."</string>
+    <string name="ui_recorded_range_value_through_value_value_transaction_s_8937f3">"Recorded range: %1$s through %2$s. %3$s transaction(s)."</string>
+    <string name="ui_no_covered_dates_in_this_period_unknown_history_is_not_zero_spending_455775" formatted="false">"No covered dates in this period. Unknown history is not zero spending."</string>
+    <string name="ui_tracking_began_after_this_period_started_totals_omit_earlier_activity_6c83f7" formatted="false">"Tracking began after this period started. Totals omit earlier activity; comparisons are unavailable."</string>
+    <string name="ui_value_future_dated_transaction_s_excluded_until_their_date_3d2379">"%1$s future-dated transaction(s) excluded until their date."</string>
+    <string name="ui_previous_period_comparison_e4dd6a" formatted="false">"Previous-period comparison"</string>
+    <string name="ui_not_available_the_selected_period_has_incomplete_tracking_history_4d69e6" formatted="false">"Not available: the selected period has incomplete tracking history."</string>
+    <string name="ui_not_available_previous_period_history_is_missing_or_incomplete_e4d595" formatted="false">"Not available: previous-period history is missing or incomplete."</string>
+    <string name="ui_not_available_the_previous_period_has_fewer_days_than_the_current_elap_3b7fbb" formatted="false">"Not available: the previous period has fewer days than the current elapsed range."</string>
+    <string name="ui_not_available_previous_totals_or_a_change_exceed_the_supported_range_9a23f2" formatted="false">"Not available: previous totals or a change exceed the supported range."</string>
+    <string name="ui_not_available_the_previous_period_is_outside_supported_years_6b9bc7" formatted="false">"Not available: the previous period is outside supported years."</string>
+    <string name="ui_not_available_this_period_has_no_covered_history_yet_c3b3c5" formatted="false">"Not available: this period has no covered history yet."</string>
+    <string name="ui_compared_with_value_through_value_7684b6">"Compared with %1$s through %2$s"</string>
+    <string name="ui_equal_elapsed_calendar_days_are_compared_the_previous_full_period_is_n_02b796" formatted="false">"Equal elapsed calendar days are compared; the previous full period is not used."</string>
+    <string name="ui_both_calendar_periods_are_complete_their_lengths_may_differ_these_are_7af531" formatted="false">"Both calendar periods are complete. Their lengths may differ; these are totals, not daily averages."</string>
+    <string name="ui_income_change_77a5b2" formatted="false">"Income change"</string>
+    <string name="ui_consumption_change_67d58b" formatted="false">"Consumption change"</string>
+    <string name="ui_saving_change_f52d12" formatted="false">"Saving change"</string>
+    <string name="ui_income_change_bf7cdc" formatted="false">"Income change: "</string>
+    <string name="ui_consumption_change_5544f4" formatted="false">"Consumption change: "</string>
+    <string name="ui_percentage_change_is_unavailable_when_the_previous_amount_is_zero_eba789" formatted="false">"Percentage change is unavailable when the previous amount is zero."</string>
+    <string name="ui_income_consumption_and_contributions_over_time_546a7c" formatted="false">"Income, consumption and contributions over time"</string>
+    <string name="ui_opening_cash_is_excluded_contributions_are_not_consumption_bars_start_294d55" formatted="false">"Opening cash is excluded. Contributions are not consumption. Bars start at zero and share one amount scale."</string>
+    <string name="ui_hide_chart_6b614d" formatted="false">"Hide chart"</string>
+    <string name="ui_show_chart_6d64a1" formatted="false">"Show chart"</string>
+    <string name="ui_scale_unavailable_no_covered_values_e3c79a" formatted="false">"Scale unavailable: no covered values."</string>
+    <string name="ui_all_covered_amounts_are_zero_zero_width_bars_are_labeled_explicitly_642453" formatted="false">"All covered amounts are zero. Zero-width bars are labeled explicitly."</string>
+    <string name="ui_scale_0_to_9a0216" formatted="false">"Scale: 0 to "</string>
+    <string name="ui_exact_labels_remain_readable_without_color_8fb40c" formatted="false">". Exact labels remain readable without color."</string>
+    <string name="ui_not_available_no_zero_bar_is_drawn_9b77f8" formatted="false">"Not available; no zero bar is drawn."</string>
+    <string name="ui_consumption_by_category_1edbbd" formatted="false">"Consumption by category"</string>
+    <string name="ui_bar_scale_zero_to_total_recorded_consumption_archived_and_unallocated_479ca9" formatted="false">"Bar scale: zero to total recorded consumption. Archived and unallocated categories count; shares are rounded down to two decimals."</string>
+    <string name="ui_category_amounts_are_unavailable_3d5f4a" formatted="false">"Category amounts are unavailable."</string>
+    <string name="ui_no_consumption_expenses_recorded_in_the_covered_range_c1bec0" formatted="false">"No consumption expenses recorded in the covered range."</string>
+    <string name="ui_value_of_recorded_consumption_ffb739">"%1$s%% of recorded consumption"</string>
+    <string name="ui_reports_use_saved_records_only_unknown_or_future_dates_are_not_zeros_h_44f5da" formatted="false">"Reports use saved records only. Unknown or future dates are not zeros. Historical-baseline forecasts and their rules are available in Plan."</string>
+    <string name="ui_recorded_totals_7cfd6c" formatted="false">"Recorded totals"</string>
+    <string name="ui_net_cash_flow_income_consumption_contributions_this_is_not_a_cash_bala_88ffcf" formatted="false">"Net cash flow = income − consumption − contributions. This is not a cash balance. A zero income has no saving rate."</string>
+    <string name="ui_english_ba118b" formatted="false">"English"</string>
+    <string name="ui_bahasa_indonesia_11b871" formatted="false">"Bahasa Indonesia"</string>
+</resources>

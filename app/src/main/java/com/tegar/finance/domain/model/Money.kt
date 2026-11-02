@@ -8,7 +8,9 @@ data class CurrencyCode(val value: String) {
         require(value.matches(Regex("[A-Z]{3}")))
         require(Currency.getInstance(value).defaultFractionDigits in 0..3)
     }
-    val fractionDigits: Int get() = Currency.getInstance(value).defaultFractionDigits
+    // Android 8's currency metadata reports IDR as 0; the ledger contract uses
+    // ISO scale 2. Storage and parsing must never vary with the device's CLDR.
+    val fractionDigits: Int get() = if (value == "IDR") 2 else Currency.getInstance(value).defaultFractionDigits
     companion object { val IDR = CurrencyCode("IDR") }
 }
 data class Money(val minorUnits: Long, val currency: CurrencyCode = CurrencyCode.IDR) {
