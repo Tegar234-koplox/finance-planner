@@ -165,7 +165,7 @@
     <string name="ui_consumption_value_91a5ee">"Consumption: %1$s"</string>
     <string name="ui_contributions_value_5279a1">"Contributions: %1$s"</string>
     <string name="ui_these_are_recorded_history_scenarios_not_guarantees_statistical_confid_5ca0fb" formatted="false">"These are recorded-history scenarios, not guarantees, statistical confidence intervals or a bank balance. They do not model seasonality, pay dates, inflation, market returns or new obligations. The historical ranges are not bounds on future outcomes. More months can still be incomplete or unrepresentative."</string>
-    <string name="ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a" formatted="false">"Goals and purchases are available from Plan. Their shared capacity and dates are scenarios, not guarantees. No financial health score is calculated."</string>
+    <string name="ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a" formatted="false">"Goals and purchases are available above."</string>
     <string name="ui_value_month_forecast_total_85a2c5">"%1$s-month forecast · total"</string>
     <string name="ui_value_through_value_2b3dc7">"%1$s through %2$s"</string>
     <string name="ui_not_available_no_complete_covered_months_e3d9d2" formatted="false">"Not available: no complete covered months."</string>

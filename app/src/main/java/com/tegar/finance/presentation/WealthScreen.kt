@@ -212,7 +212,7 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel, openInvestments: 
 @Composable private fun ItemDialog(editor: WealthItemEditor, busy: Boolean, error: AppError?, model: WealthViewModel) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = model::closeEditors, title = { Text(stringResource(if (editor.id == null) R.string.wealth_add else R.string.wealth_edit)) },
-        text = { Column(Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()).testTag("wealth_item_form"), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        text = { Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()).testTag("wealth_item_form"), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Field(editor.name, R.string.wealth_name, "wealth_name", busy) { model.editItem(editor.copy(name = it)) }
             Choice(stringResource(R.string.wealth_kind) + ": " + kindName(editor.kind), WealthKind.entries.map { it to kindName(it) }, !busy && editor.id == null, "wealth_kind") {
                 model.editItem(editor.copy(kind = it, category = if (it == WealthKind.ASSET) WealthCategory.PERSONAL else WealthCategory.LOAN, cost = ""))
@@ -233,7 +233,7 @@ fun WealthScreen(state: WealthUiState, model: WealthViewModel, openInvestments: 
 @Composable private fun ValueDialog(editor: WealthValueEditor, busy: Boolean, error: AppError?, model: WealthViewModel) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = model::closeEditors, title = { Text(stringResource(if (editor.id == null) R.string.wealth_record_value else R.string.wealth_edit_value)) },
-        text = { Column(Modifier.heightIn(max = 400.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        text = { Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Field(editor.amount, R.string.wealth_value_amount, "wealth_amount", busy, decimal = true) { model.editValue(editor.copy(amount = it)) }
             Field(editor.date, R.string.wealth_value_date, "wealth_date", busy) { model.editValue(editor.copy(date = it)) }
             Field(editor.notes, R.string.wealth_notes, "wealth_notes", busy, done = true) { model.editValue(editor.copy(notes = it)) }

@@ -75,6 +75,15 @@ class PortfolioViewModelTest {
         model.closeEditors(); model.selectMonth("2028-02"); advanceUntilIdle(); assertEquals(YearMonth.of(2028, 2), model.state.value.overview!!.progress.month)
         model.selectMonth("2028-13"); advanceUntilIdle(); assertEquals(AppError.INVALID_INPUT, model.state.value.error); assertEquals(YearMonth.of(2028, 2), model.state.value.overview!!.progress.month)
     }
+    @Test fun updateTodayReusesTheObservationWhileExplicitHistoryEntryRemainsSeparate() = runTest {
+        val repo = Source()
+        val value = HoldingValue("today-value", repo.holding.id, LocalDate.of(2028, 3, 10), Money(12345), "Existing", Instant.EPOCH, null)
+        repo.data.value = AppResult.Success(repo.snapshot.copy(values = listOf(value)))
+        val model = model(repo); advanceUntilIdle(); model.updateValue(repo.holding)
+        assertEquals("today-value", model.state.value.valueEditor!!.id); assertEquals("123,45", model.state.value.valueEditor!!.amount)
+        model.closeEditors(); model.openValue(repo.holding)
+        assertNull(model.state.value.valueEditor!!.id); assertEquals(0, repo.calls)
+    }
     private class MutableClock(var value: Instant) : Clock() {
         override fun getZone(): ZoneId = ZoneOffset.UTC
         override fun instant() = value

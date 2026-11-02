@@ -66,4 +66,6 @@
     <string name="portfolio_unknown_holdings" formatted="false">"Investment values are incomplete."</string>
     <string name="portfolio_observation">"Observed %1$s"</string>
     <string name="portfolio_cost_note">"Recorded cost: %1$s"</string>
+    <string name="portfolio_asof">"Current · %1$s"</string>
+    <string name="portfolio_current_value" formatted="false">"Current value"</string>
 </resources>

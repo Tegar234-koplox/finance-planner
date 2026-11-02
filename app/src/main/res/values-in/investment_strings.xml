@@ -66,4 +66,6 @@
     <string name="portfolio_unknown_holdings" formatted="false">"Nilai investasi belum lengkap."</string>
     <string name="portfolio_observation">"Dinilai %1$s"</string>
     <string name="portfolio_cost_note">"Modal tercatat: %1$s"</string>
+    <string name="portfolio_asof">"Saat ini · %1$s"</string>
+    <string name="portfolio_current_value" formatted="false">"Nilai saat ini"</string>
 </resources>

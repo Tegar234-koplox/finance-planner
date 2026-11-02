@@ -90,6 +90,7 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
             item {
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(stringResource(R.string.portfolio_asof, data.today), style = MaterialTheme.typography.bodySmall)
                         Text(stringResource(R.string.portfolio_total), style = MaterialTheme.typography.titleMedium)
                         Text(amount(data.total), style = MaterialTheme.typography.headlineLarge, modifier = Modifier.testTag("portfolio_total"))
                         MoneyRow(R.string.portfolio_invested, data.valuation.total, "portfolio_invested")
@@ -229,13 +230,14 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
             if (!holding.active) Text(stringResource(R.string.wealth_archived))
             if (row.latest == null) Text(stringResource(R.string.wealth_unknown)) else Text(stringResource(R.string.portfolio_observation, row.latest.date) + " · " + stringResource(R.string.wealth_age, row.ageDays.toString()))
             Row {
-                TextButton(onClick = { model.openValue(holding) }, enabled = enabled, modifier = Modifier.testTag("holding_update_${holding.id}")) { Text(stringResource(R.string.portfolio_value)) }
+                TextButton(onClick = { model.updateValue(holding) }, enabled = enabled, modifier = Modifier.testTag("holding_update_${holding.id}")) { Text(stringResource(R.string.portfolio_value)) }
                 TextButton(onClick = { details = !details }, modifier = Modifier.testTag("holding_history_${holding.id}")) { Text(stringResource(if (details) R.string.wealth_hide_values else R.string.wealth_value_history)) }
             }
             if (details) {
                 Text(stringResource(R.string.wealth_acquired_value, holding.acquiredOn))
                 holding.cost?.let { Text(stringResource(R.string.portfolio_cost_note, amount(it))) }
                 if (holding.notes.isNotBlank()) Text(holding.notes)
+                TextButton(onClick = { model.openValue(holding) }, enabled = enabled, modifier = Modifier.testTag("holding_add_observation_${holding.id}")) { Text(stringResource(R.string.wealth_record_value)) }
                 if (values.isEmpty()) Text(stringResource(R.string.wealth_no_values))
                 values.sortedByDescending { it.date }.forEach { value ->
                     HorizontalDivider()
@@ -257,7 +259,7 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
         MenuChoice(stringResource(R.string.portfolio_bucket) + ": " + editor.bucket.label(), AllocationBucket.entries.filter { it != AllocationBucket.CASH }.map { it to it.label() }, !state.busy, "holding_bucket") { model.editHolding(editor.copy(bucket = it)) }
         FormField(editor.acquired, stringResource(R.string.wealth_acquired), "holding_acquired", state.busy) { model.editHolding(editor.copy(acquired = it)) }
         if (editor.id == null) {
-            FormField(editor.amount, stringResource(R.string.wealth_value_amount), "holding_amount", state.busy, decimal = true) { model.editHolding(editor.copy(amount = it)) }
+            FormField(editor.amount, stringResource(R.string.portfolio_current_value), "holding_amount", state.busy, decimal = true) { model.editHolding(editor.copy(amount = it)) }
             FormField(editor.valueDate, stringResource(R.string.portfolio_date), "holding_date", state.busy, done = true) { model.editHolding(editor.copy(valueDate = it)) }
         }
         TextButton(onClick = { optional = !optional }, modifier = Modifier.testTag("holding_optional")) { Text(stringResource(R.string.portfolio_edit)) }
@@ -271,7 +273,7 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
 }
 @Composable private fun ValueForm(editor: HoldingValueEditor, state: PortfolioUiState, model: PortfolioViewModel) {
     EditorDialog(R.string.portfolio_value, state, model::closeEditors, model::saveValue, "holding_value_save") {
-        FormField(editor.amount, stringResource(R.string.wealth_value_amount), "holding_value_amount", state.busy, decimal = true) { model.editValue(editor.copy(amount = it)) }
+        FormField(editor.amount, stringResource(R.string.portfolio_current_value), "holding_value_amount", state.busy, decimal = true) { model.editValue(editor.copy(amount = it)) }
         FormField(editor.date, stringResource(R.string.portfolio_date), "holding_value_date", state.busy) { model.editValue(editor.copy(date = it)) }
         FormField(editor.notes, stringResource(R.string.wealth_notes), "holding_value_notes", state.busy, done = true) { model.editValue(editor.copy(notes = it)) }
     }
@@ -298,7 +300,7 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
 @Composable private fun EditorDialog(title: Int, state: PortfolioUiState, close: () -> Unit, save: () -> Unit, tag: String, content: @Composable ColumnScope.() -> Unit) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = close, title = { Text(stringResource(title)) }, text = {
-        Column(Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             content()
             state.error?.let { Text(errorText(it), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("portfolio_editor_error")) }
         }
@@ -315,6 +317,6 @@ fun PortfolioScreen(state: PortfolioUiState, model: PortfolioViewModel) {
     var open by remember { mutableStateOf(false) }
     Box {
         OutlinedButton(onClick = { open = true }, enabled = enabled && choices.isNotEmpty(), modifier = Modifier.fillMaxWidth().testTag(tag)) { Text(selected) }
-        DropdownMenu(open, { open = false }) { choices.forEach { (value, label) -> DropdownMenuItem(text = { Text(label) }, onClick = { open = false; choose(value) }) } }
+        DropdownMenu(open, { open = false }) { choices.forEachIndexed { index, (value, label) -> DropdownMenuItem(text = { Text(label) }, onClick = { open = false; choose(value) }, modifier = Modifier.testTag("${tag}_option_$index")) } }
     }
 }

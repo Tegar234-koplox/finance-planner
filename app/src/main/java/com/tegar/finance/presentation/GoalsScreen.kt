@@ -161,7 +161,7 @@ fun GoalsScreen(state: GoalsUiState, model: GoalsViewModel) {
 @Composable private fun GoalForm(editor: GoalEditor, busy: Boolean, error: AppError?, model: GoalsViewModel) {
     val keyboard = LocalSoftwareKeyboardController.current
     AlertDialog(onDismissRequest = model::closeEditor, title = { Text(stringResource(if (editor.id == null) R.string.goals_add else R.string.goals_edit)) },
-        text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        text = { Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             OutlinedTextField(editor.name, { model.edit(editor.copy(name = it)) }, label = { Text(stringResource(R.string.goals_name)) },
                 enabled = !busy, singleLine = true, modifier = Modifier.testTag("goal_name"))
             GoalChoice(goalKind(editor.kind), GoalKind.entries.map { it to goalKind(it) }, !busy, "goal_kind") { model.edit(editor.copy(kind = it)) }

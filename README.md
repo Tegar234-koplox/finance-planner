@@ -1,12 +1,51 @@
 # Finance Planner
 
-Private, local-first Kotlin Android app. Phase 8 adds non-cash assets, manual
-liabilities, dated valuations and immutable tracked-net-worth snapshots to goals,
-forecasts, reports, Home, budgets and bookkeeping. Manual investment holdings
-and market APIs remain later phases. Phase 9 has not started.
+Private, local-first Kotlin Android app. Phase 9 adds manual investment holdings,
+exact allocation targets, monthly contribution plans and cash redemptions to
+bookkeeping, goals and dated net-worth history. The interface supports English
+and Bahasa Indonesia. Market/provider work remains Phase 10 and has not started.
 
 Numbers and actions appear first. Tap the information icon for calculation details.
 Angka dan aksi utama ditampilkan lebih dulu; ketuk ikon info untuk penjelasan.
+
+## Investments / Investasi
+
+Open **Home → Investments**. The three tabs separate **Holdings**, **Allocation**
+and **Cash activity**. Add a named holding, asset class, acquisition date and
+initial dated value. Optional symbol, recorded cost and notes are under Edit
+details. Cash belongs to the ledger, never a duplicate holding. Values are manual
+observations; recording a cost does not add it to wealth or prove a return.
+
+Buka **Beranda → Investasi**. **Kepemilikan** menyimpan nilai investasi manual
+bertanggal. **Alokasi** membandingkan persentase saat ini dengan target yang
+jumlahnya harus tepat 100%. **Arus kas** mencatat setoran dan pencairan, serta
+target setoran bulanan. Angka memakai format Indonesia, misalnya `25.000,50`.
+Penjelasan perhitungan tersedia melalui ikon info; nilai dan aksi tetap terlihat.
+
+Portfolio allocation includes recorded cash once and active holding values,
+excluding non-investment assets. Actual percentages use exact largest-remainder
+rounding and sum to 100%. Missing values, a zero total or negative cash withhold
+unsupported percentages. Targets never execute trades. Current holdings can be
+excluded or deleted; linked cash entries must be unlinked/deleted before removing
+their holding, or the holding can simply be excluded.
+
+Contributions reduce cash. Redemptions increase cash and are not income,
+consumption or saving. When a cash entry links a holding, explicitly enter its
+value after that entry; both writes commit together, without adding the cash
+amount to its value again. Unlinked entries change cash only. Editing/deleting
+a cash entry does not reverse other manual observations or saved snapshots;
+review those values separately when correcting a record. Bookkeeping preserves
+the action and optional holding link on edits.
+
+Monthly targets measure gross recorded contributions. Redemptions and net
+contributions are shown separately. A zero target has no percentage; incomplete
+tracking and untracked/future months remain explicit. Forecasts do not extrapolate
+redemptions into future income or capacity.
+
+New wealth snapshots include copied investment components (method TRACKED_V2).
+Old TRACKED_V1 snapshots remain unchanged and exclude holdings. Changes between
+different scopes are unavailable instead of implying a comparable historical
+return. No current values are backfilled into older snapshots.
 
 ## Assets and net worth / Aset dan kekayaan bersih
 
@@ -24,11 +63,11 @@ tetap setelah dibuat. Mengeluarkan item dari total saat ini mempertahankan
 riwayatnya; tidak mencatat penjualan, pelunasan, atau perpindahan uang.
 
 Tracked net worth counts recorded ledger cash once, plus the latest dated active
-asset values, minus active liabilities. Goal earmarks remain inside that cash.
+asset and investment values, minus active liabilities. Goal earmarks remain inside that cash.
 Non-cash assets never increase Home spending cash. Missing active values make
 the total unavailable; cost or zero is never silently substituted. Original value
-dates and ages stay visible. Holdings and unrecorded wealth/debts are excluded;
-contributions alone cannot establish an investment holding's value.
+dates and ages stay visible. Unrecorded wealth/debts are excluded; contributions alone cannot establish an
+investment holding's value.
 
 **Save today’s snapshot** asks for confirmation and freezes cash, totals and each
 component's name, kind, value and original observation date. Later source edits,
@@ -205,9 +244,10 @@ Cloud shells first run `source /workspace/.finance-tooling/activate.sh`.
 The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 It is a development build, not the final personal-finance product.
 
-The current development APK is version 0.8.0 (code 8). Schema v5 adds four wealth tables
-through the explicit non-destructive 1→2→3→4→5 migration chain. See
-[Phase 8 status](docs/PHASE_8_STATUS.md) for current checks and limitations.
+The current development APK is version 0.9.0 (code 9). Schema v6 adds investment tables and
+nullable transaction metadata through the explicit 1→2→3→4→5→6 migration chain. See
+[Phase 9 status](docs/PHASE_9_STATUS.md) for current checks and limitations.
+[Phase 8 status](docs/PHASE_8_STATUS.md),
 [Phase 7 status](docs/PHASE_7_STATUS.md),
 [Phase 6 status](docs/PHASE_6_STATUS.md),
 [Phase 5 status](docs/PHASE_5_STATUS.md),

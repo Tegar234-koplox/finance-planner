@@ -117,7 +117,7 @@ fun BookkeepingScreen(state: BookkeepingState, model: BookkeepingViewModel, cate
     state.transactionEditor?.let { editor -> TransactionForm(editor, state, model) }
     state.categoryEditor?.let { editor ->
         AlertDialog(onDismissRequest = model::closeEditors, title = { Text(if (editor.id == null) stringResource(R.string.ui_add_category_aafdf4) else stringResource(R.string.ui_rename_category_897993)) },
-            text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            text = { Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(editor.name, { model.editCategory(editor.copy(name = it)) }, label = { Text(stringResource(R.string.ui_category_name_73ddd9)) },
                     enabled = !state.busy, singleLine = true, modifier = Modifier.testTag("category_name"))
                 Choice(stringResource(R.string.ui_type_baaddf), editor.type.label(), if (editor.id == null) TransactionType.entries.map { it.name to it.label() } else emptyList()) {
@@ -178,7 +178,7 @@ private fun TransactionForm(editor: TransactionEditor, state: BookkeepingState, 
     val keyboard = LocalSoftwareKeyboardController.current
     val available = state.categories.filter { it.transactionType == editor.type && (it.active || it.id == editor.categoryId) }
     AlertDialog(onDismissRequest = model::closeEditors, title = { Text(if (editor.id == null) stringResource(R.string.ui_add_transaction_6502c0) else stringResource(R.string.ui_edit_transaction_c71e88)) },
-        text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        text = { Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Choice(stringResource(R.string.ui_type_baaddf), editor.type.label(), TransactionType.entries.map { it.name to it.label() }) {
                 val type = TransactionType.valueOf(it)
                 model.editTransaction(editor.copy(type = type,

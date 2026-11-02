@@ -4,7 +4,7 @@ Finance Planner is a private personal financial intelligence Android application
 It helps answer: what cash is available, whether spending is within budget,
 what is safe to spend today, how behavior is changing, and when a purchase or
 savings goal is affordable, and how recorded assets and liabilities affect tracked
-net worth. Investment allocation follows;
+net worth, including manual investment allocation;
 external market information and evidence-based IPO monitoring are secondary.
 
 The primary destinations are Home, Budget, Plan, and Market. Settings is reached
@@ -14,7 +14,7 @@ honest loading, empty, and error states. Charts must explain a useful comparison
 The offline finance MVP consists of transactions/categories, budgeting,
 dashboard, reports, deterministic forecasts/recommendations, and goals/purchases
 (Phases 1–7). Daily-use approval also requires the applicable security, backup,
-test, UI, performance, and release gates. Current Phase 8 includes transaction
+test, UI, performance, and release gates. Current Phase 9 includes transaction
 CRUD/history/filter, category management, monthly overall/category budgets and
 a Home dashboard derived from those records. Home distinguishes recorded cash,
 consumption and contributions, and bounds its daily limit by both cash and budget.
@@ -36,7 +36,12 @@ Acquisition cost is metadata only; non-cash wealth never increases spendable
 cash. Historical totals exist only when saved, and changing/deleting current
 items never rewrites them. Cash and goal earmarks are counted once; investment
 holdings and unrecorded wealth/debts are explicitly outside this tracked total.
-Investment holdings/market valuations remain future phases. The optional internal health indicator is deferred; no
+Manual investment holdings, allocation targets, monthly contribution plans and
+cash redemptions are implemented. Values remain manual and dated, costs are not
+added again, and redemptions do not become income or predicted recurring capacity.
+New frozen snapshots include recorded investments without reinterpreting legacy
+captures. Primary screens show numbers and actions; detailed explanations open
+on demand. Market/provider valuations remain future phases. The optional internal health indicator is deferred; no
 health or credit score is calculated.
 
 At the user's request, the full current interface supports English and Bahasa
@@ -56,7 +61,7 @@ contributions reduce cash but are distinct from consumption expenses. Financial
 formulas have a single domain owner. Confidence is qualitative evidence strength,
 not certainty. Recommendations expose their rule and calculation.
 
-Future scope: manual investment planning, locally cached
+Future scope: provider-backed investment information, locally cached
 US and Indonesian watchlists/IHSG, evidence-based AI IPO radar, bounded background
 refresh, settings, validated versioned export/import, and optional internal
 financial health indicator. Never label that indicator a credit score.

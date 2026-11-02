@@ -165,7 +165,7 @@
     <string name="ui_consumption_value_91a5ee">"Konsumsi: %1$s"</string>
     <string name="ui_contributions_value_5279a1">"Kontribusi: %1$s"</string>
     <string name="ui_these_are_recorded_history_scenarios_not_guarantees_statistical_confid_5ca0fb" formatted="false">"Ini adalah skenario berdasarkan riwayat tercatat, bukan jaminan, interval keyakinan statistik, atau saldo bank. Skenario tidak memodelkan musim, tanggal gajian, inflasi, imbal hasil pasar, atau kewajiban baru. Rentang historis bukan batas hasil mendatang. Sampel yang lebih banyak pun dapat tidak lengkap atau tidak mewakili kondisi sebenarnya."</string>
-    <string name="ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a" formatted="false">"Tujuan dan pembelian tersedia dari Rencana. Kapasitas bersama dan tanggalnya adalah skenario, bukan jaminan. Skor kesehatan keuangan tidak dihitung."</string>
+    <string name="ui_goals_and_purchases_are_not_implemented_no_goal_capacity_target_dates_2be60a" formatted="false">"Tujuan dan pembelian tersedia melalui tombol di atas."</string>
     <string name="ui_value_month_forecast_total_85a2c5">"Prakiraan %1$s bulan · total"</string>
     <string name="ui_value_through_value_2b3dc7">"%1$s sampai %2$s"</string>
     <string name="ui_not_available_no_complete_covered_months_e3d9d2" formatted="false">"Tidak tersedia: belum ada bulan penuh yang tercakup."</string>

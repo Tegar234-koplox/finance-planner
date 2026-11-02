@@ -112,7 +112,7 @@ fun BudgetScreen(state: BudgetUiState, model: BudgetViewModel) {
         AlertDialog(onDismissRequest = model::closeEditor, title = {
             Text(if (editor.categoryId == null) stringResource(R.string.ui_overall_budget_value_8b3547, editor.month) else stringResource(R.string.ui_category_budget_value_bd5e9a, editor.month))
         }, text = {
-            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 if (editor.categoryId != null) Box {
                     OutlinedButton(onClick = { expanded = true }, enabled = !state.busy, modifier = Modifier.testTag("budget_category")) {
                         Text(choices.firstOrNull { it.id == editor.categoryId }?.name ?: stringResource(R.string.ui_choose_an_expense_category_f0939e))

@@ -1,13 +1,12 @@
 # Data model
 
-Phase 8 adds four wealth tables to the schema-v4 ledger/category/transaction/
-budget/goal data and appearance/language preferences. Schema v5 leaves every
-existing financial table unchanged. Goal progress/reserves/scenarios and current
-wealth are derived; saved wealth captures are explicit immutable observations.
-The remaining tables are a proposal, introduced with their owning phases and proper
-Room migrations. IDs are stable UUIDs except singleton ledger ID 1. Enums use
-stable names, timestamps UTC epoch milliseconds, dates epoch days, month keys
-validated YYYY-MM. Optional values use null, not fake zero/sentinel timestamps.
+Phase 9 extends schema v5 with manual holdings, dated holding values, allocation
+targets, contribution plans and frozen investment components. Schema v6 preserves
+all old fields and adds nullable action/link transaction metadata plus a zero-default
+snapshot investment subtotal. Historical schema exports 1–5 remain immutable.
+IDs are UUIDs except singleton ledger 1 and allocation bucket keys. Enums use
+stable names; UTC timestamps, epoch-day dates and strict YYYY-MM months remain.
+Money/currency rules are unchanged; missing values use null rather than fake zero.
 
 Money is `Long` minor units plus an ISO currency code, never floating point.
 IDR uses ISO scale 2: Rp500,000 = 50,000,000 minor units. Fractional digits are
@@ -17,7 +16,7 @@ Transactions require strictly positive amounts. Arithmetic is checked;
 do not use unbounded SQLite integer SUM without an overflow-safe strategy.
 The ledger is initially single currency; preferences cannot relabel stored money.
 
-## Implemented schema version 5
+## Implemented schema version 6
 
 Version 1 ledger/category columns and identities are unchanged. The explicit
 Room 1→2 migration adds transactions and integrity triggers without reseeding,
@@ -48,8 +47,8 @@ guards, without reseeding or modifying any of the six prior financial tables.
   An existing transaction may retain its archived category when edited.
   History sorts by date, creation time and ID descending. Inclusive date bounds,
   type and category filters combine with AND; unbounded filters are explicit.
-  Investment records in this phase are contributions; redemption/holding links
-  belong to Phase 9. Derived usage and cash totals are never stored.
+  Legacy investment records are contributions; Phase 9 action/holding fields
+  are described below. Derived usage and cash totals are never stored.
 - **Monthly budget:** UUID, ledger FK, strict YYYY-MM key, nonnegative Long minor
   allocation, creation/update timestamps, unique ledger/month.
 - **Category budget:** UUID, ledger FK, month, composite category/type FK constrained
@@ -120,20 +119,70 @@ fewer than two or overflow. It is not a return percentage. Original component
 names/dates/values survive current source changes and deletion; current source
 editing cannot recreate a historical observation. Currency/method/line sums and
 the cash+assets−liabilities equation are validated when reading captures.
-Future investment support must add an explicit method without reinterpreting v1.
+Phase 9 adds the explicit v2 method below without reinterpreting v1.
+
+## Phase 9 investment records and accounting
+
+- **investment_holding:** UUID, ledger FK, cleaned 1–80-character name, optional
+  symbol (≤30), STOCK/BOND/FUND/GOLD/OTHER bucket, acquisition date, optional
+  nonnegative recorded cost, notes (≤500), active flag and timestamps. CASH is
+  prohibited here; ledger cash has one authority. Acquisition may predate ledger
+  tracking but cannot exceed today or an existing value/linked entry date.
+- **investment_value:** UUID, holding FK with delete cascade, unique holding/date,
+  nonnegative manual value, notes and timestamps. Dates cannot precede acquisition
+  or be future. Normal same-date entry must edit its observation. The cash-entry
+  form explicitly upserts the supplied post-entry balance for that date atomically.
+- **allocation_target:** bucket PK (CASH plus all five investment classes), ledger
+  FK, integer 0–10000 basis points. A complete six-row plan sums exactly 10000;
+  empty means no targets. Validation/replacement is atomic; SQL bounds partial
+  sums and invalid partial plans fail domain reads instead of masquerading as valid.
+- **contribution_plan:** UUID, ledger FK, unique ledger/month, nonnegative target.
+  Zero is an explicit target without a percentage. Removing a target keeps all
+  financial transactions and valuations.
+- **finance_transaction additions:** investmentAction nullable CONTRIBUTION/
+  REDEMPTION, holdingId nullable FK with restrict delete/update. Legacy null action
+  on INVESTMENT means contribution; both fields must be null on other types.
+  Linked dates respect acquisition; inactive holdings cannot receive new/retargeted
+  entries but existing links remain editable. All old categories/types/amounts/
+  notes/IDs/dates/timestamps stay unchanged after migration.
+- **wealth_capture additions:** investmentsMinor nonnegative default 0. TRACKED_V1
+  must have zero and no investment lines. TRACKED_V2 captures cash + assets +
+  investments − debt with frozen component validation. New captures use v2.
+- **wealth_capture_investment:** UUID, capture FK/cascade, unique capture/source
+  holding, copied name/bucket/value/original valuation date. No FK to current
+  holdings; deletion/exclusion/current reclassification cannot rewrite it. Updates
+  are forbidden. Snapshot deletion removes copied components explicitly.
+
+Recorded cash = opening + income − consumption − contributions + redemptions.
+Redemptions do not count as income, consumption, saving or recurring forecast
+capacity. Monthly contribution target progress uses gross contributions; redeemed
+and net amounts are separate. Correcting a cash record does not synthesize an
+undo of an independently recorded holding observation. A linked entry requires
+an explicit nonnegative post-entry value and commits cash/value together; no
+amount is added to that value a second time. Unlinked entries affect cash only.
+
+Current portfolio = cash + active manual holding values; property and other
+non-investment assets enter net worth separately. Cost remains metadata, never
+an extra asset or inferred profit/return. Latest on/before-date observations are
+used, with original dates visible. Missing active values block unsupported totals;
+future observations are excluded after clock rollback. Snapshot components never
+backfill unobserved history. v1/v2 historical deltas are unavailable across scope
+versions; equal-scope stored observations can compare exactly.
+
+Allocation denominator is cash + holding values. Actual shares are unavailable
+for missing values, nonpositive totals or negative cash. Exact largest-remainder
+rounding distributes 10000 basis points (stable bucket-order ties); targets must
+sum to 10000. Target currency amounts use the same exact distribution across the
+portfolio's minor units, so monetary gaps sum to zero. No floating-point money,
+trading action, automatic purchase, return model or provider quote is involved.
 
 ## Proposed later tables
 
 | Concept | Fields / integrity |
 | --- | --- |
-| Investment transaction extensions (9) | Contribution/redemption action and optional holding FK; existing Phase 2 investment records are contributions |
-| Investment-inclusive net-worth method (9) | A new explicit method must preserve old TRACKED_V1 observations, label holdings coverage and avoid double counting |
-| Investment (9) | ID, ledger, instrument/symbol/market, class, manual invested cost/current value, valuation date, notes; exclusive ownership with assets |
-| Allocation target (9) | Ledger/bucket unique, basis points 0–10000; complete target plans total 10000; cash comes from ledger, not a duplicate holding |
-| Contribution plan (9) | Ledger/month unique, target; actual contributions/redemptions derived from transactions |
-| Watchlist (10) | ID, symbol, market, display name, configurable provider/instrument identity; identity unique per provider/market |
-| Quote/sync state (10) | Watchlist FK, exact canonical decimal price/currency/change, source time, last-success time; separate last-attempt/error, preserve cache on failure |
-| IPO company/evidence (13) | Company/name/industry; evidence FK, signal type, source URL/identifier, text, publication/retrieval time, verified/active/supersedes; score/status derived from deduplicated evidence |
+| Watchlist (10) | Provider/instrument identity, market/symbol, configurable name |
+| Quote/sync state (10) | Exact price/currency/time, source, last success/attempt/error; preserve cached data on failure |
+| IPO company/evidence (13) | Attributable sources, publication/retrieval times, active/superseded and deduplicated evidence |
 
 Separate overall/category budget tables avoid nullable unique-key ambiguity.
 When an overall budget exists, category allocations cannot exceed it; expense

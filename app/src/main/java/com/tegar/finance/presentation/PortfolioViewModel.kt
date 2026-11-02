@@ -97,6 +97,10 @@ class PortfolioViewModel @Inject constructor(private val repository: InvestmentR
         closeEditors()
         mutable.update { it.copy(valueEditor = HoldingValueEditor(value?.id, holding.id, money(value?.amount), value?.date?.toString() ?: today, value?.notes.orEmpty())) }
     }
+    fun updateValue(holding: InvestmentHolding) {
+        val today = state.value.overview?.today ?: return
+        openValue(holding, state.value.source?.values?.firstOrNull { it.holdingId == holding.id && it.date == today })
+    }
     fun editValue(value: HoldingValueEditor) { if (!state.value.busy) mutable.update { it.copy(valueEditor = value, error = null) } }
     fun saveValue() {
         val editor = state.value.valueEditor ?: return

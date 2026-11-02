@@ -1,5 +1,54 @@
 # Architecture
 
+## Phase 9 manual investments and compact financial screens
+
+Schema v6 adds investment_holding/value, allocation_target, contribution_plan and
+wealth_capture_investment. Transactions retain every original column and add
+nullable investmentAction/holdingId; old INVESTMENT rows remain contributions.
+Snapshots add investmentsMinor defaulting to zero. Migration 5→6 does not rewrite
+old financial fields or frozen v1 captures. Matching fresh/migrated SQL guards
+protect ownership, dates, exact nonnegative amounts, target bounds and immutable
+captured components. Holding links restrict deletion; observations cascade only
+with their current holding, while frozen investment components have no source FK.
+
+LocalInvestmentRepository observes Room invalidations across all seven source
+tables, then reads ledger, transactions, categories, holdings/values, targets and
+plans in one transaction. Validation precedes writes. Linked cash entries and
+the user's explicitly supplied post-entry value commit atomically. Neither cash
+amounts nor costs auto-increment manual valuations. A cash edit/deletion does not
+invent a reversal of another independently recorded value. All transaction mapping
+uses one shared mapper so Home, goals, reports and wealth preserve the action/link.
+
+RecordedCashCalculator adds redemptions to cash; RecordedFlowCalculator separates
+them from income, consumption and contributions. Saving/rate semantics remain
+unchanged. Reports expose redeemed amounts separately; their three named chart
+series remain income/consumption/contributions. Forecasts use the recurring
+income/consumption/contribution baseline, never extrapolate redemptions, and
+current goal capacity still relies on actual cash plus the selected baseline.
+
+InvestmentValuations selects the latest on/before-date active observation, with
+no cost fallback. PortfolioCalculator owns portfolio+cash totals, exact allocation
+weights, target monetary gaps and monthly gross/net contribution progress.
+BigInteger sums and largest remainders preserve totals with stable ties; bounded
+integer conversion supports API 26. Missing values, nonpositive denominators,
+negative cash, range limits and tracking coverage are explicit.
+
+WealthSource adds holdings in its existing transactional read. New TRACKED_V2
+captures freeze investment names/classes/values/original dates alongside cash,
+non-cash assets and liabilities. Legacy v1 components remain immutable. History
+comparison requires equal scope versions; neither current valuations nor later
+scope changes reinterpret older observations.
+
+PortfolioViewModel retains failed drafts, guards concurrent writes, clears stale
+metrics on read failure, and uses the injected ledger-zone date. Home opens a
+bilingual PortfolioScreen with Holdings/Allocation/Cash activity tabs. Native
+cards prioritize balances, dated observations and actions. Optional metadata,
+source histories and calculation explanations are disclosed on request. The
+shared ScreenHelp dialog also removes long default prose from Home, budgets,
+reports, forecasts, goals and assets while keeping warnings and coverage visible.
+No dependencies, network permissions, quotes, provider APIs or Phase 10 work are
+introduced. See PHASE_9_STATUS.md for actual final evidence and delivery limits.
+
 ## Phase 8 tracked assets, liabilities and dated history
 
 WealthMigrations.FROM_4_TO_5 adds four tables and guards, preserving all six
@@ -38,8 +87,8 @@ Refresh/resume recomputes today without pretending to refresh a market quote.
 The domain, ViewModel, storage, migration, reactive UI and main-application tests
 exercise no double counting, immutable history, CRUD/guards, language switching
 and restart. See PHASE_8_STATUS.md for actual counts, APK evidence and limits.
-Manual investment holdings remain Phase 9; no investment-inclusive valuation,
-redemption or provider work is started.
+Phase 9 above extends this contract with manual holdings and redemption cash
+entries. Provider/market work remains deferred.
 
 ## Phase 7 goals, earmarks and purchase scenarios
 
@@ -349,4 +398,5 @@ Publication/restoration in a new cloud task remains separate and NOT VERIFIED.
 [PHASE_5_STATUS.md](PHASE_5_STATUS.md); current forecast verification is in
 [PHASE_6_STATUS.md](PHASE_6_STATUS.md); current goals verification is in
 [PHASE_7_STATUS.md](PHASE_7_STATUS.md); current wealth verification is in
-[PHASE_8_STATUS.md](PHASE_8_STATUS.md). Stop before Phase 9.
+[PHASE_8_STATUS.md](PHASE_8_STATUS.md); current investment verification is in
+[PHASE_9_STATUS.md](PHASE_9_STATUS.md). Stop before Phase 10.
