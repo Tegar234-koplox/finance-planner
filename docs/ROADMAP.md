@@ -1,13 +1,13 @@
 # Sequential roadmap
 
-Phases 0–8 are complete. Phase 8 passed debug/test-APK builds, 251 JVM tests,
-all 38 Android tests on API 26, and actual APK 0.7→0.8 migration 4→5 preserving
-all six nonempty original financial tables. Lint has 0 errors, 7 existing upgrade
-advisories and 2 unused label resources. See PHASE_8_STATUS.md for evidence and
-limits; Phase 1–7 status reports retain their historical results.
-Phase 9 is in progress: manual holdings, exact allocation targets, contribution
-plans, cash redemptions and investment-inclusive frozen snapshots. The user also
-authorized compact financial screens. Stop after Phase 9; do not start Phase 10.
+Phases 0–9 implementation and application gates are complete. Phase 9 passed
+285 JVM tests, all 45 Android tests on API 26, debug/test-APK builds, and lint
+(0 errors, 7 existing upgrade advisories). Actual APK 0.8→0.9 migration 5→6
+preserved all original columns/rows in ten nonempty tables and legacy v1 captures.
+Compact bilingual UI and manual investment flows are verified. GitHub branch
+pushes work; PR creation/squash merge remain blocked by API access (Forbidden).
+See PHASE_9_STATUS.md for evidence/limits and the outstanding delivery step.
+Phase 1–8 reports remain historical. Stop after Phase 9; Phase 10 has not started.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review
@@ -59,5 +59,6 @@ implemented, together with rolling/weighted 1/3-month forecasts and explainable
 rules using complete historical months. The interface is bilingual; a health
 indicator is deferred. Goals/purchases, earmark progress, cash reservations and
 shared capacity/date scenarios are implemented. Non-cash assets, manual liabilities,
-dated valuations and frozen tracked-net-worth snapshots are implemented. Holdings/investment-inclusive valuation and market
-APIs have not started.
+dated valuations and frozen tracked-net-worth snapshots are implemented. Manual investment holdings, exact allocation targets, contribution plans,
+redemptions and investment-inclusive frozen snapshots are implemented. Market
+provider APIs have not started.

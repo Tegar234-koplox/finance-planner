@@ -1,7 +1,7 @@
 # Phase 9 — manual investments and compact financial screens
 
-Application verification is in progress. GitHub PR/squash merge is blocked by API
-access (`Forbidden`); branch pushes work. Phase 10 has not started.
+Application readiness: YES. GitHub PR/squash merge remains blocked by API access
+(`Forbidden`); branch pushes work. Phase 10 has not started.
 
 ## Behavior
 
@@ -50,7 +50,7 @@ Actual cloud commands:
 source /workspace/.finance-tooling/activate.sh
 cd /workspace/finance-planner
 ./gradlew --offline --no-daemon --console=plain testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest
-./gradlew --offline --no-daemon --console=plain connectedDebugAndroidTest
+ANDROID_SERIAL=emulator-5556 ./gradlew --offline --no-daemon --console=plain connectedDebugAndroidTest -Pandroid.injected.device.serial=emulator-5556
 ```
 
 | Check | Result |
@@ -63,8 +63,8 @@ cd /workspace/finance-planner
 | Investment main-application UI | PASS: targets, contribution, redemption, cash/wealth, recreation, bilingual UI, frozen capture and cleanup |
 | Debug app/test APK | PASS |
 | Android lint | 0 errors; 7 existing NewerVersionAvailable advisories |
-| Complete Android suite | In progress: 45 tests |
-| Actual delivered APK update | To be verified |
+| Complete Android suite | 45 tests; zero failures, errors or skips |
+| Actual delivered APK update | PASS: 0.8.0→0.9.0, schema 5→6, all ten nonempty old tables preserved |
 
 The 34 new JVM tests exercise allocation rounding/ties/exact totals, invalid target
 plans and percent input, zero denominator, negative cash, known zero versus missing,
@@ -98,12 +98,53 @@ was retained, stale locks were backed up and the software emulator restarted.
 No absent-device attempt is counted as a passing test. The first complete run
 passed 44/45 tests; ReportsStorageTest still expected schema 5 instead of 6.
 Only that version assertion changed; the financial assertions were retained and
-the full suite is rerun. A separate fresh emulator isolates real APK-upgrade smoke
+the complete rerun passed all 45 tests. A separate fresh emulator isolates real APK-upgrade smoke
 from instrumentation so neither task mutates the other device.
 
 ## APK and upgrade
 
-Final APK, checksum and upgrade evidence will be recorded after the full suite.
+File: `/workspace/artifacts/finance-planner-phase9-debug.apk`, version 0.9.0/code 9,
+13,781,814 bytes, min SDK 26, target SDK 36, no INTERNET permission.
+The delivered bytes match the application APK used in the complete suite and
+actual upgrade smoke. Its public debug certificate matches previous deliveries.
+
+SHA-256: `449caf3390818ad56d8bbf74f22af0ff2604ffe47f9c45bd7294f506439f63c2`
+
+Certificate SHA-256:
+`8d5371f1873f08db2511df399485c7d870c9aaa8671a7fdcbbd7184b09fe215e`
+
+Checksum: `/workspace/artifacts/finance-planner-phase9-debug.apk.sha256`.
+Final machine-readable evidence: `/workspace/artifacts/phase9-test-summary.json`.
+There are 537 matched English/Indonesian strings, including 68 investment keys;
+positional placeholders match. No synthetic financial records ship in the APK.
+
+The separate API 26 upgrade emulator installed the exact delivered v0.8.0 APK,
+opened it with all ten old tables nonempty (ledger 1, categories 11, transactions
+3, and one each of overall budget/category budget/goal/asset/value/v1 capture/
+capture line), then installed these exact v0.9.0 bytes using adb install -r.
+Every original column and row compared equal. Legacy investments still resolve
+as contributions; old snapshots stay v1 with zero investment subtotal and no
+invented components. All five new tables were initially empty.
+
+A temporary manual fund fixture checked cash Rp9,500 plus holdings Rp5,000 =
+portfolio Rp14,500, and an additional non-cash asset Rp10,000 = wealth Rp24,500.
+Recorded cost was not added again. Actual cash/fund weights were 65.52/34.48%;
+gross contributions Rp500, redemption Rp1,000 and net −Rp500 gave 25% progress
+against a Rp2,000 target. The real UI captured v2 totals and copied components;
+the old v1 capture stayed identical, and cross-scope change remained unavailable.
+Light/dark, Indonesian/English and real process restart were verified visually.
+
+Afterward the exact post-upgrade database was restored, only known fixture IDs
+were removed, and the original clean ledger/category data matched again. All
+transaction/budget/goal/wealth/investment tables were empty. Language returned to
+English, appearance to Follow system, and Home/Portfolio reopened successfully.
+
+Screenshots under `/workspace/artifacts`:
+`finance-planner-phase9-before-home.png`, `finance-planner-phase9-home.png`,
+`finance-planner-phase9-portfolio-light.png`, `finance-planner-phase9-allocation-light.png`,
+`finance-planner-phase9-contributions-light.png`, `finance-planner-phase9-portfolio-dark.png`,
+`finance-planner-phase9-portfolio-id.png`, `finance-planner-phase9-restart-id.png`,
+`finance-planner-phase9-wealth-id.png`, `finance-planner-phase9-history-scope-id.png`.
 
 ## Manual testing / Uji manual
 
@@ -136,8 +177,9 @@ implementation/test/documentation commits. Main is never pushed directly.
 Actual GitHub API calls to user/GraphQL return Forbidden, and PR creation fails.
 There are no GitHub connector/browser tools in this session. No PR or squash merge
 is claimed. Git read/push access alone does not establish PR/merge authorization.
-The concrete branch and PR description will be ready for the requested workflow
-when authenticated GitHub API access is available. Environment settings/publication
+The tested branch and concrete PR description are ready for the requested
+workflow when authenticated GitHub API access is available.
+Branch: https://github.com/Tegar234-koplox/finance-planner/tree/feat/phase9-manual-investments. Environment settings/publication
 were not changed to bypass that restriction.
 
 Device evidence covers an Android 8/API 26 x86_64 software emulator at 720×1280,
@@ -146,5 +188,5 @@ full TalkBack/large-font and performance coverage are not claimed. This remains 
 debug development build. Export/import/security/release gates remain later phases.
 All historical schema exports 1–5 and Phase 1–8 status reports are preserved.
 
-Readiness: pending the full Android suite and actual APK upgrade; GitHub PR/merge
-remains blocked by API access. Stop after Phase 9.
+**Application readiness: YES. Requested GitHub PR/squash merge: BLOCKED by API
+access. Stop after Phase 9; Phase 10 requires a new instruction.**
