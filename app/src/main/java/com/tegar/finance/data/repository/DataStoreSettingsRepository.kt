@@ -11,11 +11,19 @@ import kotlinx.coroutines.flow.map
 @Singleton
 class DataStoreSettingsRepository @Inject constructor(private val store: DataStore<Preferences>) : SettingsRepository {
     override fun observeSettings() = store.data.map { preferences ->
-        AppSettings(preferences[ThemeKey]?.let(ThemeMode::valueOf) ?: ThemeMode.SYSTEM)
+        AppSettings(preferences[ThemeKey]?.let(ThemeMode::valueOf) ?: ThemeMode.SYSTEM,
+            preferences[LanguageKey]?.let(AppLanguage::valueOf) ?: AppLanguage.ENGLISH)
     }.storageResults()
     override suspend fun setTheme(mode: ThemeMode): AppResult<Unit> = storageOperation {
         store.edit { it[ThemeKey] = mode.name }
         Unit
     }
-    companion object { private val ThemeKey = stringPreferencesKey("theme") }
+    override suspend fun setLanguage(language: AppLanguage): AppResult<Unit> = storageOperation {
+        store.edit { it[LanguageKey] = language.name }
+        Unit
+    }
+    companion object {
+        private val ThemeKey = stringPreferencesKey("theme")
+        private val LanguageKey = stringPreferencesKey("language")
+    }
 }

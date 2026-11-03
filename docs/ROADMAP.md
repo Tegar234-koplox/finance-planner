@@ -1,15 +1,29 @@
 # Sequential roadmap
 
-Phases 0 and 1 are complete. Phase 1 passed build, 34 unit tests, lint (0 errors,
-7 documented upgrade advisories), app launch, and all 4 Android instrumentation
-tests on API 26. Stop after Phase 1's report; later phases require another
-instruction. See PHASE_1_STATUS.md for verification and limitations.
+Phases 0–9 implementation and application gates are complete. Phase 9 passed
+285 JVM tests, all 45 Android tests on API 26, debug/test-APK builds, and lint
+(0 errors, 7 existing upgrade advisories). Actual APK 0.8→0.9 migration 5→6
+preserved all original columns/rows in ten nonempty tables and legacy v1 captures.
+Compact bilingual UI and manual investment flows are verified. GitHub branch
+pushes work; PR creation/squash merge remain blocked by API access (Forbidden).
+See PHASE_9_STATUS.md for evidence/limits and the outstanding delivery step.
+Phase 1–8 reports remain historical. Stop after Phase 9; Phase 10 has not started.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review
 diff/status, document outcomes and report readiness YES/NO. Never count skipped,
 zero-test, or unrun targets as passed. Preserve user changes; use the existing
 isolated cloud checkout, no worktrees unless requested.
+For every subsequent coherent change, create a commit. When a feature is complete,
+push its branch, create a pull request and squash merge after checks pass.
+Never push changes directly to main. Keep the user’s identity for commits and
+GitHub publication; report any missing account/API access explicitly.
+Keep primary screens concise: metrics/actions first, short status captions,
+and detailed calculation explanations behind an information control.
+Use the user's verified Git account identity for author and committer. Do not
+attribute changes to bots, GPT or similar identities, and do not add co-author,
+co-contributor or generated-contributor trailers. Confirm the account identity
+from configured/connected account evidence before committing; never invent it.
 
 | Phase | Scope | Required gate |
 | --- | --- | --- |
@@ -37,5 +51,14 @@ isolated cloud checkout, no worktrees unless requested.
 | 21 | Release/signing/shrinker/docs/user guide | Actual release build, migrations/backup/security/edge-case/device tests |
 
 Tests are added throughout, not postponed to 19. Phase 1 appearance preference
-is the small settings foundation; full settings remain Phase 15. Market APIs,
-transaction entry, budgets, analytics, forecasts, and goals have not started.
+is the small settings foundation; Phase 6 adds the user-requested English/
+Indonesian language preference. Other full settings remain Phase 15. Transaction
+entry/history/filter, category management, monthly budgets and the source-backed
+Home decision dashboard, weekly/monthly/yearly reports and labeled charts are
+implemented, together with rolling/weighted 1/3-month forecasts and explainable
+rules using complete historical months. The interface is bilingual; a health
+indicator is deferred. Goals/purchases, earmark progress, cash reservations and
+shared capacity/date scenarios are implemented. Non-cash assets, manual liabilities,
+dated valuations and frozen tracked-net-worth snapshots are implemented. Manual investment holdings, exact allocation targets, contribution plans,
+redemptions and investment-inclusive frozen snapshots are implemented. Market
+provider APIs have not started.

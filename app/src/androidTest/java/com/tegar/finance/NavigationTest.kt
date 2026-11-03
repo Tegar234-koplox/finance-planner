@@ -12,15 +12,15 @@ class NavigationTest {
     }
     @Test fun fourDestinationsAndSettingsBackNavigation() {
         ready()
-        compose.onNodeWithText("No activity yet").assertIsDisplayed()
+        compose.onNodeWithText("Transactions").assertIsDisplayed()
         compose.onNodeWithTag("nav_budget").performClick()
-        compose.onNodeWithText("No budgets yet").assertIsDisplayed()
+        compose.onNodeWithText("Monthly budgets").assertIsDisplayed()
         compose.onNodeWithContentDescription("Settings").performClick()
         compose.onNodeWithText("Appearance").assertIsDisplayed()
         compose.onNodeWithContentDescription("Navigate back").performClick()
-        compose.onNodeWithText("No budgets yet").assertIsDisplayed()
+        compose.onNodeWithText("Monthly budgets").assertIsDisplayed()
         compose.onNodeWithTag("nav_plan").performClick()
-        compose.onNodeWithText("No goals yet").assertIsDisplayed()
+        compose.onNodeWithText("Forecasts").assertIsDisplayed()
         compose.onNodeWithTag("nav_market").performClick()
         compose.onNodeWithText("Market monitoring is not enabled").assertIsDisplayed()
     }
@@ -29,6 +29,6 @@ class NavigationTest {
         compose.onNodeWithTag("nav_plan").performClick()
         compose.activityRule.scenario.recreate()
         ready()
-        compose.onNodeWithText("No goals yet").assertIsDisplayed()
+        compose.onNodeWithText("Forecasts").assertIsDisplayed()
     }
 }

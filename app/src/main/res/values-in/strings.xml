@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="language">"Bahasa"</string>
+    <string name="language_description">"Pilih English atau Bahasa Indonesia. Nilai uang, nama kategori, dan catatan tersimpan tetap dipertahankan."</string>
+    <string name="language_error">"Pilihan bahasa tidak dapat disimpan. Coba lagi."</string>
+    <string name="app_name">"Finance Planner"</string>
+    <string name="home">"Beranda"</string>
+    <string name="budget">"Anggaran"</string>
+    <string name="plan">"Rencana"</string>
+    <string name="market">"Pasar"</string>
+    <string name="settings">"Pengaturan"</string>
+    <string name="back">"Kembali"</string>
+    <string name="home_title">"Keuangan Anda dalam satu tempat"</string>
+    <string name="home_empty">"Belum ada aktivitas"</string>
+    <string name="home_body">"Ringkasan pendapatan, pengeluaran, dan aktivitas terbaru akan tampil di sini."</string>
+    <string name="budget_title">"Rencana yang jelas untuk bulan Anda"</string>
+    <string name="budget_empty">"Belum ada anggaran"</string>
+    <string name="budget_body">"Anggaran kategori bulanan dan sisanya akan tampil di sini."</string>
+    <string name="plan_title">"Siapkan ruang untuk hal penting"</string>
+    <string name="plan_empty">"Belum ada tujuan"</string>
+    <string name="plan_body">"Satukan tujuan tabungan dan pembelian mendatang."</string>
+    <string name="market_title">"Pantau daftar pilihan Anda"</string>
+    <string name="market_empty">"Pemantauan pasar belum diaktifkan"</string>
+    <string name="market_body">"Catatan keuangan pribadi tetap tersedia secara luring."</string>
+    <string name="offline_note">"Catatan Anda tetap di perangkat ini."</string>
+    <string name="appearance">"Tampilan"</string>
+    <string name="appearance_description">"Pilih tampilan yang Anda sukai."</string>
+    <string name="theme_system">"Ikuti sistem"</string>
+    <string name="theme_light">"Terang"</string>
+    <string name="theme_dark">"Gelap"</string>
+    <string name="privacy_title">"Privasi secara bawaan"</string>
+    <string name="privacy_body">"Tanpa sinkronisasi awan, iklan, atau pelacakan aktivitas."</string>
+    <string name="currency_default">"Mata uang: Rupiah Indonesia (IDR)"</string>
+    <string name="preference_error">"Pilihan tampilan tidak dapat disimpan. Coba pilih kembali."</string>
+    <string name="storage_error">"Penyimpanan lokal tidak dapat dibuka."</string>
+    <string name="retry">"Coba lagi"</string>
+    <string name="evidence_unavailable">"TIDAK TERSEDIA"</string>
+    <string name="evidence_low">"RENDAH"</string>
+    <string name="evidence_medium">"SEDANG"</string>
+    <string name="evidence_higher">"LEBIH BANYAK"</string>
+</resources>

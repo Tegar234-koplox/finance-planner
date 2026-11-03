@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="portfolio_title" formatted="false">"Investasi"</string>
+    <string name="portfolio_open" formatted="false">"Investasi"</string>
+    <string name="portfolio_holdings" formatted="false">"Kepemilikan"</string>
+    <string name="portfolio_allocation" formatted="false">"Alokasi"</string>
+    <string name="portfolio_activity" formatted="false">"Arus kas"</string>
+    <string name="portfolio_total" formatted="false">"Portofolio + kas"</string>
+    <string name="portfolio_invested" formatted="false">"Nilai investasi"</string>
+    <string name="portfolio_add" formatted="false">"Tambah investasi"</string>
+    <string name="portfolio_value" formatted="false">"Perbarui nilai"</string>
+    <string name="portfolio_edit" formatted="false">"Ubah detail"</string>
+    <string name="portfolio_symbol" formatted="false">"Kode (opsional)"</string>
+    <string name="portfolio_bucket" formatted="false">"Kelas aset"</string>
+    <string name="portfolio_cost" formatted="false">"Modal (opsional)"</string>
+    <string name="portfolio_after" formatted="false">"Nilai investasi setelah arus kas"</string>
+    <string name="portfolio_flow_after_hint" formatted="false">"Menyimpan juga memperbarui nilai investasi pada tanggal tersebut."</string>
+    <string name="portfolio_record" formatted="false">"Catat arus kas"</string>
+    <string name="portfolio_contribution" formatted="false">"Setoran"</string>
+    <string name="portfolio_redemption" formatted="false">"Pencairan"</string>
+    <string name="portfolio_amount" formatted="false">"Jumlah"</string>
+    <string name="portfolio_unassigned" formatted="false">"Tanpa investasi terkait"</string>
+    <string name="portfolio_gross" formatted="false">"Total setoran"</string>
+    <string name="portfolio_redeemed" formatted="false">"Total pencairan"</string>
+    <string name="portfolio_net" formatted="false">"Setoran bersih"</string>
+    <string name="portfolio_plan_target" formatted="false">"Target setoran bulanan"</string>
+    <string name="portfolio_target" formatted="false">"Target"</string>
+    <string name="portfolio_actual" formatted="false">"Aktual"</string>
+    <string name="portfolio_gap">"Selisih nilai target: %1$s"</string>
+    <string name="portfolio_allocation_unavailable" formatted="false">"Persentase memerlukan nilai lengkap, total positif, dan kas nonnegatif."</string>
+    <string name="portfolio_no_targets" formatted="false">"Tetapkan target untuk membandingkan alokasi."</string>
+    <string name="portfolio_set_targets" formatted="false">"Ubah target"</string>
+    <string name="portfolio_reset_targets" formatted="false">"Hapus target"</string>
+    <string name="portfolio_target_total">"Total target: %1$s%%"</string>
+    <string name="portfolio_empty" formatted="false">"Tambahkan kepemilikan investasi pertamamu."</string>
+    <string name="portfolio_valuation_missing">"%1$s investasi aktif belum memiliki nilai."</string>
+    <string name="portfolio_plan" formatted="false">"Atur target setoran"</string>
+    <string name="portfolio_plan_remove" formatted="false">"Hapus target"</string>
+    <string name="portfolio_no_plan" formatted="false">"Belum ada target bulanan"</string>
+    <string name="portfolio_plan_hint" formatted="false">"Progres memakai total setoran. Pencairan ditampilkan terpisah."</string>
+    <string name="portfolio_partial" formatted="false">"Bulan parsial · hanya catatan tersedia"</string>
+    <string name="portfolio_untracked" formatted="false">"Bulan ini belum tercakup pencatatan."</string>
+    <string name="portfolio_no_rows" formatted="false">"Belum ada arus kas investasi bulan ini."</string>
+    <string name="portfolio_holding_delete_body" formatted="false">"Hapus investasi ini beserta nilai bertanggalnya? Snapshot tersimpan tetap sama."</string>
+    <string name="portfolio_value_delete_body" formatted="false">"Hapus penilaian ini? Nilai sebelumnya dapat menjadi nilai saat ini; snapshot tetap sama."</string>
+    <string name="portfolio_movement_delete_body" formatted="false">"Hapus arus kas ini? Nilai investasi manual dan snapshot tersimpan tetap sama."</string>
+    <string name="portfolio_error_in_use" formatted="false">"Investasi ini memiliki arus kas terkait. Lepas kaitannya dahulu, atau kecualikan investasi."</string>
+    <string name="portfolio_error_targets">"Isi target semua kelas aset dengan total tepat 100%."</string>
+    <string name="portfolio_error_input" formatted="false">"Periksa nama, tanggal, jumlah, dan kelas aset. Nilai tidak boleh negatif."</string>
+    <string name="portfolio_help" formatted="false">"Alokasi portofolio mencakup kas buku satu kali dan nilai investasi manual aktif. Properti dan aset noninvestasi ditampilkan dalam kekayaan bersih. Modal adalah catatan terpisah, bukan nilai tambahan atau imbal hasil. Nilai yang belum diketahui tidak memiliki persentase. Target tidak mengeksekusi transaksi."</string>
+    <string name="portfolio_flow_help" formatted="false">"Setoran mengurangi kas; pencairan menambah kas dan bukan pendapatan. Arus kas terkait menyimpan saldo investasi yang kamu isi, tanpa menambahkan jumlah kas sekali lagi. Mengubah atau menghapus arus kas tidak membatalkan penilaian manual atau snapshot lain. Perbarui penilaian secara terpisah saat melakukan koreksi. Arus kas tanpa kaitan hanya mengubah kas. Pencairan mendatang tidak diekstrapolasi dalam prakiraan."</string>
+    <string name="portfolio_format_hint" formatted="false">"Contoh: 25.000,50 · mata uang buku"</string>
+    <string name="portfolio_stock" formatted="false">"Saham"</string>
+    <string name="portfolio_bond" formatted="false">"Obligasi"</string>
+    <string name="portfolio_fund" formatted="false">"Reksa dana"</string>
+    <string name="portfolio_gold" formatted="false">"Emas"</string>
+    <string name="portfolio_other" formatted="false">"Investasi lainnya"</string>
+    <string name="portfolio_cash" formatted="false">"Kas"</string>
+    <string name="portfolio_save" formatted="false">"Simpan"</string>
+    <string name="portfolio_date" formatted="false">"Tanggal (YYYY-MM-DD)"</string>
+    <string name="portfolio_month" formatted="false">"Bulan (YYYY-MM)"</string>
+    <string name="portfolio_progress">"Progres target: %1$s%%"</string>
+    <string name="portfolio_wealth_scope_changed" formatted="false">"Cakupan snapshot berbeda; perubahan tidak tersedia."</string>
+    <string name="portfolio_snapshot_time">"Disimpan %1$s (UTC) · termasuk investasi tercatat"</string>
+    <string name="portfolio_snapshot_line">"%1$s · %2$s · %3$s · %4$s"</string>
+    <string name="portfolio_unknown_holdings" formatted="false">"Nilai investasi belum lengkap."</string>
+    <string name="portfolio_observation">"Dinilai %1$s"</string>
+    <string name="portfolio_cost_note">"Modal tercatat: %1$s"</string>
+    <string name="portfolio_asof">"Saat ini · %1$s"</string>
+    <string name="portfolio_current_value" formatted="false">"Nilai saat ini"</string>
+</resources>

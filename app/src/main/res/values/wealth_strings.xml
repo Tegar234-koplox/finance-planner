@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="wealth_title" formatted="false">"Assets and tracked net worth"</string>
+    <string name="wealth_open" formatted="false">"Assets and net worth"</string>
+    <string name="wealth_add" formatted="false">"Add asset or liability"</string>
+    <string name="wealth_edit" formatted="false">"Edit item"</string>
+    <string name="wealth_save_item" formatted="false">"Save item"</string>
+    <string name="wealth_asset" formatted="false">"Asset"</string>
+    <string name="wealth_liability" formatted="false">"Liability"</string>
+    <string name="wealth_property" formatted="false">"Property"</string>
+    <string name="wealth_vehicle" formatted="false">"Vehicle"</string>
+    <string name="wealth_personal" formatted="false">"Personal item"</string>
+    <string name="wealth_loan" formatted="false">"Loan / mortgage"</string>
+    <string name="wealth_card" formatted="false">"Card debt"</string>
+    <string name="wealth_other" formatted="false">"Other"</string>
+    <string name="wealth_name" formatted="false">"Name"</string>
+    <string name="wealth_kind" formatted="false">"Kind"</string>
+    <string name="wealth_category" formatted="false">"Category"</string>
+    <string name="wealth_acquired" formatted="false">"Acquired / opened on (YYYY-MM-DD)"</string>
+    <string name="wealth_cost" formatted="false">"Acquisition cost (optional)"</string>
+    <string name="wealth_notes" formatted="false">"Notes (optional, up to 500 characters)"</string>
+    <string name="wealth_value_amount" formatted="false">"Manual value / amount owed"</string>
+    <string name="wealth_value_date" formatted="false">"Value date (YYYY-MM-DD)"</string>
+    <string name="wealth_record_value" formatted="false">"Record dated value"</string>
+    <string name="wealth_edit_value" formatted="false">"Edit dated value"</string>
+    <string name="wealth_save_value" formatted="false">"Save value"</string>
+    <string name="wealth_archive" formatted="false">"Exclude"</string>
+    <string name="wealth_restore" formatted="false">"Include"</string>
+    <string name="wealth_archived" formatted="false">"Excluded from current total"</string>
+    <string name="wealth_delete_item" formatted="false">"Delete item"</string>
+    <string name="wealth_delete_value" formatted="false">"Delete value"</string>
+    <string name="wealth_delete_capture" formatted="false">"Delete snapshot"</string>
+    <string name="wealth_delete_title" formatted="false">"Confirm deletion"</string>
+    <string name="wealth_delete_item_body">"Delete %1$s and its dated values? Cash, transactions, goals and saved net-worth snapshots stay unchanged."</string>
+    <string name="wealth_delete_value_body" formatted="false">"Delete this dated value? An earlier recorded value may become the latest; saved snapshots stay unchanged. Without any value, an active item becomes unknown, not zero."</string>
+    <string name="wealth_delete_capture_body" formatted="false">"Delete this saved snapshot and its copied components? Current items, values and cash stay unchanged. Historical dates without a saved snapshot remain unavailable."</string>
+    <string name="wealth_intro" formatted="false">"Manage non-cash assets and liabilities here. Keep investment holdings in Investments and cash in the ledger."</string>
+    <string name="wealth_scope" formatted="false">"Tracked net worth = recorded cash + active asset values + active investment values − active liabilities. Goal earmarks stay inside cash; acquisition costs are not added again."</string>
+    <string name="wealth_investment_scope" formatted="false">"Investment values are manual, dated observations. Cash entries do not prove a market value. Unrecorded assets and debts remain outside this total."</string>
+    <string name="wealth_total" formatted="false">"Tracked net worth"</string>
+    <string name="wealth_asset_total" formatted="false">"Active asset values"</string>
+    <string name="wealth_debt_total" formatted="false">"Active liabilities"</string>
+    <string name="wealth_missing">"Unknown active values: %1$s asset(s), %2$s liability item(s). Record a value or explicitly exclude the item before capturing a total."</string>
+    <string name="wealth_future">"Future-dated source observations excluded: %1$s value(s), %2$s item(s)."</string>
+    <string name="wealth_refresh" formatted="false">"Refresh values"</string>
+    <string name="wealth_capture" formatted="false">"Save today’s snapshot"</string>
+    <string name="wealth_capture_confirm_title" formatted="false">"Save today’s tracked snapshot?"</string>
+    <string name="wealth_capture_confirm_body" formatted="false">"Save today’s cash and latest recorded asset, investment and debt values? Later edits will not change this snapshot."</string>
+    <string name="wealth_capture_saved" formatted="false">"Snapshot saved"</string>
+    <string name="wealth_snapshot_exists" formatted="false">"Today’s snapshot saved"</string>
+    <string name="wealth_history_title" formatted="false">"Saved dated snapshots"</string>
+    <string name="wealth_history_empty" formatted="false">"No saved snapshots yet."</string>
+    <string name="wealth_history_hint" formatted="false">"These are saved observations, not a reconstructed daily history. Changes between captures can include cash edits, new items, exclusions and value corrections; they are not investment returns."</string>
+    <string name="wealth_history_change">"Change between the latest two saved dates: %1$s"</string>
+    <string name="wealth_history_components" formatted="false">"Show saved components"</string>
+    <string name="wealth_hide_components" formatted="false">"Hide saved components"</string>
+    <string name="wealth_snapshot_date">"Snapshot date: %1$s"</string>
+    <string name="wealth_snapshot_time">"Captured at %1$s (UTC). Tracked assets/liabilities method v1; holdings excluded."</string>
+    <string name="wealth_component">"%1$s · %2$s · %3$s · valued on %4$s"</string>
+    <string name="wealth_empty" formatted="false">"Add your first asset or liability."</string>
+    <string name="wealth_current_items" formatted="false">"Current records and dated values"</string>
+    <string name="wealth_latest">"%1$s · %2$s"</string>
+    <string name="wealth_age">"Valued %1$s day(s) ago"</string>
+    <string name="wealth_unknown" formatted="false">"No dated value yet"</string>
+    <string name="wealth_acquired_value">"Acquired / opened on: %1$s"</string>
+    <string name="wealth_cost_value">"Acquisition cost (metadata only): %1$s"</string>
+    <string name="wealth_value_history" formatted="false">"Details and value history"</string>
+    <string name="wealth_hide_values" formatted="false">"Hide details"</string>
+    <string name="wealth_value_row">"%1$s: %2$s"</string>
+    <string name="wealth_no_values" formatted="false">"No dated observations."</string>
+    <string name="wealth_form_hint" formatted="false">"Use the ledger currency and Indonesian notation, for example 25.000,50. Values and amounts owed may be zero but not negative. Future dates and dates before acquisition/opening are rejected."</string>
+    <string name="wealth_cost_hint" formatted="false">"Cost is optional metadata only. Do not add it to the current value or create a duplicate cash expense. Item kind is fixed after creation."</string>
+    <string name="wealth_archive_hint" formatted="false">"Excluding an item removes it only from the current tracked total. Dated values and saved snapshots stay intact; no sale or repayment is recorded."</string>
+    <string name="wealth_error_input" formatted="false">"Check name (1–80 characters), kind/category, nonnegative amounts, notes (up to 500 characters) and valid dates. Kind is fixed; acquisition cannot move after an existing value date."</string>
+    <string name="wealth_error_currency" formatted="false">"Amounts must use the ledger currency."</string>
+    <string name="wealth_error_range" formatted="false">"An amount or aggregate exceeds the supported range. Unsupported totals cannot be captured."</string>
+    <string name="wealth_error_missing" formatted="false">"This item, value or snapshot no longer exists. Refresh the list."</string>
+    <string name="wealth_error_incomplete" formatted="false">"A tracked total is unavailable because cash or an active value is unknown. No snapshot was saved."</string>
+    <string name="wealth_error_conflict" formatted="false">"This item already has a value on that date. Edit the existing observation or choose another date."</string>
+    <string name="wealth_error_storage" formatted="false">"Asset and net-worth data could not be read or saved. Try again."</string>
+    <string name="wealth_read_error" formatted="false">"Current values and old on-screen totals are hidden until the data can be read again."</string>
+</resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="portfolio_title" formatted="false">"Investments"</string>
+    <string name="portfolio_open" formatted="false">"Investments"</string>
+    <string name="portfolio_holdings" formatted="false">"Holdings"</string>
+    <string name="portfolio_allocation" formatted="false">"Allocation"</string>
+    <string name="portfolio_activity" formatted="false">"Cash activity"</string>
+    <string name="portfolio_total" formatted="false">"Portfolio incl. cash"</string>
+    <string name="portfolio_invested" formatted="false">"Holding values"</string>
+    <string name="portfolio_add" formatted="false">"Add investment"</string>
+    <string name="portfolio_value" formatted="false">"Update value"</string>
+    <string name="portfolio_edit" formatted="false">"Edit details"</string>
+    <string name="portfolio_symbol" formatted="false">"Symbol (optional)"</string>
+    <string name="portfolio_bucket" formatted="false">"Asset class"</string>
+    <string name="portfolio_cost" formatted="false">"Cost (optional)"</string>
+    <string name="portfolio_after" formatted="false">"Holding value after this entry"</string>
+    <string name="portfolio_flow_after_hint" formatted="false">"Saving also updates this holding’s value on the selected date."</string>
+    <string name="portfolio_record" formatted="false">"Record cash entry"</string>
+    <string name="portfolio_contribution" formatted="false">"Contribution"</string>
+    <string name="portfolio_redemption" formatted="false">"Redemption"</string>
+    <string name="portfolio_amount" formatted="false">"Amount"</string>
+    <string name="portfolio_unassigned" formatted="false">"No linked holding"</string>
+    <string name="portfolio_gross" formatted="false">"Contributions"</string>
+    <string name="portfolio_redeemed" formatted="false">"Redemptions"</string>
+    <string name="portfolio_net" formatted="false">"Net contributions"</string>
+    <string name="portfolio_plan_target" formatted="false">"Monthly contribution target"</string>
+    <string name="portfolio_target" formatted="false">"Target"</string>
+    <string name="portfolio_actual" formatted="false">"Actual"</string>
+    <string name="portfolio_gap">"Target value gap: %1$s"</string>
+    <string name="portfolio_allocation_unavailable" formatted="false">"Shares need known values, a positive total and nonnegative cash."</string>
+    <string name="portfolio_no_targets" formatted="false">"Set targets to compare allocations."</string>
+    <string name="portfolio_set_targets" formatted="false">"Edit targets"</string>
+    <string name="portfolio_reset_targets" formatted="false">"Clear targets"</string>
+    <string name="portfolio_target_total">"Total target: %1$s%%"</string>
+    <string name="portfolio_empty" formatted="false">"Add your first investment holding."</string>
+    <string name="portfolio_valuation_missing">"%1$s active holding(s) need a value."</string>
+    <string name="portfolio_plan" formatted="false">"Set contribution target"</string>
+    <string name="portfolio_plan_remove" formatted="false">"Remove target"</string>
+    <string name="portfolio_no_plan" formatted="false">"No monthly target"</string>
+    <string name="portfolio_plan_hint" formatted="false">"Progress uses gross contributions. Redemptions are shown separately."</string>
+    <string name="portfolio_partial" formatted="false">"Partial month · recorded entries only"</string>
+    <string name="portfolio_untracked" formatted="false">"This month is not covered yet."</string>
+    <string name="portfolio_no_rows" formatted="false">"No investment cash entries this month."</string>
+    <string name="portfolio_holding_delete_body" formatted="false">"Delete this holding and its dated values? Saved snapshots stay unchanged."</string>
+    <string name="portfolio_value_delete_body" formatted="false">"Delete this observation? Earlier values may become current; saved snapshots stay unchanged."</string>
+    <string name="portfolio_movement_delete_body" formatted="false">"Delete this cash entry? Manual holding values and saved snapshots stay unchanged."</string>
+    <string name="portfolio_error_in_use" formatted="false">"This holding has cash entries. Unlink them first, or exclude the holding."</string>
+    <string name="portfolio_error_targets">"Assign all asset classes a target totaling exactly 100%."</string>
+    <string name="portfolio_error_input" formatted="false">"Check the name, dates, amounts and asset class. Values cannot be negative."</string>
+    <string name="portfolio_help" formatted="false">"Portfolio allocation includes ledger cash once and active manual investment values. Property and other non-investment assets are shown in net worth. Cost is a separate note, not an extra value or a return. Unknown values have no percentage. Targets do not execute trades."</string>
+    <string name="portfolio_flow_help" formatted="false">"Contributions reduce cash; redemptions increase cash and are not income. A linked entry saves the holding balance you explicitly enter, never adds the cash amount to its value again. Editing or deleting cash entries does not undo other manual valuations or snapshots. Update those observations separately when correcting them. Unlinked entries change cash only. Future redemptions are not extrapolated into forecasts."</string>
+    <string name="portfolio_format_hint" formatted="false">"Example: 25.000,50 · ledger currency"</string>
+    <string name="portfolio_stock" formatted="false">"Stocks"</string>
+    <string name="portfolio_bond" formatted="false">"Bonds"</string>
+    <string name="portfolio_fund" formatted="false">"Funds"</string>
+    <string name="portfolio_gold" formatted="false">"Gold"</string>
+    <string name="portfolio_other" formatted="false">"Other investments"</string>
+    <string name="portfolio_cash" formatted="false">"Cash"</string>
+    <string name="portfolio_save" formatted="false">"Save"</string>
+    <string name="portfolio_date" formatted="false">"Date (YYYY-MM-DD)"</string>
+    <string name="portfolio_month" formatted="false">"Month (YYYY-MM)"</string>
+    <string name="portfolio_progress">"Target progress: %1$s%%"</string>
+    <string name="portfolio_wealth_scope_changed" formatted="false">"Snapshot scopes differ; change is unavailable."</string>
+    <string name="portfolio_snapshot_time">"Saved %1$s (UTC) · includes recorded investments"</string>
+    <string name="portfolio_snapshot_line">"%1$s · %2$s · %3$s · %4$s"</string>
+    <string name="portfolio_unknown_holdings" formatted="false">"Investment values are incomplete."</string>
+    <string name="portfolio_observation">"Observed %1$s"</string>
+    <string name="portfolio_cost_note">"Recorded cost: %1$s"</string>
+    <string name="portfolio_asof">"Current · %1$s"</string>
+    <string name="portfolio_current_value" formatted="false">"Current value"</string>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="goals_title" formatted="false">"Tujuan dan pembelian"</string>
+    <string name="goals_manage" formatted="false">"Kelola tujuan"</string>
+    <string name="goals_add" formatted="false">"Tambah tujuan"</string>
+    <string name="goals_edit" formatted="false">"Ubah tujuan"</string>
+    <string name="goals_save" formatted="false">"Simpan tujuan"</string>
+    <string name="goals_delete" formatted="false">"Hapus tujuan"</string>
+    <string name="goals_refresh" formatted="false">"Muat ulang tujuan"</string>
+    <string name="goals_empty" formatted="false">"Tambahkan tujuan tabungan atau pembelian pertamamu."</string>
+    <string name="goals_intro" formatted="false">"Dana tujuan mencadangkan kas yang sudah tercatat. Dana ini bukan pendapatan, pengeluaran, atau kekayaan tambahan. Menyimpan tujuan tidak memindahkan uang."</string>
+    <string name="goals_name" formatted="false">"Nama tujuan"</string>
+    <string name="goals_kind_saving" formatted="false">"Tujuan tabungan"</string>
+    <string name="goals_kind_purchase" formatted="false">"Pembelian"</string>
+    <string name="goals_priority" formatted="false">"Prioritas"</string>
+    <string name="goals_priority_high" formatted="false">"Tinggi"</string>
+    <string name="goals_priority_normal" formatted="false">"Normal"</string>
+    <string name="goals_priority_low" formatted="false">"Rendah"</string>
+    <string name="goals_state" formatted="false">"Status"</string>
+    <string name="goals_active" formatted="false">"Aktif"</string>
+    <string name="goals_paused" formatted="false">"Dijeda"</string>
+    <string name="goals_pause_hint" formatted="false">"Menjeda menghentikan alokasi baru dalam skenario. Dana yang sudah disisihkan tetap dicadangkan hingga diubah atau tujuannya dihapus."</string>
+    <string name="goals_target" formatted="false">"Jumlah target"</string>
+    <string name="goals_earmarked" formatted="false">"Dana yang sudah disisihkan"</string>
+    <string name="goals_asof" formatted="false">"Tanggal dana disisihkan (YYYY-MM-DD)"</string>
+    <string name="goals_deadline" formatted="false">"Tanggal target (YYYY-MM-DD)"</string>
+    <string name="goals_amount_hint" formatted="false">"Contoh: 25.000,50"</string>
+    <string name="goals_asof_hint" formatted="false">"Gunakan tanggal pencatatan dana terbaru."</string>
+    <string name="goals_error_input" formatted="false">"Periksa nama (1–80 karakter), target positif, dana tujuan nonnegatif, dan tanggal valid. Tanggal dana tujuan tidak boleh mendatang."</string>
+    <string name="goals_error_coverage" formatted="false">"Tanggal dana tujuan tidak boleh mendahului awal pencatatan buku."</string>
+    <string name="goals_error_currency" formatted="false">"Jumlah tujuan harus menggunakan mata uang buku."</string>
+    <string name="goals_error_range" formatted="false">"Jumlah ini melebihi batas yang didukung."</string>
+    <string name="goals_error_missing" formatted="false">"Tujuan ini sudah tidak ada. Muat ulang daftar."</string>
+    <string name="goals_error_storage" formatted="false">"Tujuan tidak dapat dibaca atau disimpan. Coba lagi."</string>
+    <string name="goals_read_error" formatted="false">"Rencana tidak tersedia. Tanggal atau total sebelumnya tidak ditampilkan."</string>
+    <string name="goals_delete_title" formatted="false">"Hapus tujuan ini?"</string>
+    <string name="goals_delete_body">"Hapus %1$s? Dana cadangannya dilepas dalam rencana. Kas tercatat dan transaksi tetap dipertahankan; tidak ada pembelian yang dilakukan."</string>
+    <string name="goals_cash_reserved" formatted="false">"Dicadangkan untuk tujuan"</string>
+    <string name="goals_cash_free" formatted="false">"Kas setelah cadangan tujuan"</string>
+    <string name="goals_reserve_overflow" formatted="false">"Total cadangan tujuan melebihi batas jumlah yang didukung. Kas bebas bernilai nol."</string>
+    <string name="goals_limit_reason" formatted="false">"Cadangan tujuan membuat kas tercatat menjadi batas belanja yang lebih rendah."</string>
+    <string name="goals_cash_shortfall" formatted="false">"Kas tercatat tidak menopang semua dana tujuan, atau kas bernilai negatif. Periksa catatan atau ubah dana tujuan; tanggal skenario tidak tersedia."</string>
+    <string name="goals_cash_unavailable" formatted="false">"Kas tercatat tidak tersedia. Tanggal yang bergantung pada kas tidak ditampilkan."</string>
+    <string name="goals_capacity" formatted="false">"Kapasitas perencanaan bulanan bersama"</string>
+    <string name="goals_baseline">"Perencanaan memakai pilihan Prakiraan: %1$s, jendela %2$s bulan, %3$s sampel penuh."</string>
+    <string name="goals_capacity_formula" formatted="false">"Kapasitas = maks(pendapatan prakiraan 1 bulan − konsumsi − kontribusi, 0), memakai jumlah prakiraan yang ditampilkan setelah pembulatan. Perlu minimal 2 bulan penuh. Ini adalah skenario, bukan jaminan pendapatan mendatang."</string>
+    <string name="goals_need_history" formatted="false">"Tidak tersedia: catat setidaknya 2 bulan yang sudah selesai dan tercakup penuh."</string>
+    <string name="goals_no_capacity" formatted="false">"Tidak ada arus kas bulanan positif pada dasar riwayat terpilih."</string>
+    <string name="goals_capacity_range" formatted="false">"Dasar riwayat atau prakiraan melebihi batas yang didukung."</string>
+    <string name="goals_queue" formatted="false">"Satu antrean bersama: prioritas tertinggi, lalu tanggal target terawal dan waktu pembuatan terlama. Kas bebas tercatat dialokasikan satu kali; kapasitas bulanan yang sama kemudian dibagi ke tujuan aktif. Dana tujuan yang dijeda tetap dicadangkan."</string>
+    <string name="goals_schedule" formatted="false">"Kontribusi mendatang diasumsikan pada akhir setiap bulan kalender penuh berikutnya. Pendapatan sisa bulan ini, imbal hasil, inflasi, atau tagihan yang belum dicatat tidak diasumsikan. Ubah Prakiraan untuk membandingkan metode/jendela."</string>
+    <string name="goals_target_value">"Target: %1$s"</string>
+    <string name="goals_earmark_value">"Dana disisihkan: %1$s · per %2$s"</string>
+    <string name="goals_remaining_value">"Sisa yang perlu disisihkan: %1$s"</string>
+    <string name="goals_progress">"Progres dana tujuan: %1$s%%"</string>
+    <string name="goals_funding_empty" formatted="false">"Belum ada dana disisihkan"</string>
+    <string name="goals_funding_partial" formatted="false">"Sebagian dana disisihkan"</string>
+    <string name="goals_funding_full" formatted="false">"Dana tujuan mencapai target"</string>
+    <string name="goals_funding_over" formatted="false">"Dana tujuan melebihi target"</string>
+    <string name="goals_date_value">"Tanggal target: %1$s"</string>
+    <string name="goals_overdue" formatted="false">"Tanggal target sudah lewat; masih ada dana yang perlu disisihkan."</string>
+    <string name="goals_due_today" formatted="false">"Target jatuh tempo hari ini dan dananya belum penuh."</string>
+    <string name="goals_needed_value">"Jumlah bulanan untuk tujuan ini saja: %1$s"</string>
+    <string name="goals_needed_hint">"%1$s tanggal kontribusi akhir bulan"</string>
+    <string name="goals_no_dates" formatted="false">"Tidak ada tanggal kontribusi akhir bulan mendatang sebelum/pada tanggal target ini."</string>
+    <string name="goals_cash_assigned">"Kas bebas yang dialokasikan dalam skenario ini: %1$s"</string>
+    <string name="goals_scenario_date">"Tanggal siap dalam skenario: %1$s"</string>
+    <string name="goals_reason_earmarked" formatted="false">"Target sudah disisihkan dan seluruh cadangan tujuan ditopang kas tercatat hari ini. Ini bukan tanggal pencapaian historis."</string>
+    <string name="goals_reason_cash" formatted="false">"Skenario prioritas ini dapat menutup sisa target dari kas bebas tercatat saat ini. Simpan perubahan dana tujuan untuk mencatat alokasi Anda; tidak ada jumlah yang disimpan otomatis."</string>
+    <string name="goals_reason_projected" formatted="false">"Diestimasi dari kapasitas bersama setelah tujuan berprioritas lebih tinggi dan alokasi kas. Dana tujuan tercatat tidak bertambah otomatis."</string>
+    <string name="goals_reason_paused" formatted="false">"Dijeda: tidak mendapat alokasi kas bebas atau kapasitas mendatang baru."</string>
+    <string name="goals_reason_date_range" formatted="false">"Tanggal penyelesaian skenario berada di luar tahun yang didukung."</string>
+    <string name="goals_meets_deadline" formatted="false">"Skenario ini siap paling lambat pada tanggal target; ini bukan jaminan kemampuan membeli."</string>
+    <string name="goals_misses_deadline" formatted="false">"Skenario ini melewati tanggal target. Tinjau prioritas, jumlah target, tenggat, atau arus kas tercatat."</string>
+    <string name="goals_purchase_hint" formatted="false">"Ini hanya perencanaan pembelian. Pembelian tidak dieksekusi dan tidak membuat aset, pengeluaran, atau transfer. Catat pembelian sebenarnya secara terpisah saat terjadi."</string>
+    <string name="goals_footer" formatted="false">"Dana tujuan adalah pernyataan alokasi kas yang sudah ada, bukan kekayaan tambahan. Periksa tanggal pencatatan lama dan kewajiban yang belum dicatat. Alokasi dan tanggal skenario berubah mengikuti catatan, prioritas, dan pilihan prakiraan."</string>
+</resources>
