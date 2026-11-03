@@ -47,6 +47,10 @@ class MainActivity : ComponentActivity() {
             val wealthState by wealth.state.collectAsStateWithLifecycle()
             val goalsState by goals.state.collectAsStateWithLifecycle()
             AppLocalization(state.language) { FinanceTheme(state.theme, onDarkTheme = { dark ->
+                if (android.os.Build.VERSION.SDK_INT < 29) {
+                    @Suppress("DEPRECATION")
+                    window.navigationBarColor = if (dark) android.graphics.Color.rgb(18, 24, 20) else android.graphics.Color.rgb(247, 250, 246)
+                }
                 WindowCompat.getInsetsController(window, window.decorView).apply {
                     isAppearanceLightStatusBars = !dark
                     isAppearanceLightNavigationBars = !dark
