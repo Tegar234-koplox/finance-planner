@@ -1,0 +1,24 @@
+<resources>
+    <string name="market_prices_title">Market prices</string>
+    <string name="market_no_prices">No market prices yet</string>
+    <string name="market_manual_available">Your manual portfolio is available offline.</string>
+    <string name="market_open_portfolio">Open portfolio</string>
+    <string name="market_help_body">Prices appear when a supported market data source is connected. Saved prices stay available offline, with their source and observation time. “Recent” means observed and retrieved within 15 minutes; it does not guarantee a live price. Older prices are marked “Outdated”. Failed or empty updates keep the last saved price. Market prices never change your manual valuations, cash or net worth automatically.</string>
+    <string name="market_refresh">Refresh prices</string>
+    <string name="market_cache_error">Saved prices could not be read.</string>
+    <string name="market_recent">Recent</string>
+    <string name="market_stale">Outdated</string>
+    <string name="market_missing">No price</string>
+    <string name="market_price_unavailable">Price unavailable</string>
+    <string name="market_observed">Observed: %1$s</string>
+    <string name="market_retry_after">Retry after %1$s</string>
+    <string name="market_error_offline">Offline. Update unavailable.</string>
+    <string name="market_error_timeout">Update timed out.</string>
+    <string name="market_error_auth">Data source authorization required.</string>
+    <string name="market_error_limit">Update limit reached.</string>
+    <string name="market_error_provider">Data source unavailable.</string>
+    <string name="market_error_invalid">Update contained an invalid price.</string>
+    <string name="market_error_empty">No price in the latest update.</string>
+    <string name="market_error_unsupported">This instrument is unavailable from the data source.</string>
+    <string name="market_error_unconfigured">Data source is not connected.</string>
+</resources>

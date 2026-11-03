@@ -22,7 +22,7 @@ class NavigationTest {
         compose.onNodeWithTag("nav_plan").performClick()
         compose.onNodeWithText("Forecasts").assertIsDisplayed()
         compose.onNodeWithTag("nav_market").performClick()
-        compose.onNodeWithText("Market monitoring is not enabled").assertIsDisplayed()
+        compose.onNodeWithText("No market prices yet").assertIsDisplayed()
     }
     @Test fun navigationSurvivesActivityRecreation() {
         ready()

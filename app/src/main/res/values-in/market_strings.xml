@@ -1,0 +1,24 @@
+<resources>
+    <string name="market_prices_title">Harga pasar</string>
+    <string name="market_no_prices">Belum ada harga pasar</string>
+    <string name="market_manual_available">Portofolio manual tetap tersedia secara luring.</string>
+    <string name="market_open_portfolio">Buka portofolio</string>
+    <string name="market_help_body">Harga muncul saat sumber data pasar yang didukung terhubung. Harga tersimpan tetap tersedia secara luring beserta sumber dan waktu pengamatannya. “Terbaru” berarti diamati dan diambil dalam 15 menit terakhir; bukan jaminan harga langsung. Harga yang lebih lama ditandai “Data lama”. Pembaruan yang gagal atau kosong mempertahankan harga terakhir. Harga pasar tidak mengubah penilaian manual, kas, atau kekayaan bersih secara otomatis.</string>
+    <string name="market_refresh">Perbarui harga</string>
+    <string name="market_cache_error">Harga tersimpan tidak dapat dibaca.</string>
+    <string name="market_recent">Terbaru</string>
+    <string name="market_stale">Data lama</string>
+    <string name="market_missing">Tanpa harga</string>
+    <string name="market_price_unavailable">Harga tidak tersedia</string>
+    <string name="market_observed">Diamati: %1$s</string>
+    <string name="market_retry_after">Coba lagi setelah %1$s</string>
+    <string name="market_error_offline">Luring. Pembaruan tidak tersedia.</string>
+    <string name="market_error_timeout">Waktu pembaruan habis.</string>
+    <string name="market_error_auth">Sumber data memerlukan otorisasi.</string>
+    <string name="market_error_limit">Batas pembaruan tercapai.</string>
+    <string name="market_error_provider">Sumber data tidak tersedia.</string>
+    <string name="market_error_invalid">Pembaruan berisi harga yang tidak valid.</string>
+    <string name="market_error_empty">Pembaruan terakhir tidak berisi harga.</string>
+    <string name="market_error_unsupported">Instrumen ini tidak tersedia dari sumber data.</string>
+    <string name="market_error_unconfigured">Sumber data belum terhubung.</string>
+</resources>

@@ -22,7 +22,6 @@
     <string name="market_title">Your watchlist, at a glance</string>
     <string name="market_empty">Market monitoring is not enabled</string>
     <string name="market_body">Your personal financial records stay available offline.</string>
-    <string name="offline_note">Your records stay on this device.</string>
     <string name="appearance">Appearance</string>
     <string name="appearance_description">Choose the look you prefer.</string>
     <string name="theme_system">Follow system</string>

@@ -20,6 +20,7 @@ import com.tegar.finance.presentation.ForecastViewModel
 import com.tegar.finance.presentation.PortfolioViewModel
 import com.tegar.finance.presentation.WealthViewModel
 import com.tegar.finance.presentation.GoalsViewModel
+import com.tegar.finance.presentation.MarketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
     private val portfolio: PortfolioViewModel by viewModels()
     private val wealth: WealthViewModel by viewModels()
     private val goals: GoalsViewModel by viewModels()
+    private val market: MarketViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,6 +48,7 @@ class MainActivity : ComponentActivity() {
             val portfolioState by portfolio.state.collectAsStateWithLifecycle()
             val wealthState by wealth.state.collectAsStateWithLifecycle()
             val goalsState by goals.state.collectAsStateWithLifecycle()
+            val marketState by market.state.collectAsStateWithLifecycle()
             AppLocalization(state.language) { FinanceTheme(state.theme, onDarkTheme = { dark ->
                 if (android.os.Build.VERSION.SDK_INT < 29) {
                     @Suppress("DEPRECATION")
@@ -55,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     isAppearanceLightStatusBars = !dark
                     isAppearanceLightNavigationBars = !dark
                 }
-            }) { FinanceApp(state, viewModel::retry, viewModel::setTheme, records, bookkeeping, budgetState, budgets, homeState, home, reportsState, reports, forecastState, forecast, viewModel::setLanguage, goalsState, goals, wealthState, wealth, portfolioState, portfolio) } }
+            }) { FinanceApp(state, viewModel::retry, viewModel::setTheme, records, bookkeeping, budgetState, budgets, homeState, home, reportsState, reports, forecastState, forecast, viewModel::setLanguage, goalsState, goals, wealthState, wealth, portfolioState, portfolio, marketState, market) } }
         }
     }
 }

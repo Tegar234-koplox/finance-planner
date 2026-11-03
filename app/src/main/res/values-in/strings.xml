@@ -22,7 +22,6 @@
     <string name="market_title">"Pantau daftar pilihan Anda"</string>
     <string name="market_empty">"Pemantauan pasar belum diaktifkan"</string>
     <string name="market_body">"Catatan keuangan pribadi tetap tersedia secara luring."</string>
-    <string name="offline_note">"Catatan Anda tetap di perangkat ini."</string>
     <string name="appearance">"Tampilan"</string>
     <string name="appearance_description">"Pilih tampilan yang Anda sukai."</string>
     <string name="theme_system">"Ikuti sistem"</string>

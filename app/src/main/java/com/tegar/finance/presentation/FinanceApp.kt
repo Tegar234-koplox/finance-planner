@@ -1,8 +1,6 @@
 package com.tegar.finance.presentation
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.List
@@ -18,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.tegar.finance.R
-import com.tegar.finance.core.ui.EmptyState
 
 private enum class Destination(val route: String, val label: Int, val title: Int, val empty: Int, val body: Int, val icon: ImageVector) {
     HOME("home", R.string.home, R.string.home_title, R.string.home_empty, R.string.home_body, Icons.Default.Home),
@@ -34,7 +31,8 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
     home: HomeUiState, homeModel: HomeViewModel, reports: ReportsUiState, reportsModel: ReportsViewModel,
     forecast: ForecastUiState, forecastModel: ForecastViewModel,
     onLanguage: (com.tegar.finance.domain.model.AppLanguage) -> Unit,
-    goals: GoalsUiState, goalsModel: GoalsViewModel, wealth: WealthUiState, wealthModel: WealthViewModel, portfolio: PortfolioUiState, portfolioModel: PortfolioViewModel) {
+    goals: GoalsUiState, goalsModel: GoalsViewModel, wealth: WealthUiState, wealthModel: WealthViewModel, portfolio: PortfolioUiState, portfolioModel: PortfolioViewModel,
+    market: MarketUiState, marketModel: MarketViewModel) {
     LaunchedEffect(forecast.options) { goalsModel.useForecastOptions(forecast.options) }
     val controller = rememberNavController()
     val entry by controller.currentBackStackEntryAsState()
@@ -98,15 +96,8 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                         else if (target == Destination.BUDGET) BudgetScreen(budgets, budgetModel)
                         else if (target == Destination.PLAN) ForecastScreen(forecast, forecastModel,
                             openGoals = { controller.navigate("goals") { launchSingleTop = true } }) else
-                        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
-                            verticalArrangement = Arrangement.spacedBy(24.dp)) {
-                            Text(stringResource(target.title), style = MaterialTheme.typography.headlineMedium)
-                            Card(Modifier.fillMaxWidth()) {
-                                EmptyState(target.icon, stringResource(target.empty), stringResource(target.body))
-                            }
-                            Text(stringResource(R.string.offline_note), style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        }
+                        MarketScreen(market, marketModel::retry, marketModel::refresh, marketModel::recheckAge,
+                            portfolio = { controller.navigate("investments") { launchSingleTop = true } })
                     }
                 }
                 composable("settings") { SettingsScreen(state, onTheme, onLanguage) }
