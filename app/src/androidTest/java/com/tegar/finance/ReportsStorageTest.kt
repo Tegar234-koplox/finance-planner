@@ -50,7 +50,7 @@ class ReportsStorageTest {
             assertEquals(7000L,reopened.current.totals.netCashFlow!!.minorUnits)
             assertEquals(food.id,reopened.categories.single().categoryId)
             assertEquals(5,source.observeBudgets().first().ok()!!.transactions.size)
-            assertEquals(5,db.openHelper.readableDatabase.version)
+            assertEquals(6,db.openHelper.readableDatabase.version)
             book.deleteTransaction(id).ok()
             assertEquals(0L,report().current.totals!!.consumption.minorUnits)
             assertTrue(report().categories.isEmpty())
