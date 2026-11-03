@@ -34,8 +34,9 @@ remain explicit. No purchase or transfer is executed. Assets and manual liabilit
 observations, explicit missing values and saved frozen net-worth snapshots.
 Acquisition cost is metadata only; non-cash wealth never increases spendable
 cash. Historical totals exist only when saved, and changing/deleting current
-items never rewrites them. Cash and goal earmarks are counted once; investment
-holdings and unrecorded wealth/debts are explicitly outside this tracked total.
+items never rewrites them. Cash and goal earmarks are counted once. Recorded
+investment holdings are included once; unrecorded wealth/debts remain outside
+this tracked total.
 Manual investment holdings, allocation targets, monthly contribution plans and
 cash redemptions are implemented. Values remain manual and dated, costs are not
 added again, and redemptions do not become income or predicted recurring capacity.
