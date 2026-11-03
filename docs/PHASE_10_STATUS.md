@@ -1,6 +1,6 @@
 # Phase 10 — provider boundary, HTTPS transport and offline quote cache
 
-Application readiness: PENDING final Android/upgrade gates. Stop after Phase 10;
+Application readiness: YES. Stop after Phase 10;
 Phase 11 has not started. GitHub API access still returns Forbidden; PR/squash
 merge is not claimed. Phase 9 is now present in main through PR #1 (1a8a516),
 and this branch starts from that exact tree.
@@ -58,9 +58,9 @@ ANDROID_SERIAL=emulator-5556 ./gradlew --offline --no-daemon --console=plain con
 | JVM suite | 320 tests, zero failures/errors/skips; 35 new Phase 10 tests |
 | Lint | 0 errors, 7 existing NewerVersionAvailable advisories |
 | Debug app/test APK build | PASS |
-| Targeted market Android suite | PENDING |
-| Entire Android suite | PENDING |
-| Actual APK 0.9.0→0.10.0 update | PENDING |
+| Targeted market Android suite | 7 tests, zero failures/errors/skips |
+| Entire Android suite | 52 tests, zero failures/errors/skips, 10m 43s |
+| Actual APK 0.9.0→0.10.0 update | PASS: every original financial row/column unchanged across all 15 nonempty tables |
 | Git commit identity | Tegar Putra, tegarsangputra2@gmail.com; no attribution trailers |
 | GitHub PR/squash merge | BLOCKED by API access; not claimed |
 
@@ -92,6 +92,41 @@ the import was restored, and the complete build/unit/lint checks passed again.
 Failed attempts are not counted as passes. The separate update emulator required
 software acceleration because KVM is unavailable; an initial hardware-mode startup
 failure is not counted as a device test.
+
+The first manual APK smoke script used the wrong help-button description. A later
+step assumed the selected tab survived force-stop; process restart instead opened
+Home with the saved language. Both were harness assumptions: the final visual
+script uses the actual description, waits for language changes, opens Market
+explicitly after process restart, and scrolls upward to restore the system theme.
+Real-app instrumentation separately verifies tab preservation during Activity
+recreation. No application assertion was removed, and failed script attempts are
+retained instead of counted as passes.
+
+## Actual update and retained records
+
+A separate API-26 emulator installed the exact delivered 0.9.0 APK, loaded a
+temporary fixture with every financial table nonempty, and installed the exact
+0.10.0 deliverable with `adb install -r`. All source columns/rows compared equal,
+including both TRACKED_V1 and TRACKED_V2 frozen captures and copied components.
+Financial schema remained 6; the independent market schema initialized to 1 with
+zero quote rows. No migration or reconstruction of financial history occurred.
+
+Fixture counts were ledger 1, categories 11, transactions 4, overall budget 1,
+category budget 1, goal 1, asset 1, asset value 1, wealth captures 2, asset capture
+lines 2, holding 1, holding values 2, allocation targets 6, contribution plan 1,
+and copied investment component 1. The original clean financial database was
+restored exactly afterward. Final visual checks used no financial writes and
+confirmed empty market data, manual-portfolio navigation, optional help, both
+themes and language preference after a real process restart.
+
+Evidence under `/workspace/.finance-tooling/phase10` includes
+`final-build-retry.log`, `targeted-android.log`, `targeted-results`,
+`full-android.log`, the retained failed `upgrade-smoke-first.log`/`upgrade-smoke.log`,
+passing financial `upgrade-before.json`/`upgrade-after.json`, `final-smoke.log`,
+`upgrade-result.json`, and exact restored snapshots. The machine-readable final
+summary is `/workspace/artifacts/phase10-test-summary.json`. Screenshots are
+`finance-planner-phase10-market-en.png`, `finance-planner-phase10-market-dark.png`
+and `finance-planner-phase10-market-id.png` under `/workspace/artifacts`.
 
 ## APK and manual testing / Uji manual
 

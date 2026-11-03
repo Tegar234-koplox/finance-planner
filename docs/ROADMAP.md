@@ -1,10 +1,11 @@
 # Sequential roadmap
 
-Phases 0–9 application gates are complete. Phase 10 implements provider contracts,
-HTTPS transport and a separate offline quote cache, with 320 JVM tests, seven
-targeted Android tests, debug/test-APK builds and lint (0 errors, 7 existing upgrade
-advisories) passing. Full Android regression and final visual upgrade checks are
-in progress. Financial schema v6 stays unchanged. No provider/watchlist is shipped.
+Phases 0–10 application gates are complete. Phase 10 implements provider contracts,
+HTTPS transport and a separate offline quote cache, with 320 JVM tests, all 52
+Android tests, debug/test-APK builds and lint (0 errors, 7 existing upgrade
+advisories) passing. Actual APK 0.9→0.10 preserves every financial row/column in
+all 15 nonempty tables and legacy/v2 captures. Bilingual light/dark and process
+restart checks pass. Financial schema v6 stays unchanged. No provider/watchlist is shipped.
 Phase 9 is now in main through PR #1; this branch starts from that tree.
 GitHub API access remains Forbidden, blocking new PR creation/squash merge.
 See PHASE_10_STATUS.md for current evidence/limits and delivery status.
