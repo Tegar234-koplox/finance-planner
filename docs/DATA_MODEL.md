@@ -176,12 +176,41 @@ sum to 10000. Target currency amounts use the same exact distribution across the
 portfolio's minor units, so monetary gaps sum to zero. No floating-point money,
 trading action, automatic purchase, return model or provider quote is involved.
 
+## Phase 10 market cache (separate database)
+
+MarketDatabase v1 owns `quote_cache` in `market-cache.db`; FinanceDatabase stays
+v6, with all 15 tables and old schema exports unchanged. There is no financial
+foreign key, quote-to-holding link or implicit currency conversion.
+
+The composite primary key is `(provider, market, symbol)`: symbols from different
+venues/providers cannot collide. A row has nullable quote fields (exact plain
+decimal price text, ISO currency, source observation UTC millis, successful fetch
+UTC millis, attributed source name), required last-attempt UTC millis, nullable
+typed failure and nullable rate-limit retry time. All five quote fields must be
+present together or all absent; a quote with price zero is known, not missing.
+Price has up to 20 integer/18 fractional digits (38 significant digits maximum),
+is nonnegative, and never passes through Double or fixed ledger minor units.
+Currency remains the provider quote currency, not the ledger currency.
+
+Success atomically replaces quote and clears failure/cooldown. Failure/empty
+updates attempt/error metadata while retaining the old quote and successful fetch
+time. Cancellation leaves last-attempt evidence and old data without a permanent
+busy flag. Duplicate identities update one row; other markets/providers stay
+independent. Unexpected older source times, future/negative times, mismatched
+instrument identity, malformed decimal/currency and currency changes are rejected.
+Initial empty/no-provider states do not invent a price or production instrument.
+
+Freshness is derived, never persisted: missing if no quote; recent only when both
+`0 <= now − observedAt < 15 minutes` and `0 <= now − fetchedAt < 15 minutes`;
+otherwise outdated. A successful request for an old observation is still outdated.
+Rate-limit Retry-After is bounded to one day; no refresh occurs before the saved
+deadline. No request is automatically scheduled when the deadline passes.
+
 ## Proposed later tables
 
 | Concept | Fields / integrity |
 | --- | --- |
-| Watchlist (10) | Provider/instrument identity, market/symbol, configurable name |
-| Quote/sync state (10) | Exact price/currency/time, source, last success/attempt/error; preserve cached data on failure |
+| Watchlist (11) | Provider/instrument identity, market/symbol, configurable name |
 | IPO company/evidence (13) | Attributable sources, publication/retrieval times, active/superseded and deduplicated evidence |
 
 Separate overall/category budget tables avoid nullable unique-key ambiguity.

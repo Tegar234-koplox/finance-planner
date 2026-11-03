@@ -1,13 +1,14 @@
 # Sequential roadmap
 
-Phases 0–9 implementation and application gates are complete. Phase 9 passed
-285 JVM tests, all 45 Android tests on API 26, debug/test-APK builds, and lint
-(0 errors, 7 existing upgrade advisories). Actual APK 0.8→0.9 migration 5→6
-preserved all original columns/rows in ten nonempty tables and legacy v1 captures.
-Compact bilingual UI and manual investment flows are verified. GitHub branch
-pushes work; PR creation/squash merge remain blocked by API access (Forbidden).
-See PHASE_9_STATUS.md for evidence/limits and the outstanding delivery step.
-Phase 1–8 reports remain historical. Stop after Phase 9; Phase 10 has not started.
+Phases 0–9 application gates are complete. Phase 10 implements provider contracts,
+HTTPS transport and a separate offline quote cache, with 320 JVM tests, seven
+targeted Android tests, debug/test-APK builds and lint (0 errors, 7 existing upgrade
+advisories) passing. Full Android regression and final visual upgrade checks are
+in progress. Financial schema v6 stays unchanged. No provider/watchlist is shipped.
+Phase 9 is now in main through PR #1; this branch starts from that tree.
+GitHub API access remains Forbidden, blocking new PR creation/squash merge.
+See PHASE_10_STATUS.md for current evidence/limits and delivery status.
+Phase 1–9 reports remain historical. Stop after Phase 10; Phase 11 has not started.
 
 For each phase: inspect code/Git state, state goal/files/approach/risks/tests,
 implement the smallest coherent change, validate meaningful checks, review
@@ -61,4 +62,6 @@ indicator is deferred. Goals/purchases, earmark progress, cash reservations and
 shared capacity/date scenarios are implemented. Non-cash assets, manual liabilities,
 dated valuations and frozen tracked-net-worth snapshots are implemented. Manual investment holdings, exact allocation targets, contribution plans,
 redemptions and investment-inclusive frozen snapshots are implemented. Market
-provider APIs have not started.
+provider-specific adapters/watchlists have not started. Provider-neutral contracts,
+bounded HTTPS and an independent exact quote cache are implemented. Market age
+checks never schedule network requests.

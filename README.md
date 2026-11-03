@@ -1,9 +1,29 @@
 # Finance Planner
 
-Private, local-first Kotlin Android app. Phase 9 adds manual investment holdings,
+Private, local-first Kotlin Android app. Phase 9 added manual investment holdings,
 exact allocation targets, monthly contribution plans and cash redemptions to
 bookkeeping, goals and dated net-worth history. The interface supports English
-and Bahasa Indonesia. Market/provider work remains Phase 10 and has not started.
+and Bahasa Indonesia. Phase 10 adds provider contracts, bounded HTTPS transport
+and an isolated offline quote cache. Market-specific providers/watchlists remain
+Phase 11 onward; no provider is connected or price invented in this build.
+
+## Market prices / Harga pasar
+
+Open **Market** to view saved quotes when an authorized source is available.
+The current build has no connected price source, so it shows an honest empty
+state and **Open portfolio** for manual investment records. Detailed explanations
+remain behind the information icon.
+
+Buka **Pasar**. Jika belum ada sumber harga yang terhubung, layar menampilkan
+**Belum ada harga pasar** dan tombol **Buka portofolio**. Catatan investasi manual
+tetap tersedia secara luring. Penyedia harga dan watchlist masuk fase berikutnya.
+
+Cached prices retain their own currency, exact decimal precision, source and
+observation/retrieval timestamps. “Recent” requires both timestamps to be less
+than 15 minutes old; it is not a live-price guarantee. Offline, empty, timeout,
+authorization, rate-limit and provider-error results preserve the last successful
+price and its timestamps. Prices never automatically change manual valuations,
+cash, goals or net worth, and USD quotes never become IDR values implicitly.
 
 Numbers and actions appear first. Tap the information icon for calculation details.
 Angka dan aksi utama ditampilkan lebih dulu; ketuk ikon info untuk penjelasan.
@@ -244,9 +264,11 @@ Cloud shells first run `source /workspace/.finance-tooling/activate.sh`.
 The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 It is a development build, not the final personal-finance product.
 
-The current development APK is version 0.9.0 (code 9). Schema v6 adds investment tables and
-nullable transaction metadata through the explicit 1→2→3→4→5→6 migration chain. See
-[Phase 9 status](docs/PHASE_9_STATUS.md) for current checks and limitations.
+The current development APK is version 0.10.0 (code 10). Financial schema v6 and
+its explicit 1→2→3→4→5→6 migration chain remain unchanged. Rebuildable market
+information uses a separate schema-v1 database. See
+[Phase 10 status](docs/PHASE_10_STATUS.md) for current checks and limitations.
+[Phase 9 status](docs/PHASE_9_STATUS.md),
 [Phase 8 status](docs/PHASE_8_STATUS.md),
 [Phase 7 status](docs/PHASE_7_STATUS.md),
 [Phase 6 status](docs/PHASE_6_STATUS.md),
@@ -262,8 +284,12 @@ retain the historical results.
 - [Data model](docs/DATA_MODEL.md)
 - [Roadmap and quality gates](docs/ROADMAP.md)
 
-Room stores the ledger and categories in private internal storage; DataStore
-stores nonfinancial preferences. No internet permission, network client,
-telemetry, or ads are included. Android cloud backup and device transfer are
+Room stores financial records and the separate market cache in private internal
+storage; DataStore stores nonfinancial preferences. Phase 10 adds the Internet
+permission and HTTPS-only transport for subsequent authorized market adapters.
+No provider endpoint or API key is shipped, and no network refresh runs on launch,
+resume, a timer or in the background. No telemetry or ads are included.
+Personal financial records are never inputs to the market transport.
+Android cloud backup and device transfer are
 explicitly excluded. Private storage does not imply database encryption.
 Schemas are exported under `app/schemas`. Never use destructive migrations.

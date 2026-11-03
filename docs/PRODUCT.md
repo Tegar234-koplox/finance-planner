@@ -14,7 +14,7 @@ honest loading, empty, and error states. Charts must explain a useful comparison
 The offline finance MVP consists of transactions/categories, budgeting,
 dashboard, reports, deterministic forecasts/recommendations, and goals/purchases
 (Phases 1–7). Daily-use approval also requires the applicable security, backup,
-test, UI, performance, and release gates. Current Phase 9 includes transaction
+test, UI, performance, and release gates. Current Phase 10 includes transaction
 CRUD/history/filter, category management, monthly overall/category budgets and
 a Home dashboard derived from those records. Home distinguishes recorded cash,
 consumption and contributions, and bounds its daily limit by both cash and budget.
@@ -42,7 +42,13 @@ cash redemptions are implemented. Values remain manual and dated, costs are not
 added again, and redemptions do not become income or predicted recurring capacity.
 New frozen snapshots include recorded investments without reinterpreting legacy
 captures. Primary screens show numbers and actions; detailed explanations open
-on demand. Market/provider valuations remain future phases. The optional internal health indicator is deferred; no
+on demand. Phase 10 adds provider contracts, HTTPS transport and a separate local
+quote cache with exact prices/currencies, source/time and honest outdated/error
+states. No price provider is connected yet; Market shows an empty state and a
+link to manual portfolios. Actual US and Indonesian provider/watchlist coverage
+remains Phase 11 onward, independently verified against authorized availability.
+Market prices never automatically revalue manual holdings or financial totals.
+The optional internal health indicator is deferred; no
 health or credit score is calculated.
 
 At the user's request, the full current interface supports English and Bahasa

@@ -1,5 +1,50 @@
 # Architecture
 
+## Phase 10 provider contracts, transport and isolated quote cache
+
+The market boundary is independent of every financial repository and database.
+QuoteProvider advertises a stable ProviderInfo and maps documented provider
+responses to QuotePayload or typed empty/failure outcomes. QuoteProviders rejects
+duplicate IDs and is deliberately empty in production until the authorized
+market-specific adapters in Phase 11 onward. No mock provider, endpoint, key,
+watchlist, symbol discovery or trade execution is shipped.
+
+UrlConnectionTransport uses platform HTTPS certificate/hostname validation with
+cleartext disabled. It makes one GET, disables redirects and HTTP caching, bounds
+connect/read timeouts at 10 seconds, and limits UTF-8 response bodies to 1 MiB.
+A 20-second body-read deadline also bounds a continuously streaming response;
+blocking calls remain bounded by the socket timeouts. Cancellation propagates,
+streams close and connections disconnect. Failures expose typed reasons, not
+response bodies, URLs, headers or exception messages. Retry-After seconds/HTTP
+dates are supported, with at most a one-day cooldown; there is no hidden retry.
+Provider adapters can supply authorization headers without embedding a private
+key in the application. Payload parsing belongs to each documented adapter.
+
+CachedQuoteRepository serializes explicit refreshes, records the last attempt,
+validates identity/decimal/currency/time, and atomically replaces one cache row
+only on success. Older observations and unexpected currency changes cannot
+silently replace an existing quote. Empty, offline, timeout, authorization,
+rate-limit, invalid and provider errors preserve the exact last quote/source/
+success timestamp. Active cooldowns survive process restart and prevent a request.
+Cancellation preserves cached data without leaving a persisted busy flag.
+
+RoomQuoteCache uses MarketDatabase v1 (`market-cache.db`), separate from
+FinanceDatabase v6 (`finance.db`). Quotes and sync metadata share one atomic row;
+all quote fields must be present or absent when read. Corruption becomes a market
+storage error without blocking the finance foundation. All existing financial
+entities, migrations and schema exports stay unchanged. Market prices never feed
+Money, manual holdings, forecasts, goal capacity or tracked net worth implicitly.
+
+QuoteCachePolicy derives missing/recent/outdated from both source and retrieval
+times (15-minute default, exact boundary stale). Refetching an old price or moving
+the clock backward cannot make it current. MarketViewModel observes cached records,
+clears unreadable data, guards explicit refresh and handles write errors. A visible
+screen timer and resume event only recalculate age; they never perform HTTP.
+MarketScreen keeps exact currency/price, source, observation time and failure
+visible, with details on demand. The current empty state links to the manual
+portfolio. Both UI languages remain offline. No Phase 11 work or WorkManager
+refresh is introduced. See PHASE_10_STATUS.md for actual verification.
+
 ## Phase 9 manual investments and compact financial screens
 
 Schema v6 adds investment_holding/value, allocation_target, contribution_plan and
