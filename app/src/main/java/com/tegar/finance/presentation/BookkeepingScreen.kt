@@ -30,6 +30,8 @@ import com.tegar.finance.domain.model.*
 @Composable private fun AppError.message() = when (this) {
     AppError.ALLOCATION_TOTAL -> stringResource(R.string.portfolio_error_targets)
     AppError.INVESTMENT_IN_USE -> stringResource(R.string.portfolio_error_in_use)
+    AppError.DUPLICATE_INSTRUMENT -> stringResource(R.string.market_duplicate)
+    AppError.WATCHLIST_LIMIT -> stringResource(R.string.market_limit)
     AppError.INVALID_INPUT -> stringResource(R.string.ui_check_the_amount_date_yyyy_mm_dd_date_range_name_1_80_characters_and_n_031125)
     AppError.OUT_OF_RANGE -> stringResource(R.string.ui_this_amount_is_too_large_890084)
     AppError.CURRENCY_MISMATCH -> stringResource(R.string.ui_the_amount_must_use_the_ledger_currency_c869fa)

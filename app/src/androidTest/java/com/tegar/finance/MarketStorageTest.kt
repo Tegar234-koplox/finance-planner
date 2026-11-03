@@ -32,7 +32,7 @@ class MarketStorageTest {
             db = Room.databaseBuilder(context, MarketDatabase::class.java, name).build()
             val cache = RoomQuoteCache(db.quotes())
             assertEquals(expected, cache.read(key)); assertEquals(listOf(expected), cache.observe().first())
-            assertEquals(1, db.openHelper.readableDatabase.version)
+            assertEquals(2, db.openHelper.readableDatabase.version)
             assertEquals(QuoteFreshness.STALE, QuoteCachePolicy().freshness(cache.read(key)!!.quote, now))
         } finally { db.close(); context.deleteDatabase(name) }
     }

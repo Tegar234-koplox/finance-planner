@@ -5,6 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,7 +27,7 @@ import kotlinx.coroutines.isActive
 
 @Composable
 fun MarketScreen(state: MarketUiState, retry: () -> Unit, refresh: () -> Unit,
-    recheckAge: () -> Unit, portfolio: () -> Unit) {
+    recheckAge: () -> Unit, portfolio: () -> Unit, model: MarketViewModel? = null) {
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { recheckAge() }
     LaunchedEffect(Unit) {
         while (isActive) { recheckAge(); delay(60_000) }
@@ -36,11 +38,27 @@ fun MarketScreen(state: MarketUiState, retry: () -> Unit, refresh: () -> Unit,
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.market_prices_title), style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.weight(1f))
-                if (state.canRefresh || state.refreshing) IconButton(onClick = refresh,
-                    enabled = !state.refreshing, modifier = Modifier.testTag("market_refresh")) {
+                if (state.refreshing) IconButton(onClick = { model?.cancelRefresh() }, modifier = Modifier.testTag("market_cancel_refresh")) {
+                    Icon(Icons.Default.Close, stringResource(R.string.market_cancel_refresh))
+                } else if (state.canRefresh || (state.managed && state.rows.isNotEmpty())) IconButton(onClick = refresh,
+                    enabled = state.canRefresh && !state.saving, modifier = Modifier.testTag("market_refresh")) {
                     Icon(Icons.Default.Refresh, stringResource(R.string.market_refresh))
                 }
                 ScreenHelp("market_help") { Text(stringResource(R.string.market_help_body)) }
+            }
+        }
+        if (state.managed) item {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilledTonalButton(onClick = { model?.openEntry() }, enabled = !state.refreshing && !state.saving,
+                        modifier = Modifier.weight(1f).testTag("market_add")) { Text(stringResource(R.string.market_add)) }
+                    OutlinedButton(onClick = { model?.openConnection() }, enabled = !state.refreshing && !state.saving,
+                        modifier = Modifier.weight(1f).testTag("market_connection")) {
+                        Text(stringResource(if (state.hasKey) R.string.market_source else R.string.market_connect))
+                    }
+                }
+                if (state.hasKey || state.keyError) Text(stringResource(if (state.keyError) R.string.market_key_unreadable else R.string.market_key_saved),
+                    style = MaterialTheme.typography.bodySmall, color = if (state.keyError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         if (state.loading || state.refreshing) item { LinearProgressIndicator(Modifier.fillMaxWidth()) }
@@ -63,13 +81,15 @@ fun MarketScreen(state: MarketUiState, retry: () -> Unit, refresh: () -> Unit,
             }
         }
         items(state.rows, key = { "${it.record.key.provider}|${it.record.key.market}|${it.record.key.symbol}" }) { row ->
-            MarketPriceCard(row)
+            MarketPriceCard(row, !state.refreshing && !state.saving,
+                edit = { row.entry?.let { model?.openEntry(it) } }, remove = { row.entry?.let { model?.askDelete(it) } })
         }
     }
+    if (model != null) MarketDialogs(state, model)
 }
 
 @Composable
-private fun MarketPriceCard(row: MarketQuoteRow) {
+private fun MarketPriceCard(row: MarketQuoteRow, enabled: Boolean, edit: () -> Unit, remove: () -> Unit) {
     val record = row.record
     val quote = record.quote
     val locale = LocalConfiguration.current.locales[0]
@@ -87,10 +107,25 @@ private fun MarketPriceCard(row: MarketQuoteRow) {
                     QuoteFreshness.STALE -> R.string.market_stale
                     QuoteFreshness.MISSING -> R.string.market_missing
                 }), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (row.entry != null) {
+                    var expanded by remember { mutableStateOf(false) }
+                    Box {
+                        IconButton(onClick = { expanded = true }, enabled = enabled, modifier = Modifier.testTag("market_menu_${row.entry.id}")) {
+                            Icon(Icons.Default.MoreVert, stringResource(R.string.market_actions, record.key.symbol))
+                        }
+                        DropdownMenu(expanded, onDismissRequest = { expanded = false }) {
+                            DropdownMenuItem(text = { Text(stringResource(R.string.market_edit)) }, onClick = { expanded = false; edit() })
+                            DropdownMenuItem(text = { Text(stringResource(R.string.market_remove)) }, onClick = { expanded = false; remove() })
+                        }
+                    }
+                }
             }
-            Text(if (quote == null) stringResource(R.string.market_price_unavailable) else "${quote.currency.value} $price",
+            if (row.entry != null && row.entry.name != record.key.symbol) Text(row.entry.name, style = MaterialTheme.typography.bodyMedium)
+            Text(if (quote == null) stringResource(R.string.market_price_unavailable)
+                else if (row.entry?.kind == InstrumentKind.INDEX) stringResource(R.string.market_points, price!!) else "${quote.currency.value} $price",
                 style = MaterialTheme.typography.headlineSmall, modifier = Modifier.testTag("market_price_${record.key.symbol}"))
-            Text("${record.key.market} · ${quote?.source ?: record.key.provider}",
+            val venue = if (row.entry == null) record.key.market else marketVenue(record.key.market)
+            Text("$venue · ${quote?.source ?: if (row.entry != null) "Twelve Data" else record.key.provider}",
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (quote != null) Text(stringResource(R.string.market_observed, time.format(quote.observedAt)),
                 style = MaterialTheme.typography.bodySmall)

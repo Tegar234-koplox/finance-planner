@@ -13,8 +13,8 @@ android {
         applicationId = "com.tegar.finance"
         minSdk = 26
         targetSdk = 36
-        versionCode = 10
-        versionName = "0.10.0"
+        versionCode = 11
+        versionName = "0.11.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.datastore)
     implementation(libs.hilt.android)
     implementation(libs.coroutines)
+    implementation(libs.gson)
     ksp(libs.room.compiler)
     ksp(libs.hilt.compiler)
     testImplementation(libs.junit)

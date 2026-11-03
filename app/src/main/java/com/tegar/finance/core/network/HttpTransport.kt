@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.*
 
 data class HttpRequest(val uri: URI, val headers: Map<String, String> = emptyMap()) {
+    override fun toString() = "HttpRequest(origin=${uri.scheme}://${uri.host}, path=${uri.path}, credentials=[redacted])"
     init {
         require(uri.scheme == "https" && !uri.host.isNullOrBlank() && uri.userInfo == null && uri.fragment == null)
         require(uri.port == -1 || uri.port == 443)

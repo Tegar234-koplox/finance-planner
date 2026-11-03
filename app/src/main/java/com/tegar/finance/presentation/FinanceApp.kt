@@ -97,7 +97,7 @@ fun FinanceApp(state: AppUiState, retry: () -> Unit, onTheme: (com.tegar.finance
                         else if (target == Destination.PLAN) ForecastScreen(forecast, forecastModel,
                             openGoals = { controller.navigate("goals") { launchSingleTop = true } }) else
                         MarketScreen(market, marketModel::retry, marketModel::refresh, marketModel::recheckAge,
-                            portfolio = { controller.navigate("investments") { launchSingleTop = true } })
+                            portfolio = { controller.navigate("investments") { launchSingleTop = true } }, model = marketModel)
                     }
                 }
                 composable("settings") { SettingsScreen(state, onTheme, onLanguage) }
